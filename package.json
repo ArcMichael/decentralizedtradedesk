@@ -8,12 +8,8 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "tauri": "tauri",
-    "release": "standard-version && node sync-version.cjs"
-  },
-  "standard-version": {
-    "scripts": {
-      "postbump": "node sync-version.cjs"
-    }
+    "release": "standard-version",
+    "release-rust": "node auto-increment-rust-version.cjs"
   },
   "dependencies": {
     "@tauri-apps/api": ">=2.0.0-beta.0",
