@@ -1,7 +1,7 @@
 {
   "productName": "decentralizedtradedesk",
   "version": "0.0.0",
-  "identifier": "com.tauri.dev",
+  "identifier": "com.michaelqiu.decentralizedtradedesk",
   "build": {
     "beforeDevCommand": "pnpm dev",
     "devUrl": "http://localhost:1420",
