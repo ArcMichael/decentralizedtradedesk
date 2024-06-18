@@ -1,6 +1,6 @@
 {
   "productName": "decentralizedtradedesk",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "identifier": "com.michaelqiu.decentralizedtradedesk",
   "build": {
     "beforeDevCommand": "pnpm dev",
