@@ -27,6 +27,9 @@ importers:
       '@commitlint/config-conventional':
         specifier: ^19.2.2
         version: 19.2.2
+      '@commitlint/core':
+        specifier: ^19.3.0
+        version: 19.3.0(@types/node@20.14.5)(typescript@5.4.5)
       '@tauri-apps/cli':
         specifier: '>=2.0.0-beta.0'
         version: 2.0.0-beta.20
@@ -187,6 +190,10 @@ packages:
 
   '@commitlint/config-validator@19.0.3':
     resolution: {integrity: sha512-2D3r4PKjoo59zBc2auodrSCaUnCSALCx54yveOFwwP/i2kfEAQrygwOleFWswLqK0UL/F9r07MFi5ev2ohyM4Q==}
+    engines: {node: '>=v18'}
+
+  '@commitlint/core@19.3.0':
+    resolution: {integrity: sha512-VV6Ar3UU00oyE28VH0ILqQblfyJDXHMyjgRSH0zEdNLkfe8B9cYWntchoYYImzO39ED0HyCa2AjYYvjj1CgWng==}
     engines: {node: '>=v18'}
 
   '@commitlint/ensure@19.0.3':
@@ -2304,6 +2311,16 @@ snapshots:
     dependencies:
       '@commitlint/types': 19.0.3
       ajv: 8.16.0
+
+  '@commitlint/core@19.3.0(@types/node@20.14.5)(typescript@5.4.5)':
+    dependencies:
+      '@commitlint/format': 19.3.0
+      '@commitlint/lint': 19.2.2
+      '@commitlint/load': 19.2.0(@types/node@20.14.5)(typescript@5.4.5)
+      '@commitlint/read': 19.2.1
+    transitivePeerDependencies:
+      - '@types/node'
+      - typescript
 
   '@commitlint/ensure@19.0.3':
     dependencies:
