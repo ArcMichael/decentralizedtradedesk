@@ -11,7 +11,10 @@
     "release": "standard-version && git push origin main && git push origin main --tags",
     "release-rust": "node auto-increment-rust-version.cjs",
     "prepare": "husky install",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "add": "git add .",
+    "commit": "cz",
+    "push": "git push"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
