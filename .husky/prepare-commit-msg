@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Check if commit message is provided as an argument
+if [ -z "$1" ]; then
+  exec < /dev/tty && npx cz --hook || true
+fi

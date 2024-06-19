@@ -11,9 +11,7 @@
     "release": "standard-version && git push origin main && git push origin main --tags",
     "release-rust": "node auto-increment-rust-version.cjs",
     "prepare": "husky install",
-    "lint-staged": "lint-staged",
-    "commit": "cz",
-    "add": "git add ."
+    "lint-staged": "lint-staged"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -22,9 +20,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npx commitlint --edit $1",
-      "commit-msg": "npm run commitlint",
-      "prepare-commit-msg": "exec < /dev/tty && npx cz --hook || true"
+      "pre-commit": "lint-staged"
     }
   },
   "config": {
