@@ -1,5 +1,6 @@
 ## <small>0.0.5 (2024-06-20)</small>
 
+* chore(release): 0.0.5 ([331ddbc](https://github.com/ArcMichael/decentralizedtradedesk/commit/331ddbc))
 * feat(pkg): ci ([976ddcc](https://github.com/ArcMichael/decentralizedtradedesk/commit/976ddcc))
 * feat(test): test ([43dfa74](https://github.com/ArcMichael/decentralizedtradedesk/commit/43dfa74))
 * ci(husky lint-staged commit add): ci ([d145466](https://github.com/ArcMichael/decentralizedtradedesk/commit/d145466))
