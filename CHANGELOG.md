@@ -1,3 +1,13 @@
+## <small>0.0.5 (2024-06-20)</small>
+
+* feat(pkg): ci ([976ddcc](https://github.com/ArcMichael/decentralizedtradedesk/commit/976ddcc))
+* feat(test): test ([43dfa74](https://github.com/ArcMichael/decentralizedtradedesk/commit/43dfa74))
+* ci(husky lint-staged commit add): ci ([d145466](https://github.com/ArcMichael/decentralizedtradedesk/commit/d145466))
+* ci(pkg): ci ([fc87ec2](https://github.com/ArcMichael/decentralizedtradedesk/commit/fc87ec2))
+* test(test): test ([4e5ef82](https://github.com/ArcMichael/decentralizedtradedesk/commit/4e5ef82))
+
+
+
 ## <small>0.0.4 (2024-06-18)</small>
 
 * chore(release): 0.0.3 ([dc0b666](https://github.com/ArcMichael/decentralizedtradedesk/commit/dc0b666))
