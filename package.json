@@ -14,7 +14,8 @@
     "lint-staged": "lint-staged",
     "add": "git add .",
     "commit": "cz",
-    "push": "git push"
+    "push": "git push",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -46,6 +47,7 @@
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.2.1",
     "commitizen": "^4.3.0",
+    "conventional-changelog-cli": "^5.0.0",
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^8.0.0",
     "internal-ip": "^7.0.0",
