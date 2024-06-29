@@ -34,6 +34,10 @@
 |  |  └── default.json
 |  ├── gen
 |  |  └── schemas
+|  |     ├── acl-manifests.json
+|  |     ├── capabilities.json
+|  |     ├── desktop-schema.json
+|  |     └── macOS-schema.json
 |  ├── icons
 |  |  ├── 128x128.png
 |  |  ├── 128x128@2x.png
@@ -57,12 +61,25 @@
 |  ├── target
 |  |  ├── CACHEDIR.TAG
 |  |  ├── debug
+|  |  |  ├── build
+|  |  |  ├── decentralizedtradedesk
+|  |  |  ├── decentralizedtradedesk.d
+|  |  |  ├── deps
+|  |  |  ├── examples
+|  |  |  └── incremental
 |  |  └── release
+|  |     ├── build
+|  |     ├── bundle
+|  |     ├── decentralizedtradedesk
+|  |     ├── decentralizedtradedesk.d
+|  |     ├── deps
+|  |     ├── examples
+|  |     └── incremental
 |  └── tauri.conf.json
 ├── tsconfig.json
 ├── tsconfig.node.json
 └── vite.config.ts
 
-directory: 20 file: 49 symboliclink: 23
+directory: 33 file: 57 symboliclink: 53
 
 ignored: directory (1)
