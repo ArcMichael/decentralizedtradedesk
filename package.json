@@ -19,7 +19,8 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "prettier --write"
+      "prettier --write",
+      "eslint --fix"
     ]
   },
   "husky": {
@@ -49,6 +50,10 @@
     "commitizen": "^4.3.0",
     "conventional-changelog-cli": "^5.0.0",
     "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-react": "^7.31.8",
     "husky": "^8.0.0",
     "internal-ip": "^7.0.0",
     "lint-staged": "^15.2.7",
