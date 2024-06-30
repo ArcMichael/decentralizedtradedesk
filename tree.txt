@@ -4,16 +4,9 @@
 ├── README.md
 ├── auto-increment-rust-version.cjs
 ├── commitlint.config.mjs
-├── dist
-|  ├── assets
-|  |  ├── index-Dfkbh-rD.css
-|  |  ├── index-DsCN549U.js
-|  |  └── react-CHdo91hT.svg
-|  ├── index.html
-|  ├── tauri.svg
-|  └── vite.svg
 ├── index.html
-├── output.txt
+├── jest.config.json
+├── jest.setup.ts
 ├── package.json
 ├── pnpm-lock.yaml
 ├── public
@@ -22,6 +15,14 @@
 ├── src
 |  ├── App.css
 |  ├── App.tsx
+|  ├── Layout
+|  ├── Route
+|  |  ├── HomePage.tsx
+|  |  ├── Routes.tsx
+|  |  ├── WelcomePage.css
+|  |  └── WelcomePage.tsx
+|  ├── __tests__
+|  |  └── App.test.tsx
 |  ├── assets
 |  |  └── react.svg
 |  ├── main.tsx
@@ -60,26 +61,21 @@
 |  |  └── main.rs
 |  ├── target
 |  |  ├── CACHEDIR.TAG
-|  |  ├── debug
-|  |  |  ├── build
-|  |  |  ├── decentralizedtradedesk
-|  |  |  ├── decentralizedtradedesk.d
-|  |  |  ├── deps
-|  |  |  ├── examples
-|  |  |  └── incremental
-|  |  └── release
+|  |  └── debug
 |  |     ├── build
-|  |     ├── bundle
 |  |     ├── decentralizedtradedesk
 |  |     ├── decentralizedtradedesk.d
 |  |     ├── deps
 |  |     ├── examples
 |  |     └── incremental
 |  └── tauri.conf.json
+├── test
+|  └── __mocks__
+|     └── fileMock.js
 ├── tsconfig.json
 ├── tsconfig.node.json
 └── vite.config.ts
 
-directory: 33 file: 57 symboliclink: 53
+directory: 31 file: 56 symboliclink: 64
 
 ignored: directory (1)
