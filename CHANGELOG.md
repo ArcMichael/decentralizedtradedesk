@@ -1,5 +1,6 @@
 ## <small>0.0.7 (2024-06-30)</small>
 
+* chore(release): 0.0.7 ([89d89ba](https://github.com/ArcMichael/decentralizedtradedesk/commit/89d89ba))
 * fix(route): case sensitive ([1630cd2](https://github.com/ArcMichael/decentralizedtradedesk/commit/1630cd2))
 * fix(tsconfig.node.json): addition types with jest and testing-lib/jest-dom ([f748264](https://github.com/ArcMichael/decentralizedtradedesk/commit/f748264))
 * feat(react-router): addition react-router, vitural routerpage ([162e476](https://github.com/ArcMichael/decentralizedtradedesk/commit/162e476))

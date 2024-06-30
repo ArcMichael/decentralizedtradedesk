@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import reactLogo from '../assets/react.svg';
 import { invoke } from '@tauri-apps/api/core';
-import './WelcomePage.css';
+import '@/styles/WelcomePage.css';
 import { Link } from 'react-router-dom';
 
 function WelcomePage() {
