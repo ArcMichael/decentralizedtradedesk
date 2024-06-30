@@ -68,6 +68,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "lint-staged": "^15.2.7",
     "prettier": "^3.3.2",
+    "react-router-dom": "^6.24.0",
     "standard-version": "^9.5.0",
     "tree-cli": "^0.6.7",
     "ts-jest": "^29.1.5",
