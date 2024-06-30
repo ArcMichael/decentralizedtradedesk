@@ -1,5 +1,6 @@
 ## <small>0.0.6 (2024-06-30)</small>
 
+* chore(release): 0.0.6 ([6b64d44](https://github.com/ArcMichael/decentralizedtradedesk/commit/6b64d44))
 * test(jest{config, setop}, tsconfig, app.test.tsx, tauri.conf.json(windows), filemock.js): initial ([aebff9f](https://github.com/ArcMichael/decentralizedtradedesk/commit/aebff9f))
 * build(addition tauri-build in pkg): pkg ([e758013](https://github.com/ArcMichael/decentralizedtradedesk/commit/e758013))
 * build(vscode gitignore): pref ([b96181e](https://github.com/ArcMichael/decentralizedtradedesk/commit/b96181e))

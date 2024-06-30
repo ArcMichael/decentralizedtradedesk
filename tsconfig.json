@@ -22,7 +22,9 @@
 
     /* Jest */
     "esModuleInterop": true, // 添加此行
-    "allowSyntheticDefaultImports": true, // 添加此行
+    "allowSyntheticDefaultImports": true, // 添加此行,
+
+    "types": ["jest"]
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
