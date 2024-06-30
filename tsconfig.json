@@ -24,7 +24,7 @@
     "esModuleInterop": true, // 添加此行
     "allowSyntheticDefaultImports": true, // 添加此行,
 
-    "types": []
+    "types": ["jest"]
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
