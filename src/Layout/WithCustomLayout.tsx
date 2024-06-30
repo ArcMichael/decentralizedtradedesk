@@ -5,7 +5,7 @@ import CustomSider from './CustomSider';
 import CustomContent from './CustomContent';
 import CustomFooter from './CustomFooter';
 
-const WithCustomerLayout = (WrappedComponent: React.FC) => {
+const WithCustomLayout = (WrappedComponent: React.FC) => {
   const HOC: React.FC = () => {
     const [collapsed, setCollapsed] = useState(false);
 
@@ -28,4 +28,4 @@ const WithCustomerLayout = (WrappedComponent: React.FC) => {
   return HOC;
 };
 
-export default WithCustomerLayout;
+export default WithCustomLayout;

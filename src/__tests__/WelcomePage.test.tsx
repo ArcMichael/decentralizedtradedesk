@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import WelcomePage from '../Route/WelcomePage';
+import WelcomePage from '../Pages/WelcomePage';
 
 describe('WelcomePage', () => {
   it('renders welcome page content correctly', () => {

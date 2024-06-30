@@ -1,15 +1,21 @@
+//__tests__/CustomSider.test.ts
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import CustomSider from '../Layout/CustomSider';
-import { act } from 'react'; // 从 'react' 导入
+import { act } from 'react';
 
 describe('CustomSider', () => {
   it('renders menu items correctly', async () => {
     await act(async () => {
-      render(<CustomSider collapsed={false} />);
+      render(
+        <MemoryRouter>
+          <CustomSider collapsed={false} />
+        </MemoryRouter>
+      );
     });
 
-    expect(screen.getByText('nav 1')).toBeInTheDocument();
-    expect(screen.getByText('nav 2')).toBeInTheDocument();
-    expect(screen.getByText('nav 3')).toBeInTheDocument();
+    expect(screen.getByText('Welcome')).toBeInTheDocument();
+    expect(screen.getByText('Dashboard')).toBeInTheDocument();
+    expect(screen.getByText('Admin')).toBeInTheDocument();
   });
 });

@@ -5,8 +5,8 @@ import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 const { Header } = Layout;
 
 interface CustomHeaderProps {
-  collapsed: boolean;
-  toggleCollapse: () => void;
+  collapsed?: boolean;
+  toggleCollapse?: () => void;
 }
 
 const CustomHeader: React.FC<CustomHeaderProps> = ({
@@ -19,16 +19,18 @@ const CustomHeader: React.FC<CustomHeaderProps> = ({
 
   return (
     <Header style={{ padding: 0, background: colorBgContainer }}>
-      <Button
-        type='text'
-        icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        onClick={toggleCollapse}
-        style={{
-          fontSize: '16px',
-          width: 64,
-          height: 64,
-        }}
-      />
+      {toggleCollapse && (
+        <Button
+          type='text'
+          icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+          onClick={toggleCollapse}
+          style={{
+            fontSize: '16px',
+            width: 64,
+            height: 64,
+          }}
+        />
+      )}
     </Header>
   );
 };
