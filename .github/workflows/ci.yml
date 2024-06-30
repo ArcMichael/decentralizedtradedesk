@@ -6,7 +6,7 @@ on:
   push:
     branches:
       - main
-      - 'feature/**'
+      - 'feature/jest'
   pull_request:
     branches:
       - main
