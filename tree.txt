@@ -16,16 +16,30 @@
 |  ├── App.css
 |  ├── App.tsx
 |  ├── Layout
+|  |  ├── CustomContent.tsx
+|  |  ├── CustomFooter.tsx
+|  |  ├── CustomHeader.tsx
+|  |  ├── CustomSider.tsx
+|  |  └── WithCustomLayout.tsx
 |  ├── Route
 |  |  ├── HomePage.tsx
 |  |  ├── Routes.tsx
-|  |  ├── WelcomePage.css
 |  |  └── WelcomePage.tsx
 |  ├── __tests__
-|  |  └── App.test.tsx
+|  |  ├── CustomContent.test.tsx
+|  |  ├── CustomFooter.test.tsx
+|  |  ├── CustomHeader.test.tsx
+|  |  ├── CustomSider.test.tsx
+|  |  ├── Routes.test.tsx
+|  |  ├── WelcomePage.test.tsx
+|  |  └── WithCustomLayout.test.tsx
 |  ├── assets
 |  |  └── react.svg
 |  ├── main.tsx
+|  ├── setupTests.ts
+|  ├── styles
+|  |  ├── WelcomePage.css
+|  |  └── globals.css
 |  └── vite-env.d.ts
 ├── src-tauri
 |  ├── Cargo.lock
@@ -72,10 +86,11 @@
 ├── test
 |  └── __mocks__
 |     └── fileMock.js
+├── tree.txt
 ├── tsconfig.json
 ├── tsconfig.node.json
 └── vite.config.ts
 
-directory: 31 file: 56 symboliclink: 64
+directory: 33 file: 70 symboliclink: 66
 
 ignored: directory (1)
