@@ -1,3 +1,15 @@
+## <small>0.0.6 (2024-06-30)</small>
+
+* test(jest{config, setop}, tsconfig, app.test.tsx, tauri.conf.json(windows), filemock.js): initial ([aebff9f](https://github.com/ArcMichael/decentralizedtradedesk/commit/aebff9f))
+* build(addition tauri-build in pkg): pkg ([e758013](https://github.com/ArcMichael/decentralizedtradedesk/commit/e758013))
+* build(vscode gitignore): pref ([b96181e](https://github.com/ArcMichael/decentralizedtradedesk/commit/b96181e))
+* docs(pkg/tree-cli): create a tree of directory ([26dbc6b](https://github.com/ArcMichael/decentralizedtradedesk/commit/26dbc6b))
+* docs(test formatting for tree-cli): tree ([c2e444e](https://github.com/ArcMichael/decentralizedtradedesk/commit/c2e444e))
+* fix(semi of prettierrc): change semi to true ([3ec0617](https://github.com/ArcMichael/decentralizedtradedesk/commit/3ec0617))
+* ci(add eslint): enhance ci ([bc6aefd](https://github.com/ArcMichael/decentralizedtradedesk/commit/bc6aefd))
+
+
+
 ## <small>0.0.5 (2024-06-20)</small>
 
 * chore(release): 0.0.5 ([331ddbc](https://github.com/ArcMichael/decentralizedtradedesk/commit/331ddbc))
