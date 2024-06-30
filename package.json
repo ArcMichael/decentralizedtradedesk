@@ -1,24 +1,40 @@
 {
   "name": "decentralizedtradedesk",
-  "private": true,
   "version": "0.0.7",
+  "private": true,
+  "description": "A decentralized trade desk application",
+  "homepage": "https://github.com/ArcMichael/decentralizedtradedesk#readme",
+  "bugs": {
+    "url": "https://github.com/ArcMichael/decentralizedtradedesk/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ArcMichael/decentralizedtradedesk.git"
+  },
+  "license": "BSD-2-Clause",
+  "author": "ArcMichael <hulen20@gmail.com>",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "add": "git add .",
     "build": "tsc && vite build",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
+    "commit": "cz",
+    "dev": "vite",
+    "lint-staged": "lint-staged",
+    "prepare": "husky install",
     "preview": "vite preview",
-    "tauri": "tauri",
-    "tauri-build": "tauri build",
+    "push": "git push",
     "release": "standard-version && git push origin main && git push origin main --tags",
     "release-rust": "node auto-increment-rust-version.cjs",
-    "prepare": "husky install",
-    "lint-staged": "lint-staged",
-    "add": "git add .",
-    "commit": "cz",
-    "push": "git push",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
+    "tauri": "tauri",
+    "tauri-build": "tauri build",
     "test": "jest",
     "tree": "tree -l 4 -o tree.txt --ignore node_modules/"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -26,15 +42,13 @@
       "eslint --fix"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "resolutions": {
+    "punycode": "^2.3.1"
   },
   "dependencies": {
     "@ant-design/icons": "^5.3.7",
@@ -78,8 +92,5 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.5.2",
     "vite": "^5.3.2"
-  },
-  "resolutions": {
-    "punycode": "^2.3.1"
   }
 }
