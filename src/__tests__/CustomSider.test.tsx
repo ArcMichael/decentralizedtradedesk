@@ -1,4 +1,5 @@
-//__tests__/CustomSider.test.ts
+// __tests__/CustomSider.test.ts
+
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import CustomSider from '../Layout/CustomSider';
@@ -14,8 +15,9 @@ describe('CustomSider', () => {
       );
     });
 
-    expect(screen.getByText('Welcome')).toBeInTheDocument();
-    expect(screen.getByText('Dashboard')).toBeInTheDocument();
+    expect(screen.getByText('Home')).toBeInTheDocument();
     expect(screen.getByText('Admin')).toBeInTheDocument();
+    expect(screen.getByText('Dashboard')).toBeInTheDocument();
+    expect(screen.getByText('Browse')).toBeInTheDocument();
   });
 });

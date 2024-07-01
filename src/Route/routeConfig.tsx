@@ -1,4 +1,6 @@
-import React from 'react';
+// routeConfig.tsx
+
+import React, { lazy } from 'react';
 import {
   UserOutlined,
   UploadOutlined,
@@ -6,29 +8,36 @@ import {
   WalletOutlined,
 } from '@ant-design/icons';
 
-import HomePage from '../Pages/HomePage';
-import AdminProductsPage from '../Pages/Admin/AdminProductsPage';
-import AdminUsersPage from '../Pages/Admin/AdminUsersPage';
-import AdminOrdersPage from '../Pages/Admin/AdminOrdersPage';
-import AdminStatisticsPage from '../Pages/Admin/AdminStatisticsPage';
-import LoginPage from '../Pages/LoginPage';
-import RegisterPage from '../Pages/RegisterPage';
-import NotFoundPage from '../Pages/NotFoundPage';
-import DashboardPage from '../Pages/DashboardPage';
-import UserOrdersPage from '../Pages/Dashboard/UserOrdersPage';
-import UserProfilePage from '../Pages/Dashboard/UserProfilePage';
-import UserSettingsPage from '../Pages/Dashboard/UserSettingsPage';
-import UserWalletPage from '../Pages/Dashboard/UserWalletPage';
-import BrowsePage from '../Pages/BrowsePage';
-import ProductDetailPage from '../Pages/ProductDetailPage';
+const HomePage = lazy(() => import('../Pages/HomePage'));
+const AdminProductsPage = lazy(
+  () => import('../Pages/Admin/AdminProductsPage')
+);
+const AdminUsersPage = lazy(() => import('../Pages/Admin/AdminUsersPage'));
+const AdminOrdersPage = lazy(() => import('../Pages/Admin/AdminOrdersPage'));
+const AdminStatisticsPage = lazy(
+  () => import('../Pages/Admin/AdminStatisticsPage')
+);
+const LoginPage = lazy(() => import('../Pages/LoginPage'));
+const RegisterPage = lazy(() => import('../Pages/RegisterPage'));
+const NotFoundPage = lazy(() => import('../Pages/NotFoundPage'));
+const UserOrdersPage = lazy(() => import('../Pages/Dashboard/UserOrdersPage'));
+const UserProfilePage = lazy(
+  () => import('../Pages/Dashboard/UserProfilePage')
+);
+const UserSettingsPage = lazy(
+  () => import('../Pages/Dashboard/UserSettingsPage')
+);
+const UserWalletPage = lazy(() => import('../Pages/Dashboard/UserWalletPage'));
+const BrowsePage = lazy(() => import('../Pages/BrowsePage'));
+const ProductDetailPage = lazy(() => import('../Pages/ProductDetailPage'));
 
 export interface RouteConfig {
   path: string;
-  element: React.ReactNode;
-  group?: string; // 新增 group 属性
+  element?: React.ReactNode;
   title: string;
   icon: React.ReactNode;
   showInSider: boolean;
+  children?: RouteConfig[];
 }
 
 const routes: RouteConfig[] = [
@@ -53,77 +62,77 @@ const routes: RouteConfig[] = [
     icon: <UploadOutlined />,
     showInSider: false,
   },
-  // 管理员路由组
   {
-    path: '/admin/products',
-    element: <AdminProductsPage />,
-    group: 'Admin',
-    title: 'Products',
+    path: '/admin',
+    title: 'Admin',
     icon: <UserOutlined />,
     showInSider: true,
-  },
-  {
-    path: '/admin/users',
-    element: <AdminUsersPage />,
-    group: 'Admin',
-    title: 'Users',
-    icon: <UserOutlined />,
-    showInSider: true,
-  },
-  {
-    path: '/admin/orders',
-    element: <AdminOrdersPage />,
-    group: 'Admin',
-    title: 'Orders',
-    icon: <UserOutlined />,
-    showInSider: true,
-  },
-  {
-    path: '/admin/statistics',
-    element: <AdminStatisticsPage />,
-    group: 'Admin',
-    title: 'Statistics',
-    icon: <UserOutlined />,
-    showInSider: true,
+    children: [
+      {
+        path: '/admin/products',
+        element: <AdminProductsPage />,
+        title: 'Products',
+        icon: <UserOutlined />,
+        showInSider: true,
+      },
+      {
+        path: '/admin/users',
+        element: <AdminUsersPage />,
+        title: 'Users',
+        icon: <UserOutlined />,
+        showInSider: true,
+      },
+      {
+        path: '/admin/orders',
+        element: <AdminOrdersPage />,
+        title: 'Orders',
+        icon: <UserOutlined />,
+        showInSider: true,
+      },
+      {
+        path: '/admin/statistics',
+        element: <AdminStatisticsPage />,
+        title: 'Statistics',
+        icon: <UserOutlined />,
+        showInSider: true,
+      },
+    ],
   },
   {
     path: '/dashboard',
-    element: <DashboardPage />,
     title: 'Dashboard',
     icon: <SettingOutlined />,
     showInSider: true,
-  },
-  {
-    path: '/dashboard/orders',
-    element: <UserOrdersPage />,
-    group: 'Dashboard',
-    title: 'Orders',
-    icon: <SettingOutlined />,
-    showInSider: true,
-  },
-  {
-    path: '/dashboard/profile',
-    element: <UserProfilePage />,
-    group: 'Dashboard',
-    title: 'Profile',
-    icon: <SettingOutlined />,
-    showInSider: true,
-  },
-  {
-    path: '/dashboard/settings',
-    element: <UserSettingsPage />,
-    group: 'Dashboard',
-    title: 'Settings',
-    icon: <SettingOutlined />,
-    showInSider: true,
-  },
-  {
-    path: '/dashboard/wallet',
-    element: <UserWalletPage />,
-    group: 'Dashboard',
-    title: 'Wallet',
-    icon: <WalletOutlined />,
-    showInSider: true,
+    children: [
+      {
+        path: '/dashboard/orders',
+        element: <UserOrdersPage />,
+        title: 'Orders',
+        icon: <SettingOutlined />,
+        showInSider: true,
+      },
+      {
+        path: '/dashboard/profile',
+        element: <UserProfilePage />,
+        title: 'Profile',
+        icon: <SettingOutlined />,
+        showInSider: true,
+      },
+      {
+        path: '/dashboard/settings',
+        element: <UserSettingsPage />,
+        title: 'Settings',
+        icon: <SettingOutlined />,
+        showInSider: true,
+      },
+      {
+        path: '/dashboard/wallet',
+        element: <UserWalletPage />,
+        title: 'Wallet',
+        icon: <WalletOutlined />,
+        showInSider: true,
+      },
+    ],
   },
   {
     path: '/browse',
