@@ -7,12 +7,13 @@ import {
 } from '@ant-design/icons';
 
 import HomePage from '../Pages/HomePage';
-import WelcomePage from '../Pages/WelcomePage';
 import NotFoundPage from '../Pages/NotFoundPage';
 import DashboardPage from '../Pages/DashboardPage';
 import AdminPanelPage from '../Pages/AdminPanelPage';
 import LoginPage from '../Pages/LoginPage';
 import RegisterPage from '../Pages/RegisterPage';
+import BrowsePage from '../Pages/BrowsePage';
+import ProductDetailPage from '../Pages/ProductDetailPage';
 
 export interface RouteConfig {
   path: string;
@@ -26,18 +27,11 @@ export interface RouteConfig {
 
 const routes: RouteConfig[] = [
   {
-    path: '/',
+    path: '',
     element: <HomePage />,
     exact: true,
     title: 'Home',
     icon: <UserOutlined />,
-    showInSider: false,
-  },
-  {
-    path: 'welcome',
-    element: <WelcomePage />,
-    title: 'Welcome',
-    icon: <VideoCameraOutlined />,
     showInSider: true,
   },
   {
@@ -67,6 +61,20 @@ const routes: RouteConfig[] = [
     title: 'Admin',
     icon: <VideoCameraOutlined />,
     showInSider: true,
+  },
+  {
+    path: 'browse',
+    element: <BrowsePage />,
+    title: 'Browse',
+    icon: <UserOutlined />,
+    showInSider: true,
+  },
+  {
+    path: 'product/:id',
+    element: <ProductDetailPage />,
+    title: 'Product Detail',
+    icon: <UserOutlined />,
+    showInSider: false,
   },
   {
     path: '*',

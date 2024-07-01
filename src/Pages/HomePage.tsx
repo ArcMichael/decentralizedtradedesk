@@ -1,6 +1,6 @@
 // src/Pages/HomePage.tsx
 import React from 'react';
-import WithSimpleLayout from '../Layout/WithSimpleLayout';
+import WithCustomLayout from '../Layout/WithCustomLayout';
 
 const HomePage: React.FC = () => {
   return (
@@ -11,4 +11,4 @@ const HomePage: React.FC = () => {
   );
 };
 
-export default WithSimpleLayout(HomePage);
+export default WithCustomLayout(HomePage);
