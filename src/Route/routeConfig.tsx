@@ -1,72 +1,152 @@
-// src/Route/routeConfig.tsx
-import React from 'react';
+// routeConfig.tsx
+
+import React, { lazy } from 'react';
 import {
   UserOutlined,
-  VideoCameraOutlined,
   UploadOutlined,
+  SettingOutlined,
+  WalletOutlined,
 } from '@ant-design/icons';
 
-import HomePage from '../Pages/HomePage';
-import WelcomePage from '../Pages/WelcomePage';
-import NotFoundPage from '../Pages/NotFoundPage';
-import DashboardPage from '../Pages/DashboardPage';
-import AdminPanelPage from '../Pages/AdminPanelPage';
-import LoginPage from '../Pages/LoginPage';
-import RegisterPage from '../Pages/RegisterPage';
+const HomePage = lazy(() => import('../Pages/HomePage'));
+const AdminProductsPage = lazy(
+  () => import('../Pages/Admin/AdminProductsPage')
+);
+const AdminUsersPage = lazy(() => import('../Pages/Admin/AdminUsersPage'));
+const AdminOrdersPage = lazy(() => import('../Pages/Admin/AdminOrdersPage'));
+const AdminStatisticsPage = lazy(
+  () => import('../Pages/Admin/AdminStatisticsPage')
+);
+const LoginPage = lazy(() => import('../Pages/LoginPage'));
+const RegisterPage = lazy(() => import('../Pages/RegisterPage'));
+const NotFoundPage = lazy(() => import('../Pages/NotFoundPage'));
+const UserOrdersPage = lazy(() => import('../Pages/Dashboard/UserOrdersPage'));
+const UserProfilePage = lazy(
+  () => import('../Pages/Dashboard/UserProfilePage')
+);
+const UserSettingsPage = lazy(
+  () => import('../Pages/Dashboard/UserSettingsPage')
+);
+const UserWalletPage = lazy(() => import('../Pages/Dashboard/UserWalletPage'));
+const BrowsePage = lazy(() => import('../Pages/BrowsePage'));
+const ProductDetailPage = lazy(() => import('../Pages/ProductDetailPage'));
 
 export interface RouteConfig {
   path: string;
-  element: React.ReactNode;
-  exact?: boolean;
-  subRoutes?: RouteConfig[];
-  title?: string;
-  icon?: React.ReactNode;
-  showInSider?: boolean;
+  element?: React.ReactNode;
+  title: string;
+  icon: React.ReactNode;
+  showInSider: boolean;
+  children?: RouteConfig[];
 }
 
 const routes: RouteConfig[] = [
   {
     path: '/',
     element: <HomePage />,
-    exact: true,
     title: 'Home',
     icon: <UserOutlined />,
-    showInSider: false,
-  },
-  {
-    path: 'welcome',
-    element: <WelcomePage />,
-    title: 'Welcome',
-    icon: <VideoCameraOutlined />,
     showInSider: true,
   },
   {
-    path: 'login',
+    path: '/login',
     element: <LoginPage />,
     title: 'Login',
     icon: <UploadOutlined />,
     showInSider: false,
   },
   {
-    path: 'register',
+    path: '/register',
     element: <RegisterPage />,
     title: 'Register',
     icon: <UploadOutlined />,
     showInSider: false,
   },
   {
-    path: 'dashboard',
-    element: <DashboardPage />,
+    path: '/admin',
+    title: 'Admin',
+    icon: <UserOutlined />,
+    showInSider: true,
+    children: [
+      {
+        path: '/admin/products',
+        element: <AdminProductsPage />,
+        title: 'Products',
+        icon: <UserOutlined />,
+        showInSider: true,
+      },
+      {
+        path: '/admin/users',
+        element: <AdminUsersPage />,
+        title: 'Users',
+        icon: <UserOutlined />,
+        showInSider: true,
+      },
+      {
+        path: '/admin/orders',
+        element: <AdminOrdersPage />,
+        title: 'Orders',
+        icon: <UserOutlined />,
+        showInSider: true,
+      },
+      {
+        path: '/admin/statistics',
+        element: <AdminStatisticsPage />,
+        title: 'Statistics',
+        icon: <UserOutlined />,
+        showInSider: true,
+      },
+    ],
+  },
+  {
+    path: '/dashboard',
     title: 'Dashboard',
+    icon: <SettingOutlined />,
+    showInSider: true,
+    children: [
+      {
+        path: '/dashboard/orders',
+        element: <UserOrdersPage />,
+        title: 'Orders',
+        icon: <SettingOutlined />,
+        showInSider: true,
+      },
+      {
+        path: '/dashboard/profile',
+        element: <UserProfilePage />,
+        title: 'Profile',
+        icon: <SettingOutlined />,
+        showInSider: true,
+      },
+      {
+        path: '/dashboard/settings',
+        element: <UserSettingsPage />,
+        title: 'Settings',
+        icon: <SettingOutlined />,
+        showInSider: true,
+      },
+      {
+        path: '/dashboard/wallet',
+        element: <UserWalletPage />,
+        title: 'Wallet',
+        icon: <WalletOutlined />,
+        showInSider: true,
+      },
+    ],
+  },
+  {
+    path: '/browse',
+    element: <BrowsePage />,
+    title: 'Browse',
     icon: <UserOutlined />,
     showInSider: true,
   },
   {
-    path: 'admin',
-    element: <AdminPanelPage />,
-    title: 'Admin',
-    icon: <VideoCameraOutlined />,
-    showInSider: true,
+    path: '/product/:id',
+    element: <ProductDetailPage />,
+    title: 'Product Detail',
+    icon: <UserOutlined />,
+    showInSider: false,
   },
   {
     path: '*',
