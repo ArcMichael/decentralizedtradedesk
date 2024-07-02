@@ -8,9 +8,9 @@ import CustomFooter from './CustomFooter';
 const WithSimpleLayout = (WrappedComponent: React.FC): React.FC => {
   const HOC: React.FC = () => {
     return (
-      <Layout style={{ height: '100vh' }}>
-        <CustomHeader />
-        <CustomContent>
+      <Layout style={{ minHeight: '100vh' }}>
+        <CustomHeader showUserMenu={false} />
+        <CustomContent showBreadcrumbs={false}>
           <WrappedComponent />
         </CustomContent>
         <CustomFooter />

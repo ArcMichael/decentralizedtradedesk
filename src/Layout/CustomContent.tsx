@@ -6,9 +6,13 @@ const { Content } = Layout;
 
 interface CustomContentProps {
   children: ReactNode;
+  showBreadcrumbs?: boolean; // Add this prop
 }
 
-const CustomContent: React.FC<CustomContentProps> = ({ children }) => {
+const CustomContent: React.FC<CustomContentProps> = ({
+  children,
+  showBreadcrumbs = true,
+}) => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -23,7 +27,7 @@ const CustomContent: React.FC<CustomContentProps> = ({ children }) => {
         borderRadius: borderRadiusLG,
       }}
     >
-      <Breadcrumbs />
+      {showBreadcrumbs && <Breadcrumbs />}
       {children}
     </Content>
   );

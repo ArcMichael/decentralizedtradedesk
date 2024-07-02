@@ -1,6 +1,17 @@
+// src/Pages/Dashboard/UserOrdersPage.tsx
 import React from 'react';
-import WithCustomerLayout from '../../Layout/WithCustomLayout'; // Adjust the import path as needed
+import WithCustomLayout from '../../Layout/WithCustomLayout';
+import { Typography } from 'antd';
 
-const UserOrdersPage: React.FC = () => <div>UserOrdersPage.tsx</div>;
+const { Title } = Typography;
 
-export default WithCustomerLayout(UserOrdersPage);
+const UserOrdersPage: React.FC = () => {
+  return (
+    <div style={{ padding: '24px' }}>
+      <Title level={2}>User Orders Page</Title>
+      <p>View and manage your orders from this page.</p>
+    </div>
+  );
+};
+
+export default WithCustomLayout(UserOrdersPage);
