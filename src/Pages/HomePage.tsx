@@ -3,10 +3,19 @@ import React from 'react';
 import { Row, Col, Card, Button, Typography } from 'antd';
 import { GithubOutlined } from '@ant-design/icons';
 import WithCustomLayout from '../Layout/WithCustomLayout';
+import { open } from '@tauri-apps/plugin-shell';
 
 const { Title, Paragraph } = Typography;
 
 const HomePage: React.FC = () => {
+  const openExternalLink = async (url: string) => {
+    try {
+      await open(url);
+    } catch (e) {
+      console.error('Failed to open URL', e);
+    }
+  };
+
   return (
     <div style={{ padding: '24px' }}>
       <header>
@@ -89,11 +98,17 @@ const HomePage: React.FC = () => {
         <Title level={2}>Contact Us</Title>
         <Paragraph>
           Have questions or need more information?{' '}
-          <a href='https://github.com/ArcMichael/decentralizedtradedesk/issues'>
-            <Button type='link' icon={<GithubOutlined />}>
-              Contact us
-            </Button>
-          </a>{' '}
+          <Button
+            type='link'
+            icon={<GithubOutlined />}
+            onClick={() =>
+              openExternalLink(
+                'https://github.com/ArcMichael/decentralizedtradedesk/issues'
+              )
+            }
+          >
+            Contact us
+          </Button>{' '}
           and we'll be happy to assist you!
         </Paragraph>
       </section>
