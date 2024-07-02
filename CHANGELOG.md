@@ -1,5 +1,6 @@
 ## <small>0.0.8 (2024-07-02)</small>
 
+* chore(release): 0.0.8 ([a492e86](https://github.com/ArcMichael/decentralizedtradedesk/commit/a492e86))
 * docs(supplement docs in pkg): desc home resp lice anth and sort pkg ([f1c3292](https://github.com/ArcMichael/decentralizedtradedesk/commit/f1c3292))
 * docs(tree): update tree ([b1a4322](https://github.com/ArcMichael/decentralizedtradedesk/commit/b1a4322))
 * test(update jest): jest ([79a3f07](https://github.com/ArcMichael/decentralizedtradedesk/commit/79a3f07))
