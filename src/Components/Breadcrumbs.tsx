@@ -21,8 +21,8 @@ const findRoute = (
 const generateBreadcrumbs = (
   pathSnippets: string[],
   routeList: RouteConfig[]
-): React.ReactElement[] => {
-  const breadcrumbs: React.ReactElement[] = [];
+): { key: string; title: React.ReactNode }[] => {
+  const breadcrumbs: { key: string; title: React.ReactNode }[] = [];
   let currentPath = '';
 
   for (const snippet of pathSnippets) {
@@ -30,15 +30,12 @@ const generateBreadcrumbs = (
     const route = findRoute(currentPath, routeList);
     if (route) {
       if (route.children) {
-        breadcrumbs.push(
-          <Breadcrumb.Item key={currentPath}>{route.title}</Breadcrumb.Item>
-        );
+        breadcrumbs.push({ key: currentPath, title: route.title });
       } else {
-        breadcrumbs.push(
-          <Breadcrumb.Item key={currentPath}>
-            <Link to={currentPath}>{route.title}</Link>
-          </Breadcrumb.Item>
-        );
+        breadcrumbs.push({
+          key: currentPath,
+          title: <Link to={currentPath}>{route.title}</Link>,
+        });
       }
     }
   }
@@ -50,15 +47,15 @@ const Breadcrumbs: React.FC = () => {
   const location = useLocation();
   const pathSnippets = location.pathname.split('/').filter(i => i);
 
-  const breadcrumbItems: React.ReactElement[] = [
-    <Breadcrumb.Item key='home'>
-      <Link to='/'>Home</Link>
-    </Breadcrumb.Item>,
-  ].concat(generateBreadcrumbs(pathSnippets, routes));
+  const breadcrumbItems = [
+    {
+      key: 'home',
+      title: <Link to='/'>Home</Link>,
+    },
+    ...generateBreadcrumbs(pathSnippets, routes),
+  ];
 
-  return (
-    <Breadcrumb style={{ margin: '16px 0' }}>{breadcrumbItems}</Breadcrumb>
-  );
+  return <Breadcrumb items={breadcrumbItems} />;
 };
 
 export default Breadcrumbs;
