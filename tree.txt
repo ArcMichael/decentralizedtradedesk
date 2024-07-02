@@ -15,24 +15,43 @@
 ├── src
 |  ├── App.css
 |  ├── App.tsx
+|  ├── Components
+|  |  ├── Breadcrumbs.tsx
+|  |  └── UserMenu.tsx
 |  ├── Layout
 |  |  ├── CustomContent.tsx
 |  |  ├── CustomFooter.tsx
 |  |  ├── CustomHeader.tsx
 |  |  ├── CustomSider.tsx
-|  |  └── WithCustomLayout.tsx
-|  ├── Route
+|  |  ├── WithCustomLayout.tsx
+|  |  └── WithSimpleLayout.tsx
+|  ├── Pages
+|  |  ├── Admin
+|  |  |  ├── AdminOrdersPage.tsx
+|  |  |  ├── AdminProductsPage.tsx
+|  |  |  ├── AdminStatisticsPage.tsx
+|  |  |  └── AdminUsersPage.tsx
+|  |  ├── BrowsePage.tsx
+|  |  ├── Dashboard
+|  |  |  ├── UserOrdersPage.tsx
+|  |  |  ├── UserProfilePage.tsx
+|  |  |  ├── UserSettingsPage.tsx
+|  |  |  └── UserWalletPage.tsx
 |  |  ├── HomePage.tsx
+|  |  ├── LoginPage.tsx
+|  |  ├── NotFoundPage.tsx
+|  |  ├── ProductDetailPage.tsx
+|  |  └── RegisterPage.tsx
+|  ├── Route
 |  |  ├── Routes.tsx
-|  |  └── WelcomePage.tsx
+|  |  └── routeConfig.tsx
 |  ├── __tests__
 |  |  ├── CustomContent.test.tsx
 |  |  ├── CustomFooter.test.tsx
 |  |  ├── CustomHeader.test.tsx
 |  |  ├── CustomSider.test.tsx
-|  |  ├── Routes.test.tsx
-|  |  ├── WelcomePage.test.tsx
-|  |  └── WithCustomLayout.test.tsx
+|  |  ├── WithSimpleLayout.test.tsx
+|  |  └── routeConfig.test.tsx
 |  ├── assets
 |  |  └── react.svg
 |  ├── main.tsx
@@ -91,6 +110,6 @@
 ├── tsconfig.node.json
 └── vite.config.ts
 
-directory: 33 file: 70 symboliclink: 66
+directory: 37 file: 85 symboliclink: 66
 
 ignored: directory (1)
