@@ -1,3 +1,20 @@
+## <small>0.0.8 (2024-07-02)</small>
+
+* docs(supplement docs in pkg): desc home resp lice anth and sort pkg ([f1c3292](https://github.com/ArcMichael/decentralizedtradedesk/commit/f1c3292))
+* docs(tree): update tree ([b1a4322](https://github.com/ArcMichael/decentralizedtradedesk/commit/b1a4322))
+* test(update jest): jest ([79a3f07](https://github.com/ArcMichael/decentralizedtradedesk/commit/79a3f07))
+* feat(big update): all framework of page ([b0ec1d4](https://github.com/ArcMichael/decentralizedtradedesk/commit/b0ec1d4))
+* feat(detail of homepage and breadcrumbs): addition detail ([a6dfe5c](https://github.com/ArcMichael/decentralizedtradedesk/commit/a6dfe5c))
+* feat(detail page): add more page in detail ([660194e](https://github.com/ArcMichael/decentralizedtradedesk/commit/660194e))
+* feat(github ci): ci ([bb3fccd](https://github.com/ArcMichael/decentralizedtradedesk/commit/bb3fccd))
+* feat(hest): jest ([f18250d](https://github.com/ArcMichael/decentralizedtradedesk/commit/f18250d))
+* feat(route): show all of the route ([9ca7212](https://github.com/ArcMichael/decentralizedtradedesk/commit/9ca7212))
+* feat(homepage, routeconfig): reformat router ([5c88f1a](https://github.com/ArcMichael/decentralizedtradedesk/commit/5c88f1a))
+* ci(github ci): ci ([9fa7c01](https://github.com/ArcMichael/decentralizedtradedesk/commit/9fa7c01))
+* fix(jest and simple of layout): addition jest and setup layout of layout ([7012cad](https://github.com/ArcMichael/decentralizedtradedesk/commit/7012cad))
+
+
+
 ## <small>0.0.7 (2024-06-30)</small>
 
 * chore(release): 0.0.7 ([89d89ba](https://github.com/ArcMichael/decentralizedtradedesk/commit/89d89ba))
