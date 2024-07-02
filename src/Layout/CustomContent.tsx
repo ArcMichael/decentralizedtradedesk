@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import { Layout, theme } from 'antd';
+import Breadcrumbs from '../Components/Breadcrumbs';
 
 const { Content } = Layout;
 
@@ -22,6 +23,7 @@ const CustomContent: React.FC<CustomContentProps> = ({ children }) => {
         borderRadius: borderRadiusLG,
       }}
     >
+      <Breadcrumbs />
       {children}
     </Content>
   );

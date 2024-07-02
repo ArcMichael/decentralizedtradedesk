@@ -1,3 +1,4 @@
+// src/Layout/WithCustomLayout.tsx
 import React, { useState } from 'react';
 import { Layout } from 'antd';
 import CustomHeader from './CustomHeader';
@@ -12,10 +13,11 @@ const WithCustomLayout = (WrappedComponent: React.FC) => {
     const toggleCollapse = () => setCollapsed(!collapsed);
 
     return (
-      <Layout style={{ height: '100vh' }}>
+      <Layout style={{ minHeight: '100vh' }}>
         <CustomSider collapsed={collapsed} />
         <Layout>
           <CustomHeader collapsed={collapsed} toggleCollapse={toggleCollapse} />
+
           <CustomContent>
             <WrappedComponent />
           </CustomContent>
