@@ -29,7 +29,9 @@
     "tauri": "tauri",
     "tauri-build": "tauri build",
     "test": "jest",
-    "tree": "tree -l 4 -o tree.txt --ignore node_modules/"
+    "tree": "tree -l 4 -o tree.txt --ignore node_modules/",
+    "truffle-compile": "cd truffle && truffle compile --config ./truffle-config.ts",
+    "truffle-migrate": "cd truffle && truffle migrate --network development --config ./truffle-config.ts"
   },
   "husky": {
     "hooks": {
@@ -56,7 +58,8 @@
     "@tauri-apps/plugin-shell": "2.0.0-beta.6",
     "antd": "^5.18.3",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "web3": "^4.10.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
