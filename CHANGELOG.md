@@ -1,3 +1,14 @@
+## <small>0.0.9 (2024-07-03)</small>
+
+* test(jest change): change ([79833a3](https://github.com/ArcMichael/decentralizedtradedesk/commit/79833a3))
+* feat(pkg pref in main,app metamasklogin web3): a big update ([cdfd197](https://github.com/ArcMichael/decentralizedtradedesk/commit/cdfd197))
+* feat(pkg.engine, nodejs): use another version of node to build tauri project use adopt web3 ([0c6921e](https://github.com/ArcMichael/decentralizedtradedesk/commit/0c6921e))
+* ci(pkg): addition engine scope ([79b22e7](https://github.com/ArcMichael/decentralizedtradedesk/commit/79b22e7))
+* perf(pkg): upgrade pkg ([0fb5d00](https://github.com/ArcMichael/decentralizedtradedesk/commit/0fb5d00))
+* feat(home jump): use native(rust) bridge ([1621162](https://github.com/ArcMichael/decentralizedtradedesk/commit/1621162))
+
+
+
 ## <small>0.0.8 (2024-07-02)</small>
 
 * chore(release): 0.0.8 ([a492e86](https://github.com/ArcMichael/decentralizedtradedesk/commit/a492e86))
