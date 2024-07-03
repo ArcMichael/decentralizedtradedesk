@@ -59,6 +59,7 @@
 |  ├── styles
 |  |  ├── WelcomePage.css
 |  |  └── globals.css
+|  ├── utils
 |  └── vite-env.d.ts
 ├── src-tauri
 |  ├── Cargo.lock
@@ -100,7 +101,11 @@
 |  |     ├── decentralizedtradedesk.d
 |  |     ├── deps
 |  |     ├── examples
-|  |     └── incremental
+|  |     ├── incremental
+|  |     ├── libdecentralizedtradedesk_lib.a
+|  |     ├── libdecentralizedtradedesk_lib.d
+|  |     ├── libdecentralizedtradedesk_lib.dylib
+|  |     └── libdecentralizedtradedesk_lib.rlib
 |  └── tauri.conf.json
 ├── test
 |  └── __mocks__
@@ -110,6 +115,6 @@
 ├── tsconfig.node.json
 └── vite.config.ts
 
-directory: 37 file: 85 symboliclink: 66
+directory: 38 file: 89 symboliclink: 66
 
 ignored: directory (1)
