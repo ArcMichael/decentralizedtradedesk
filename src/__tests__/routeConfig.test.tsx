@@ -20,7 +20,7 @@ describe('routeConfig', () => {
       {
         path: '/login',
         title: 'Login',
-        showInSider: false,
+        showInSider: true,
         icon: <UploadOutlined />,
       },
       {

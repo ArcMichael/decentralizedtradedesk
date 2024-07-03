@@ -1,48 +1,72 @@
 // src/Pages/LoginPage.tsx
 
-import React from 'react';
-import { Form, Input, Button } from 'antd';
+import React, { useState, useCallback } from 'react';
+import { Button, message, Spin } from 'antd';
 import WithSimpleLayout from '../Layout/WithSimpleLayout';
+import { getWeb3 } from '../web3/web3Config';
+import { useUser } from '../contexts/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage: React.FC = () => {
-  const onFinish = (values: any) => {
-    console.log('Success:', values);
-    // Handle login logic here
-  };
+  const navigate = useNavigate();
+  const { login } = useUser();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
+  const initMetaMask = useCallback(async () => {
+    setLoading(true);
+    try {
+      const web3Instance = await getWeb3();
+      if (web3Instance) {
+        const accounts = await web3Instance.eth.getAccounts();
+        if (accounts.length > 0) {
+          login(accounts[0]);
+          message.success('MetaMask connected. You are now logged in.');
+          setIsLoggedIn(true);
+        } else {
+          message.error(
+            'MetaMask is not connected. Please log in to MetaMask.'
+          );
+        }
+      }
+    } catch (error) {
+      message.error('Failed to load web3 or accounts.');
+    } finally {
+      setLoading(false);
+    }
+  }, [login]);
 
   return (
     <div style={{ maxWidth: '300px', margin: 'auto', padding: '24px' }}>
       <h1>Login Page</h1>
-      <Form
-        name='login'
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-      >
-        <Form.Item
-          name='username'
-          rules={[{ required: true, message: 'Please input your username!' }]}
-        >
-          <Input placeholder='Username' />
-        </Form.Item>
-
-        <Form.Item
-          name='password'
-          rules={[{ required: true, message: 'Please input your password!' }]}
-        >
-          <Input.Password placeholder='Password' />
-        </Form.Item>
-
-        <Form.Item>
-          <Button type='primary' htmlType='submit' block>
-            Login
+      <Spin spinning={loading} tip='Connecting to MetaMask...'>
+        {isLoggedIn ? (
+          <Button
+            style={{
+              backgroundColor: '#1890ff',
+              color: 'white',
+              margin: '16px 0',
+            }}
+            block
+            onClick={() => navigate('/')}
+          >
+            Go
           </Button>
-        </Form.Item>
-      </Form>
+        ) : (
+          <Button style={{ margin: '16px 0' }} block onClick={initMetaMask}>
+            Connect to MetaMask
+          </Button>
+        )}
+        <Button
+          onClick={() =>
+            window.open('https://metamask.io/download.html', '_blank')
+          }
+          style={{ margin: '16px 0', borderStyle: 'dashed' }}
+          block
+        >
+          Install MetaMask
+        </Button>
+      </Spin>
     </div>
   );
 };

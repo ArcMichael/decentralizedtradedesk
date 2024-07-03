@@ -53,7 +53,7 @@ const routes: RouteConfig[] = [
     element: <LoginPage />,
     title: 'Login',
     icon: <UploadOutlined />,
-    showInSider: false,
+    showInSider: true,
   },
   {
     path: '/register',
