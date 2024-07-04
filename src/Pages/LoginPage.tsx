@@ -44,16 +44,16 @@ const LoginPage: React.FC = () => {
     setLoading(true);
     try {
       const web3Instance = new Web3(
-        Web3.givenProvider || 'http://localhost:8545'
-      );
+        new Web3.providers.HttpProvider('http://127.0.0.1:7545')
+      ); // Ganache default URL
       const account = web3Instance.eth.accounts.privateKeyToAccount(privateKey);
-      web3Instance.eth.accounts.wallet.add(account);
-      web3Instance.eth.defaultAccount = account.address;
       login(account.address);
-      message.success('Logged in with private key. You are now logged in.');
+      message.success(
+        'Logged in with private key via Ganache. You are now logged in.'
+      );
       setIsLoggedIn(true);
     } catch (error) {
-      message.error('Failed to login with private key.');
+      message.error('Failed to login with private key via Ganache.');
     } finally {
       setLoading(false);
     }
@@ -97,7 +97,6 @@ const LoginPage: React.FC = () => {
                 Install MetaMask
               </Button>
             </div>
-            <Divider />
             <Button
               onClick={() => setShowPrivateKeyLogin(!showPrivateKeyLogin)}
               style={{ margin: '16px 0', display: 'block' }}
@@ -125,7 +124,7 @@ const LoginPage: React.FC = () => {
                   block
                   onClick={handlePrivateKeyLogin}
                 >
-                  Private Key Login
+                  Private Key Login via Ganache
                 </Button>
               </div>
             )}
