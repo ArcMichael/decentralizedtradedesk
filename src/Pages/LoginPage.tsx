@@ -1,17 +1,21 @@
 // src/Pages/LoginPage.tsx
 
 import React, { useState, useCallback } from 'react';
-import { Button, message, Spin } from 'antd';
+import { Button, Input, message, Spin, Divider } from 'antd';
 import WithSimpleLayout from '../Layout/WithSimpleLayout';
 import { getWeb3 } from '../web3/web3Config';
 import { useUser } from '../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
+import Web3 from 'web3';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const { login } = useUser();
   const [loading, setLoading] = useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [privateKey, setPrivateKey] = useState<string>('');
+  const [showPrivateKeyLogin, setShowPrivateKeyLogin] =
+    useState<boolean>(false);
 
   const initMetaMask = useCallback(async () => {
     setLoading(true);
@@ -36,6 +40,25 @@ const LoginPage: React.FC = () => {
     }
   }, [login]);
 
+  const handlePrivateKeyLogin = useCallback(async () => {
+    setLoading(true);
+    try {
+      const web3Instance = new Web3(
+        Web3.givenProvider || 'http://localhost:8545'
+      );
+      const account = web3Instance.eth.accounts.privateKeyToAccount(privateKey);
+      web3Instance.eth.accounts.wallet.add(account);
+      web3Instance.eth.defaultAccount = account.address;
+      login(account.address);
+      message.success('Logged in with private key. You are now logged in.');
+      setIsLoggedIn(true);
+    } catch (error) {
+      message.error('Failed to login with private key.');
+    } finally {
+      setLoading(false);
+    }
+  }, [privateKey, login]);
+
   return (
     <div style={{ maxWidth: '300px', margin: 'auto', padding: '24px' }}>
       <h1>Login Page</h1>
@@ -53,19 +76,62 @@ const LoginPage: React.FC = () => {
             Go
           </Button>
         ) : (
-          <Button style={{ margin: '16px 0' }} block onClick={initMetaMask}>
-            Connect to MetaMask
-          </Button>
+          <>
+            <div
+              style={{
+                border: '1px solid #d9d9d9',
+                padding: '16px',
+                borderRadius: '4px',
+              }}
+            >
+              <Button style={{ margin: '16px 0' }} block onClick={initMetaMask}>
+                Connect to MetaMask
+              </Button>
+              <Button
+                onClick={() =>
+                  window.open('https://metamask.io/download.html', '_blank')
+                }
+                style={{ margin: '16px 0', borderStyle: 'dashed' }}
+                block
+              >
+                Install MetaMask
+              </Button>
+            </div>
+            <Divider />
+            <Button
+              onClick={() => setShowPrivateKeyLogin(!showPrivateKeyLogin)}
+              style={{ margin: '16px 0', display: 'block' }}
+              block
+            >
+              Toggle Private Key Login
+            </Button>
+            {showPrivateKeyLogin && (
+              <div
+                style={{
+                  border: '1px solid #d9d9d9',
+                  padding: '16px',
+                  borderRadius: '4px',
+                  marginBottom: '16px',
+                }}
+              >
+                <Input.Password
+                  placeholder='Enter your private key'
+                  value={privateKey}
+                  onChange={e => setPrivateKey(e.target.value)}
+                  style={{ margin: '16px 0' }}
+                />
+                <Button
+                  style={{ margin: '16px 0' }}
+                  block
+                  onClick={handlePrivateKeyLogin}
+                >
+                  Private Key Login
+                </Button>
+              </div>
+            )}
+            <Divider />
+          </>
         )}
-        <Button
-          onClick={() =>
-            window.open('https://metamask.io/download.html', '_blank')
-          }
-          style={{ margin: '16px 0', borderStyle: 'dashed' }}
-          block
-        >
-          Install MetaMask
-        </Button>
       </Spin>
     </div>
   );

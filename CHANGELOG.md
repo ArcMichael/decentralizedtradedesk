@@ -1,5 +1,6 @@
 ## <small>0.0.9 (2024-07-03)</small>
 
+* chore(release): 0.0.9 ([0913b2e](https://github.com/ArcMichael/decentralizedtradedesk/commit/0913b2e))
 * test(jest change): change ([79833a3](https://github.com/ArcMichael/decentralizedtradedesk/commit/79833a3))
 * feat(pkg pref in main,app metamasklogin web3): a big update ([cdfd197](https://github.com/ArcMichael/decentralizedtradedesk/commit/cdfd197))
 * feat(pkg.engine, nodejs): use another version of node to build tauri project use adopt web3 ([0c6921e](https://github.com/ArcMichael/decentralizedtradedesk/commit/0c6921e))
