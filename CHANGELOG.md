@@ -1,3 +1,16 @@
+## <small>0.0.10 (2024-07-04)</small>
+
+* ci(git branch): a shell to cleanup local branches ([f7a57fd](https://github.com/ArcMichael/decentralizedtradedesk/commit/f7a57fd))
+* ci(github ci): change node-version ([78f8e25](https://github.com/ArcMichael/decentralizedtradedesk/commit/78f8e25))
+* feat(jest): jest ([03f52dd](https://github.com/ArcMichael/decentralizedtradedesk/commit/03f52dd))
+* feat(login page): ui ([4199cfb](https://github.com/ArcMichael/decentralizedtradedesk/commit/4199cfb))
+* feat(sider admin/product routeconfig): mock crud in admin/product and enhance router and sider ([fabfa1a](https://github.com/ArcMichael/decentralizedtradedesk/commit/fabfa1a))
+* docs(tree): update tree ([958f850](https://github.com/ArcMichael/decentralizedtradedesk/commit/958f850))
+* feat(pkg, logn): depend type/node login for web3 in loginpage ([493bb22](https://github.com/ArcMichael/decentralizedtradedesk/commit/493bb22))
+* feat(test, privateroute): auth in privateroute, openexternallink ([2909eb4](https://github.com/ArcMichael/decentralizedtradedesk/commit/2909eb4))
+
+
+
 ## <small>0.0.9 (2024-07-03)</small>
 
 * chore(release): 0.0.9 ([0913b2e](https://github.com/ArcMichael/decentralizedtradedesk/commit/0913b2e))
