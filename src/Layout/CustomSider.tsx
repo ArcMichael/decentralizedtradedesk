@@ -13,11 +13,13 @@ const renderMenuItems = (routes: RouteConfig[]): MenuProps['items'] =>
           key: route.path,
           icon: route.icon,
           label: route.title,
-          children: route.children.map(child => ({
-            key: child.path,
-            icon: child.icon,
-            label: child.title,
-          })),
+          children: route.children
+            .filter(child => child.showInSider) // 过滤子项
+            .map(child => ({
+              key: child.path,
+              icon: child.icon,
+              label: child.title,
+            })),
         };
       } else if (route.showInSider) {
         return {

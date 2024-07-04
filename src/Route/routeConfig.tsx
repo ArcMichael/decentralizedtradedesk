@@ -13,6 +13,12 @@ const HomePage = lazy(() => import('../Pages/HomePage'));
 const AdminProductsPage = lazy(
   () => import('../Pages/Admin/AdminProductsPage')
 );
+const AdminAddProductPage = lazy(
+  () => import('../Pages/Admin/AdminAddProductPage')
+); // 新增
+const AdminEditProductPage = lazy(
+  () => import('../Pages/Admin/AdminEditProductPage')
+); // 新增
 const AdminUsersPage = lazy(() => import('../Pages/Admin/AdminUsersPage'));
 const AdminOrdersPage = lazy(() => import('../Pages/Admin/AdminOrdersPage'));
 const AdminStatisticsPage = lazy(
@@ -75,6 +81,20 @@ const routes: RouteConfig[] = [
         title: 'Products',
         icon: <UserOutlined />,
         showInSider: true,
+      },
+      {
+        path: '/admin/products/add',
+        element: <PrivateRoute element={<AdminAddProductPage />} />, // 新增
+        title: 'Add Product',
+        icon: <UploadOutlined />,
+        showInSider: false,
+      },
+      {
+        path: '/admin/products/edit/:id',
+        element: <PrivateRoute element={<AdminEditProductPage />} />, // 新增
+        title: 'Edit Product',
+        icon: <UploadOutlined />,
+        showInSider: false,
       },
       {
         path: '/admin/users',
