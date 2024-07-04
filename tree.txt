@@ -4,6 +4,34 @@
 ├── README.md
 ├── auto-increment-rust-version.cjs
 ├── commitlint.config.mjs
+├── dist
+|  ├── assets
+|  |  ├── AdminOrdersPage-Bxu_JF3S.js
+|  |  ├── AdminProductsPage-D_sNZHqV.js
+|  |  ├── AdminStatisticsPage-B9aNkaup.js
+|  |  ├── AdminUsersPage-D-ky8-_5.js
+|  |  ├── BrowsePage-BX4f9YMb.js
+|  |  ├── CloseOutlined-qxa7prRb.js
+|  |  ├── CustomFooter-DcOObeIR.js
+|  |  ├── ExclamationCircleFilled-BgHTL8Hl.js
+|  |  ├── HomePage-CIxpoeXz.js
+|  |  ├── LoginPage-C20nC3Mr.js
+|  |  ├── NotFoundPage-JJhPFnZk.js
+|  |  ├── ProductDetailPage-BNPTRg4L.js
+|  |  ├── RegisterPage-DEV9DTYN.js
+|  |  ├── UserOrdersPage-BgeqGKlv.js
+|  |  ├── UserProfilePage-COntG8l9.js
+|  |  ├── UserSettingsPage-DaEMKQZJ.js
+|  |  ├── UserWalletPage-DILB-VhB.js
+|  |  ├── WithCustomLayout-DZHA8NbD.js
+|  |  ├── WithSimpleLayout-CgTw7QUF.js
+|  |  ├── index-BNT3MDnT.js
+|  |  ├── index-BbvpVyZv.css
+|  |  ├── index-DDLG82sH.js
+|  |  └── index-jwxbLKGo.js
+|  ├── index.html
+|  ├── tauri.svg
+|  └── vite.svg
 ├── index.html
 ├── jest.config.json
 ├── jest.setup.ts
@@ -51,6 +79,7 @@
 |  |  ├── CustomFooter.test.tsx
 |  |  ├── CustomHeader.test.tsx
 |  |  ├── CustomSider.test.tsx
+|  |  ├── LoginPage.test.tsx
 |  |  ├── WithSimpleLayout.test.tsx
 |  |  └── routeConfig.test.tsx
 |  ├── assets
@@ -65,7 +94,10 @@
 |  ├── styles
 |  |  ├── WelcomePage.css
 |  |  └── globals.css
+|  ├── types
+|  |  └── tauri.d.ts
 |  ├── utils
+|  |  └── utils.ts
 |  ├── vite-env.d.ts
 |  └── web3
 |     └── web3Config.ts
@@ -103,17 +135,25 @@
 |  |  └── main.rs
 |  ├── target
 |  |  ├── CACHEDIR.TAG
-|  |  └── debug
+|  |  ├── debug
+|  |  |  ├── build
+|  |  |  ├── decentralizedtradedesk
+|  |  |  ├── decentralizedtradedesk.d
+|  |  |  ├── deps
+|  |  |  ├── examples
+|  |  |  ├── incremental
+|  |  |  ├── libdecentralizedtradedesk_lib.a
+|  |  |  ├── libdecentralizedtradedesk_lib.d
+|  |  |  ├── libdecentralizedtradedesk_lib.dylib
+|  |  |  └── libdecentralizedtradedesk_lib.rlib
+|  |  └── release
 |  |     ├── build
+|  |     ├── bundle
 |  |     ├── decentralizedtradedesk
 |  |     ├── decentralizedtradedesk.d
 |  |     ├── deps
 |  |     ├── examples
-|  |     ├── incremental
-|  |     ├── libdecentralizedtradedesk_lib.a
-|  |     ├── libdecentralizedtradedesk_lib.d
-|  |     ├── libdecentralizedtradedesk_lib.dylib
-|  |     └── libdecentralizedtradedesk_lib.rlib
+|  |     └── incremental
 |  └── tauri.conf.json
 ├── test
 |  └── __mocks__
@@ -130,6 +170,6 @@
 ├── tsconfig.node.json
 └── vite.config.ts
 
-directory: 46 file: 96 symboliclink: 68
+directory: 55 file: 127 symboliclink: 68
 
 ignored: directory (1)
