@@ -9,7 +9,7 @@ const NotFoundPage: React.FC = () => (
     title='404'
     subTitle='Sorry, the page you visited does not exist.'
     extra={
-      <Link to={`/welcome`}>
+      <Link to={`/`}>
         <Button type='primary'>Back Home</Button>
       </Link>
     }

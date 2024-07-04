@@ -1,6 +1,12 @@
 // src/contexts/UserContext.tsx
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from 'react';
 
 interface User {
   address: string;
@@ -28,13 +34,21 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [user, setUser] = useState<User | null>(null);
 
+  useEffect(() => {
+    const storedAddress = localStorage.getItem('accountAddress');
+    if (storedAddress) {
+      setUser({ address: storedAddress });
+    }
+  }, []);
+
   const login = (address: string) => {
     setUser({ address });
-    // 这里可以扩展以保存更多登录信息
+    localStorage.setItem('accountAddress', address);
   };
 
   const logout = () => {
     setUser(null);
+    localStorage.removeItem('accountAddress');
   };
 
   return (

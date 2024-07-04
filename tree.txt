@@ -43,6 +43,7 @@
 |  |  ├── ProductDetailPage.tsx
 |  |  └── RegisterPage.tsx
 |  ├── Route
+|  |  ├── PrivateRoute.tsx
 |  |  ├── Routes.tsx
 |  |  └── routeConfig.tsx
 |  ├── __tests__
@@ -54,13 +55,20 @@
 |  |  └── routeConfig.test.tsx
 |  ├── assets
 |  |  └── react.svg
+|  ├── build
+|  |  └── contracts
+|  |     └── UserLogin.json
+|  ├── contexts
+|  |  └── UserContext.tsx
 |  ├── main.tsx
 |  ├── setupTests.ts
 |  ├── styles
 |  |  ├── WelcomePage.css
 |  |  └── globals.css
 |  ├── utils
-|  └── vite-env.d.ts
+|  ├── vite-env.d.ts
+|  └── web3
+|     └── web3Config.ts
 ├── src-tauri
 |  ├── Cargo.lock
 |  ├── Cargo.toml
@@ -111,10 +119,17 @@
 |  └── __mocks__
 |     └── fileMock.js
 ├── tree.txt
+├── truffle
+|  ├── contracts
+|  |  └── UserLogin.sol
+|  ├── migrations
+|  |  └── 2_deploy_contracts.js
+|  ├── test
+|  └── truffle-config.ts
 ├── tsconfig.json
 ├── tsconfig.node.json
 └── vite.config.ts
 
-directory: 38 file: 89 symboliclink: 66
+directory: 46 file: 96 symboliclink: 68
 
 ignored: directory (1)
