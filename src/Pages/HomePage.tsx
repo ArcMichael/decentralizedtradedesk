@@ -3,17 +3,14 @@ import React from 'react';
 import { Row, Col, Card, Button, Typography } from 'antd';
 import { GithubOutlined } from '@ant-design/icons';
 import WithCustomLayout from '../Layout/WithCustomLayout';
-import { open } from '@tauri-apps/plugin-shell';
+import { openExternalLink } from '../utils/utils'; // Import the utility function
 
 const { Title, Paragraph } = Typography;
 
 const HomePage: React.FC = () => {
-  const openExternalLink = async (url: string) => {
-    try {
-      await open(url);
-    } catch (e) {
-      console.error('Failed to open URL', e);
-    }
+  const handleContactUsClick = () => {
+    const url = 'https://github.com/ArcMichael/decentralizedtradedesk/issues';
+    openExternalLink(url);
   };
 
   return (
@@ -101,11 +98,7 @@ const HomePage: React.FC = () => {
           <Button
             type='link'
             icon={<GithubOutlined />}
-            onClick={() =>
-              openExternalLink(
-                'https://github.com/ArcMichael/decentralizedtradedesk/issues'
-              )
-            }
+            onClick={handleContactUsClick}
           >
             Contact us
           </Button>{' '}

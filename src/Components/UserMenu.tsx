@@ -1,15 +1,19 @@
 // src/Components/UserMenu.tsx
+
 import React from 'react';
 import { Dropdown, Avatar, MenuProps } from 'antd';
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
-import { useUser } from '../contexts/UserContext'; // Import useUser from your context
+import { useUser } from '../contexts/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const UserMenu: React.FC = () => {
-  const { user, logout } = useUser(); // Get user and logout function from context
+  const { user, logout } = useUser();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    logout(); // Implement the logout function from context
+    logout();
     console.log('Logged out');
+    navigate('/login');
   };
 
   const menuItems: MenuProps['items'] = [
@@ -26,16 +30,14 @@ const UserMenu: React.FC = () => {
     },
   ];
 
-  // Function to truncate Ethereum address
   const getTruncatedAddress = (address: string) => {
-    return `${address.substring(0, 8)}...`; // Truncate and append ellipsis
+    return `${address.substring(0, 8)}...`;
   };
 
   return (
     <Dropdown menu={{ items: menuItems }} trigger={['hover']}>
       <div style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
         <Avatar icon={<UserOutlined />} />
-        {/* Display the Ethereum address if available, else show "Username" */}
         <span style={{ marginLeft: '8px' }}>
           {user ? getTruncatedAddress(user.address) : 'Username'}
         </span>

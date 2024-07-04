@@ -1,4 +1,4 @@
-// routeConfig.tsx
+// src/routeConfig.tsx
 
 import React, { lazy } from 'react';
 import {
@@ -7,6 +7,7 @@ import {
   SettingOutlined,
   WalletOutlined,
 } from '@ant-design/icons';
+import PrivateRoute from './PrivateRoute'; // Import PrivateRoute component
 
 const HomePage = lazy(() => import('../Pages/HomePage'));
 const AdminProductsPage = lazy(
@@ -43,7 +44,7 @@ export interface RouteConfig {
 const routes: RouteConfig[] = [
   {
     path: '/',
-    element: <HomePage />,
+    element: <PrivateRoute element={<HomePage />} />,
     title: 'Home',
     icon: <UserOutlined />,
     showInSider: true,
@@ -53,7 +54,7 @@ const routes: RouteConfig[] = [
     element: <LoginPage />,
     title: 'Login',
     icon: <UploadOutlined />,
-    showInSider: true,
+    showInSider: false,
   },
   {
     path: '/register',
@@ -70,28 +71,28 @@ const routes: RouteConfig[] = [
     children: [
       {
         path: '/admin/products',
-        element: <AdminProductsPage />,
+        element: <PrivateRoute element={<AdminProductsPage />} />,
         title: 'Products',
         icon: <UserOutlined />,
         showInSider: true,
       },
       {
         path: '/admin/users',
-        element: <AdminUsersPage />,
+        element: <PrivateRoute element={<AdminUsersPage />} />,
         title: 'Users',
         icon: <UserOutlined />,
         showInSider: true,
       },
       {
         path: '/admin/orders',
-        element: <AdminOrdersPage />,
+        element: <PrivateRoute element={<AdminOrdersPage />} />,
         title: 'Orders',
         icon: <UserOutlined />,
         showInSider: true,
       },
       {
         path: '/admin/statistics',
-        element: <AdminStatisticsPage />,
+        element: <PrivateRoute element={<AdminStatisticsPage />} />,
         title: 'Statistics',
         icon: <UserOutlined />,
         showInSider: true,
@@ -106,28 +107,28 @@ const routes: RouteConfig[] = [
     children: [
       {
         path: '/dashboard/orders',
-        element: <UserOrdersPage />,
+        element: <PrivateRoute element={<UserOrdersPage />} />,
         title: 'Orders',
         icon: <SettingOutlined />,
         showInSider: true,
       },
       {
         path: '/dashboard/profile',
-        element: <UserProfilePage />,
+        element: <PrivateRoute element={<UserProfilePage />} />,
         title: 'Profile',
         icon: <SettingOutlined />,
         showInSider: true,
       },
       {
         path: '/dashboard/settings',
-        element: <UserSettingsPage />,
+        element: <PrivateRoute element={<UserSettingsPage />} />,
         title: 'Settings',
         icon: <SettingOutlined />,
         showInSider: true,
       },
       {
         path: '/dashboard/wallet',
-        element: <UserWalletPage />,
+        element: <PrivateRoute element={<UserWalletPage />} />,
         title: 'Wallet',
         icon: <WalletOutlined />,
         showInSider: true,
@@ -136,14 +137,14 @@ const routes: RouteConfig[] = [
   },
   {
     path: '/browse',
-    element: <BrowsePage />,
+    element: <PrivateRoute element={<BrowsePage />} />,
     title: 'Browse',
     icon: <UserOutlined />,
     showInSider: true,
   },
   {
     path: '/product/:id',
-    element: <ProductDetailPage />,
+    element: <PrivateRoute element={<ProductDetailPage />} />,
     title: 'Product Detail',
     icon: <UserOutlined />,
     showInSider: false,

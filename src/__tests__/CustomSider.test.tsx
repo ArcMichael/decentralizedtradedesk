@@ -16,7 +16,6 @@ describe('CustomSider', () => {
     });
 
     expect(screen.getByText('Home')).toBeInTheDocument();
-    expect(screen.getByText('Login')).toBeInTheDocument();
     expect(screen.getByText('Admin')).toBeInTheDocument();
     expect(screen.getByText('Dashboard')).toBeInTheDocument();
     expect(screen.getByText('Browse')).toBeInTheDocument();
