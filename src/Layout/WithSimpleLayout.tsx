@@ -9,7 +9,7 @@ const WithSimpleLayout = (WrappedComponent: React.FC): React.FC => {
   const HOC: React.FC = () => {
     return (
       <Layout style={{ minHeight: '100vh' }}>
-        <CustomHeader showUserMenu={false} />
+        <CustomHeader />
         <CustomContent showBreadcrumbs={false}>
           <WrappedComponent />
         </CustomContent>

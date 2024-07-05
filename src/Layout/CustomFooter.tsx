@@ -21,7 +21,6 @@ const CustomFooter: React.FC = () => {
           <ul>
             <li>Home</li>
             <li>Login</li>
-            <li>Register</li>
           </ul>
         </Col>
         <Col span={12} md={6}>

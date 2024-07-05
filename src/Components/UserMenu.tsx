@@ -30,16 +30,20 @@ const UserMenu: React.FC = () => {
     },
   ];
 
-  const getTruncatedAddress = (address: string) => {
-    return `${address.substring(0, 8)}...`;
-  };
-
   return (
     <Dropdown menu={{ items: menuItems }} trigger={['hover']}>
       <div style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
         <Avatar icon={<UserOutlined />} />
-        <span style={{ marginLeft: '8px' }}>
-          {user ? getTruncatedAddress(user.address) : 'Username'}
+        <span
+          style={{
+            marginLeft: '8px',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            maxWidth: '200px',
+          }}
+        >
+          {user ? user.address : 'Username'}
         </span>
       </div>
     </Dropdown>

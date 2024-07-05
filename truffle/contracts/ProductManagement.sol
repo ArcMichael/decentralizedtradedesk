@@ -1,36 +1,41 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract ProductManagement {
+contract ProductContract {
   struct Product {
-    uint id;
     string name;
     string description;
-    uint price; // 价格以wei为单位
-    uint stock;
+    uint256 price;
+    uint256 stock;
     string category;
     string[] tags;
+    uint256 createdAt; // Add createdAt to the product structure
   }
 
-  Product[] public products;
-  uint public nextProductId = 0;
+  mapping(uint256 => Product) public products;
+  uint256 public productCount;
+
+  event ProductAdded(uint256 id, string name, uint256 createdAt);
 
   function addProduct(
-    string memory name,
-    string memory description,
-    uint price,
-    uint stock,
-    string memory category,
-    string[] memory tags
+    string memory _name,
+    string memory _description,
+    uint256 _price,
+    uint256 _stock,
+    string memory _category,
+    string[] memory _tags,
+    uint256 _createdAt // Add createdAt parameter
   ) public {
-    products.push(
-      Product(nextProductId, name, description, price, stock, category, tags)
+    productCount++;
+    products[productCount] = Product(
+      _name,
+      _description,
+      _price,
+      _stock,
+      _category,
+      _tags,
+      _createdAt // Store createdAt
     );
-    nextProductId++;
-  }
-
-  function getProduct(uint productId) public view returns (Product memory) {
-    require(productId < products.length, 'Product does not exist.');
-    return products[productId];
+    emit ProductAdded(productCount, _name, _createdAt);
   }
 }

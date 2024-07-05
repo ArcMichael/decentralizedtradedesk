@@ -16,6 +16,7 @@ const AdminAddProductPage: React.FC = () => {
     stock: 0,
     category: '',
     tags: [] as string[],
+    createdAt: '', // Add createdAt field
   });
 
   const navigate = useNavigate();
@@ -30,8 +31,9 @@ const AdminAddProductPage: React.FC = () => {
     description: string;
     price: number;
     stock: number;
-    category: string;
-    tags: string[];
+    category?: string; // Make category optional
+    tags?: string[]; // Make tags optional
+    createdAt: string;
   }
 
   const saveProduct = async (productData: ProductData) => {
@@ -62,12 +64,13 @@ const AdminAddProductPage: React.FC = () => {
           productData.description,
           web3.utils.toWei(productData.price.toString(), 'ether'),
           productData.stock,
-          productData.category,
-          productData.tags
+          productData.category || '', // Handle optional category
+          productData.tags || [], // Handle optional tags
+          productData.createdAt
         )
         .send({
           from: accounts[0],
-          gas: '500000', // 增加的gas limit数值
+          gas: '500000', // Adjusted gas limit
         });
 
       message.success('Product added successfully');
@@ -79,7 +82,9 @@ const AdminAddProductPage: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    saveProduct(product);
+    const currentTimestamp = new Date().toISOString();
+    setProduct({ ...product, createdAt: currentTimestamp });
+    saveProduct({ ...product, createdAt: currentTimestamp });
   };
 
   return (
@@ -116,14 +121,14 @@ const AdminAddProductPage: React.FC = () => {
             onChange={handleInputChange}
           />
         </Form.Item>
-        <Form.Item label='分类' required>
+        <Form.Item label='分类'>
           <Input
             name='category'
             value={product.category}
             onChange={handleInputChange}
           />
         </Form.Item>
-        <Form.Item label='标签' required>
+        <Form.Item label='标签'>
           <Input
             name='tags'
             value={product.tags.join(',')}
