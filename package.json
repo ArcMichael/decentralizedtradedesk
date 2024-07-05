@@ -31,7 +31,7 @@
     "test": "jest",
     "tree": "tree -l 4 -o tree.txt --ignore node_modules/",
     "truffle-compile": "cd truffle && truffle compile --config ./truffle-config.ts",
-    "truffle-migrate": "cd truffle && truffle migrate --network development --config ./truffle-config.ts"
+    "truffle-migrate": "cd truffle && truffle migrate --network development --resrt --config ./truffle-config.ts"
   },
   "husky": {
     "hooks": {

@@ -3,10 +3,8 @@
 import Web3 from 'web3';
 import ProductManagement from '../build/contracts/ProductManagement.json';
 
-// Declare a TypeScript interface to describe the structure expected in `ProductManagement.networks`
 interface NetworkConfigurations {
   [key: string]: {
-    // Index signature
     events: Record<string, any>;
     links: Record<string, any>;
     address: string;
@@ -14,7 +12,6 @@ interface NetworkConfigurations {
   };
 }
 
-// Casting `ProductManagement.networks` to the correct type
 const networks = ProductManagement.networks as NetworkConfigurations;
 
 declare global {
@@ -25,15 +22,22 @@ declare global {
 
 const getWeb3 = async (): Promise<Web3 | null> => {
   try {
-    const provider = new Web3.providers.HttpProvider('http://127.0.0.1:7545');
-    const web3 = new Web3(provider);
+    let web3: Web3;
+    if (window.ethereum) {
+      web3 = new Web3(window.ethereum);
+      await window.ethereum.enable();
+    } else {
+      const provider = new Web3.providers.HttpProvider('http://127.0.0.1:7545');
+      web3 = new Web3(provider);
+    }
+
     const accounts = await web3.eth.getAccounts();
     if (accounts.length === 0) {
       throw new Error(
-        'No accounts found. Check if Ganache is running properly.'
+        'No accounts found. Check if MetaMask or Ganache is running properly.'
       );
     }
-    console.log('Connected to Ganache. Accounts:', accounts);
+    console.log('Connected. Accounts:', accounts);
     return web3;
   } catch (error) {
     console.error('Failed to load web3. Error:', error);
