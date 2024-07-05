@@ -3,6 +3,7 @@
 ├── LICENSE
 ├── README.md
 ├── auto-increment-rust-version.cjs
+├── cleanup-local-branches.sh
 ├── commitlint.config.mjs
 ├── dist
 |  ├── assets
@@ -55,6 +56,8 @@
 |  |  └── WithSimpleLayout.tsx
 |  ├── Pages
 |  |  ├── Admin
+|  |  |  ├── AdminAddProductPage.tsx
+|  |  |  ├── AdminEditProductPage.tsx
 |  |  |  ├── AdminOrdersPage.tsx
 |  |  |  ├── AdminProductsPage.tsx
 |  |  |  ├── AdminStatisticsPage.tsx
@@ -170,6 +173,6 @@
 ├── tsconfig.node.json
 └── vite.config.ts
 
-directory: 55 file: 127 symboliclink: 68
+directory: 55 file: 130 symboliclink: 68
 
 ignored: directory (1)
