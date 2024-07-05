@@ -24,5 +24,3 @@ dist-ssr
 *.sln
 *.sw?
 
-# Ignore contract build artifacts
-src/build/contracts/*
