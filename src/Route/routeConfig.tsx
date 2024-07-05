@@ -9,34 +9,48 @@ import {
 } from '@ant-design/icons';
 import PrivateRoute from './PrivateRoute'; // Import PrivateRoute component
 
-const HomePage = lazy(() => import('../Pages/HomePage'));
+/**
+ * 管理后台
+ */
 const AdminProductsPage = lazy(
   () => import('../Pages/Admin/AdminProductsPage')
-);
+); // 管理后台-商品管理
 const AdminAddProductPage = lazy(
   () => import('../Pages/Admin/AdminAddProductPage')
-); // 新增
+); // 管理后台-添加商品
 const AdminEditProductPage = lazy(
   () => import('../Pages/Admin/AdminEditProductPage')
-); // 新增
-const AdminUsersPage = lazy(() => import('../Pages/Admin/AdminUsersPage'));
-const AdminOrdersPage = lazy(() => import('../Pages/Admin/AdminOrdersPage'));
+); // 管理后台-编辑商品
+const AdminUsersPage = lazy(() => import('../Pages/Admin/AdminUsersPage')); // 管理后台-用户管理
+const AdminOrdersPage = lazy(() => import('../Pages/Admin/AdminOrdersPage')); // 管理后台-订单管理
 const AdminStatisticsPage = lazy(
   () => import('../Pages/Admin/AdminStatisticsPage')
-);
-const LoginPage = lazy(() => import('../Pages/LoginPage'));
-const RegisterPage = lazy(() => import('../Pages/RegisterPage'));
-const NotFoundPage = lazy(() => import('../Pages/NotFoundPage'));
-const UserOrdersPage = lazy(() => import('../Pages/Dashboard/UserOrdersPage'));
+); // 管理后台-数据统计
+
+/**
+ * 用户个人中心
+ */
+
+const UserOrdersPage = lazy(() => import('../Pages/Dashboard/UserOrdersPage')); // 用户个人中心-订单管理
 const UserProfilePage = lazy(
   () => import('../Pages/Dashboard/UserProfilePage')
-);
+); // 用户个人中心-个人资料
 const UserSettingsPage = lazy(
   () => import('../Pages/Dashboard/UserSettingsPage')
-);
-const UserWalletPage = lazy(() => import('../Pages/Dashboard/UserWalletPage'));
-const BrowsePage = lazy(() => import('../Pages/BrowsePage'));
-const ProductDetailPage = lazy(() => import('../Pages/ProductDetailPage'));
+); // 用户个人中心-设置
+const UserWalletPage = lazy(() => import('../Pages/Dashboard/UserWalletPage')); // 用户个人中心-钱包管理
+
+/**
+ * 通用页面
+ */
+
+const HomePage = lazy(() => import('../Pages/HomePage')); // 首页
+const LoginPage = lazy(() => import('../Pages/LoginPage')); // 登录页面
+// const RegisterPage = lazy(() => import('../Pages/RegisterPage')); // 注册页面 (不需要注册)
+const NotFoundPage = lazy(() => import('../Pages/NotFoundPage')); // 404 页面
+
+const BrowsePage = lazy(() => import('../Pages/BrowsePage')); // 商品浏览页面
+const ProductDetailPage = lazy(() => import('../Pages/ProductDetailPage')); // 商品详情页面
 
 export interface RouteConfig {
   path: string;
@@ -59,13 +73,6 @@ const routes: RouteConfig[] = [
     path: '/login',
     element: <LoginPage />,
     title: 'Login',
-    icon: <UploadOutlined />,
-    showInSider: false,
-  },
-  {
-    path: '/register',
-    element: <RegisterPage />,
-    title: 'Register',
     icon: <UploadOutlined />,
     showInSider: false,
   },

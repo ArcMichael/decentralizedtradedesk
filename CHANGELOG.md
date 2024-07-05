@@ -1,5 +1,6 @@
 ## <small>0.0.10 (2024-07-04)</small>
 
+* chore(release): 0.0.10 ([53a5d33](https://github.com/ArcMichael/decentralizedtradedesk/commit/53a5d33))
 * ci(git branch): a shell to cleanup local branches ([f7a57fd](https://github.com/ArcMichael/decentralizedtradedesk/commit/f7a57fd))
 * ci(github ci): change node-version ([78f8e25](https://github.com/ArcMichael/decentralizedtradedesk/commit/78f8e25))
 * feat(jest): jest ([03f52dd](https://github.com/ArcMichael/decentralizedtradedesk/commit/03f52dd))

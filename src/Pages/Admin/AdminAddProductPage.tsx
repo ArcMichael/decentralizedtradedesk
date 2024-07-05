@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Typography, Form, Input, Button, message } from 'antd';
 import WithCustomLayout from '../../Layout/WithCustomLayout';
+import { getWeb3, getContract } from '../../web3/web3Config';
 
 const { Title } = Typography;
 
@@ -24,12 +25,61 @@ const AdminAddProductPage: React.FC = () => {
     setProduct({ ...product, [name]: value });
   };
 
-  const handleSubmit = () => {
-    // TODO: 将商品信息发送到后端API
-    // saveProduct(product);
+  interface ProductData {
+    name: string;
+    description: string;
+    price: number;
+    stock: number;
+    category: string;
+    tags: string[];
+  }
 
-    message.success('Product added successfully');
-    navigate('/admin/products');
+  const saveProduct = async (productData: ProductData) => {
+    const web3 = await getWeb3();
+    if (!web3) {
+      message.error(
+        'Web3 is not initialized. Make sure MetaMask is installed and logged in.'
+      );
+      return;
+    }
+
+    const accounts = await web3.eth.getAccounts();
+    if (accounts.length === 0) {
+      message.error('No accounts found.');
+      return;
+    }
+
+    const contract = await getContract(web3);
+    if (!contract) {
+      message.error('Failed to load contract.');
+      return;
+    }
+
+    try {
+      await contract.methods
+        .addProduct(
+          productData.name,
+          productData.description,
+          web3.utils.toWei(productData.price.toString(), 'ether'),
+          productData.stock,
+          productData.category,
+          productData.tags
+        )
+        .send({
+          from: accounts[0],
+          gas: '500000', // 增加的gas limit数值
+        });
+
+      message.success('Product added successfully');
+      navigate('/admin/products');
+    } catch (error) {
+      console.error('Error adding product:', error);
+      message.error('Failed to add product.');
+    }
+  };
+
+  const handleSubmit = () => {
+    saveProduct(product);
   };
 
   return (

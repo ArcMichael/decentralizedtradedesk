@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-undef
-const UserLogin = artifacts.require('UserLogin');
+const ProductManagement = artifacts.require('ProductManagement');
 
 module.exports = function (deployer) {
-  deployer.deploy(UserLogin);
+  deployer.deploy(ProductManagement);
 };

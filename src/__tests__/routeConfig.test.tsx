@@ -24,12 +24,6 @@ describe('routeConfig', () => {
         icon: <UploadOutlined />,
       },
       {
-        path: '/register',
-        title: 'Register',
-        showInSider: false,
-        icon: <UploadOutlined />,
-      },
-      {
         path: '/admin',
         title: 'Admin',
         showInSider: true,
