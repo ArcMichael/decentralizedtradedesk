@@ -9,7 +9,7 @@ contract ProductContract {
     uint256 stock;
     string category;
     string[] tags;
-    uint256 createdAt; // Add createdAt to the product structure
+    uint256 createdAt;
   }
 
   mapping(uint256 => Product) public products;
@@ -24,7 +24,7 @@ contract ProductContract {
     uint256 _stock,
     string memory _category,
     string[] memory _tags,
-    uint256 _createdAt // Add createdAt parameter
+    uint256 _createdAt
   ) public {
     productCount++;
     products[productCount] = Product(
@@ -34,7 +34,7 @@ contract ProductContract {
       _stock,
       _category,
       _tags,
-      _createdAt // Store createdAt
+      _createdAt
     );
     emit ProductAdded(productCount, _name, _createdAt);
   }
