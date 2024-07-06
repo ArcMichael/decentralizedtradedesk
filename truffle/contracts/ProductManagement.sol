@@ -4,6 +4,7 @@ pragma solidity ^0.8.0;
 
 contract ProductContract {
   struct Product {
+    uint256 id;
     string name;
     string description;
     uint256 price;
@@ -11,6 +12,7 @@ contract ProductContract {
     string category;
     string[] tags;
     uint256 createdAt;
+    address creator; // Add creator field
   }
 
   mapping(uint256 => Product) public products;
@@ -29,13 +31,15 @@ contract ProductContract {
   ) public {
     productCount++;
     products[productCount] = Product(
+      productCount,
       _name,
       _description,
       _price,
       _stock,
       _category,
       _tags,
-      _createdAt
+      _createdAt,
+      msg.sender // Store creator address
     );
     emit ProductAdded(productCount, _name, _createdAt);
   }
