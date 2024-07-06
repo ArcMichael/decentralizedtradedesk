@@ -1,7 +1,7 @@
 // src/web3/web3Config.ts
 
 import Web3 from 'web3';
-import ProductManagement from '../build/contracts/ProductManagement.json';
+import ProductContract from '../build/contracts/ProductContract.json';
 
 interface NetworkConfigurations {
   [key: string]: {
@@ -12,7 +12,7 @@ interface NetworkConfigurations {
   };
 }
 
-const networks = ProductManagement.networks as NetworkConfigurations;
+const networks = ProductContract.networks as NetworkConfigurations;
 
 declare global {
   interface Window {
@@ -58,7 +58,7 @@ const getContract = async (web3: Web3) => {
     }
 
     const contract = new web3.eth.Contract(
-      ProductManagement.abi,
+      ProductContract.abi,
       deployedNetwork.address
     );
 

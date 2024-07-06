@@ -37,6 +37,8 @@ const AdminAddProductPage: React.FC = () => {
   }
 
   const saveProduct = async (productData: ProductData) => {
+    // show productData
+    message.info(JSON.stringify(productData));
     const web3 = await getWeb3();
     if (!web3) {
       message.error(
@@ -66,7 +68,7 @@ const AdminAddProductPage: React.FC = () => {
           productData.stock,
           productData.category || '', // Handle optional category
           productData.tags || [], // Handle optional tags
-          productData.createdAt
+          Date.parse(productData.createdAt) // Ensure correct timestamp format
         )
         .send({
           from: accounts[0],

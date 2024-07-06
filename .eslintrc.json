@@ -1,3 +1,5 @@
+// .eslintrc.json
+
 {
   "extends": ["react-app", "prettier"],
   "plugins": ["react"],
@@ -5,5 +7,15 @@
     "react/react-in-jsx-scope": "off",
     "semi": ["error", "always"],
     "no-unused-vars": "error"
+  },
+  "env": {
+    "es2021": true,
+    "node": true
+  },
+  "globals": {
+    "artifacts": "readonly",
+    "contract": "readonly",
+    "assert": "readonly",
+    "web3": "readonly"
   }
 }
