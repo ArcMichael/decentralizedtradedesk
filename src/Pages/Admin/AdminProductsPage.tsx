@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import WithCustomLayout from '../../Layout/WithCustomLayout';
 import { Typography, Table, Button, Modal, message } from 'antd';
+import { getWeb3, getContract } from '../../web3/web3Config';
 
 const { Title } = Typography;
 const { confirm } = Modal;
 
 interface Product {
-  id: string;
+  id: number;
   name: string;
   description: string;
   price: number;
@@ -21,62 +22,101 @@ interface Product {
   transactionHash: string;
 }
 
-// 假设当前用户的地址信息
-const currentUserAddress = '0x456';
-
-const initialProducts: Product[] = [
-  {
-    id: '1',
-    name: 'Product 1',
-    description: 'Description of Product 1',
-    price: 100,
-    stock: 10,
-    category: 'Category 1',
-    tags: ['tag1', 'tag2'],
-    contractAddress: '0x123',
-    transactionStatus: 'available',
-    creatorAddress: '0x456',
-    timestamp: Date.now(),
-    transactionHash: '0x789',
-  },
-  {
-    id: '2',
-    name: 'Product 2',
-    description: 'Description of Product 2',
-    price: 200,
-    stock: 5,
-    category: 'Category 2',
-    tags: ['tag3', 'tag4'],
-    contractAddress: '0x124',
-    transactionStatus: 'available',
-    creatorAddress: '0x123',
-    timestamp: Date.now(),
-    transactionHash: '0x790',
-  },
-  // Add more initial products if needed
-];
+interface ContractProduct {
+  id: string;
+  name: string;
+  description: string;
+  price: string;
+  stock: string;
+  category: string;
+  tags?: string[]; // Make tags optional
+  creator?: string; // Make creator optional
+  createdAt: string;
+}
 
 const AdminProductsPage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // 过滤只显示当前用户创建的商品
-    const userProducts = initialProducts.filter(
-      product => product.creatorAddress === currentUserAddress
+    const initialize = async () => {
+      const web3 = await getWeb3();
+      if (!web3) {
+        message.error(
+          'Web3 is not initialized. Make sure MetaMask is installed and logged in.'
+        );
+        return;
+      }
+
+      const accounts = await web3.eth.getAccounts();
+      if (accounts.length === 0) {
+        message.error('No accounts found.');
+        return;
+      }
+
+      await fetchProducts(accounts[0], web3);
+    };
+
+    initialize();
+  }, []);
+
+  const fetchProducts = async (currentUserAddress: string, web3: any) => {
+    const contract = await getContract(web3);
+    if (!contract) {
+      message.error('Failed to load contract.');
+      return;
+    }
+
+    const productCount = parseInt(
+      await contract.methods.productCount().call(),
+      10
+    );
+    if (isNaN(productCount)) {
+      message.error('Failed to fetch product count.');
+      return;
+    }
+
+    const products: Product[] = [];
+    for (let i = 1; i <= productCount; i++) {
+      const product: ContractProduct = await contract.methods
+        .products(i)
+        .call();
+      if (product && product.creator) {
+        products.push({
+          id: parseInt(product.id, 10),
+          name: product.name,
+          description: product.description,
+          price: parseFloat(web3.utils.fromWei(product.price, 'ether')),
+          stock: parseInt(product.stock, 10),
+          category: product.category,
+          tags: product.tags || [], // Ensure tags is an array
+          contractAddress: contract.options.address || '',
+          transactionStatus: 'available', // Assuming default status
+          creatorAddress: product.creator, // Assuming the contract has creator field
+          timestamp: parseInt(product.createdAt, 10),
+          transactionHash: '', // Placeholder, should be fetched or managed
+        });
+      }
+    }
+
+    // Filter products by current user address
+    const userProducts = products.filter(
+      product =>
+        product.creatorAddress?.toLowerCase() ===
+        currentUserAddress.toLowerCase()
     );
     setProducts(userProducts);
-  }, []);
+  };
 
   const handleAddProduct = () => {
     navigate('/admin/products/add');
   };
 
-  const handleEditProduct = (id: string) => {
+  const handleEditProduct = (id: number) => {
     navigate(`/admin/products/edit/${id}`);
   };
 
-  const handleDeleteProduct = (id: string) => {
+  const handleDeleteProduct = (id: number) => {
     confirm({
       title: 'Are you sure you want to delete this product?',
       content: 'This action cannot be undone.',
@@ -84,7 +124,7 @@ const AdminProductsPage: React.FC = () => {
       okType: 'danger',
       cancelText: 'No',
       onOk() {
-        // 执行删除操作
+        // Perform delete operation
         setProducts(products.filter(product => product.id !== id));
         message.success('Product deleted successfully');
       },
