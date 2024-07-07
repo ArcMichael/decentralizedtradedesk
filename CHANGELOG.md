@@ -1,3 +1,23 @@
+## <small>0.0.11 (2024-07-07)</small>
+
+* docs(tree): fix docs ([659568b](https://github.com/ArcMichael/decentralizedtradedesk/commit/659568b))
+* Delete src/build/contracts/ProductContract.json ([c237810](https://github.com/ArcMichael/decentralizedtradedesk/commit/c237810))
+* Delete src/build/contracts/ProductManagement.json ([e74caf0](https://github.com/ArcMichael/decentralizedtradedesk/commit/e74caf0))
+* Delete src/build/contracts/UserLogin.json ([a54fd94](https://github.com/ArcMichael/decentralizedtradedesk/commit/a54fd94))
+* feat(data_constans, addpage, listpage data_interfaces): supplemental data format to closer to prod ([5630497](https://github.com/ArcMichael/decentralizedtradedesk/commit/5630497))
+* feat(eslint,gitingore,web3,page): more detail readme and enhance page ([7d8b7a8](https://github.com/ArcMichael/decentralizedtradedesk/commit/7d8b7a8))
+* feat(web3, route, sol): addproduct in web3 and sol, remark in routeconfig ([2876286](https://github.com/ArcMichael/decentralizedtradedesk/commit/2876286))
+* feat(add esource): add resource ([3ffe254](https://github.com/ArcMichael/decentralizedtradedesk/commit/3ffe254))
+* feat(add product): enhancing product page and sol for more attribult ([cd93b92](https://github.com/ArcMichael/decentralizedtradedesk/commit/cd93b92))
+* feat(adminproductspage): show liked product ([3b69615](https://github.com/ArcMichael/decentralizedtradedesk/commit/3b69615))
+* feat(fix): fix ([f2163c0](https://github.com/ArcMichael/decentralizedtradedesk/commit/f2163c0))
+* test(test): test ([35f9e8f](https://github.com/ArcMichael/decentralizedtradedesk/commit/35f9e8f))
+* perf(big update): enhance a bug update so ready to update about get list ([5fa39a8](https://github.com/ArcMichael/decentralizedtradedesk/commit/5fa39a8))
+* perf(pkg web3): pkg --reset, web3 format ([34135da](https://github.com/ArcMichael/decentralizedtradedesk/commit/34135da))
+* build(github): gitignore ([7c98752](https://github.com/ArcMichael/decentralizedtradedesk/commit/7c98752))
+
+
+
 ## <small>0.0.10 (2024-07-04)</small>
 
 * chore(release): 0.0.10 ([53a5d33](https://github.com/ArcMichael/decentralizedtradedesk/commit/53a5d33))
