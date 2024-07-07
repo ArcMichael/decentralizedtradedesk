@@ -39,7 +39,15 @@
 ├── package.json
 ├── pnpm-lock.yaml
 ├── public
+|  ├── DALL·E 2024-07-06 22.10.11 - Create an image depicting the historical Eastern Roman (Byzantine) Empire with a focus on its influence in Turkey. The scene includes iconic Byzantine.webp
+|  ├── DALL·E 2024-07-06 22.16.30 - Create a historical painting depicting the aftermath of the Treaty of Paris, focusing on the major colonial shifts and emerging conflicts. The scene f.webp
+|  ├── DALL·E 2024-07-06 22.53.37 - Modify the layered historical image to emphasize the modern Middle Eastern warfare layer. Expand this bottom layer to make it more prominent, featurin.webp
 |  ├── tauri.svg
+|  ├── thumb
+|  |  ├── resized_image1_240x240.webp
+|  |  ├── resized_image2_240x240.webp
+|  |  ├── resized_image3_240x240.webp
+|  |  └── tauri.svg
 |  └── vite.svg
 ├── src
 |  ├── App.css
@@ -89,9 +97,11 @@
 |  |  └── react.svg
 |  ├── build
 |  |  └── contracts
-|  |     └── UserLogin.json
+|  |     └── ProductContract.json
+|  ├── constants.ts
 |  ├── contexts
 |  |  └── UserContext.tsx
+|  ├── interfaces.ts
 |  ├── main.tsx
 |  ├── setupTests.ts
 |  ├── styles
@@ -100,7 +110,9 @@
 |  ├── types
 |  |  └── tauri.d.ts
 |  ├── utils
-|  |  └── utils.ts
+|  |  ├── temp.json
+|  |  ├── utils.ts
+|  |  └── web3Utils.ts
 |  ├── vite-env.d.ts
 |  └── web3
 |     └── web3Config.ts
@@ -164,7 +176,7 @@
 ├── tree.txt
 ├── truffle
 |  ├── contracts
-|  |  └── UserLogin.sol
+|  |  └── ProductManagement.sol
 |  ├── migrations
 |  |  └── 2_deploy_contracts.js
 |  ├── test
@@ -173,6 +185,6 @@
 ├── tsconfig.node.json
 └── vite.config.ts
 
-directory: 55 file: 130 symboliclink: 68
+directory: 56 file: 141 symboliclink: 70
 
 ignored: directory (1)

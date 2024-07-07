@@ -1,5 +1,6 @@
 ## <small>0.0.11 (2024-07-07)</small>
 
+* chore(release): 0.0.11 ([b47f9ba](https://github.com/ArcMichael/decentralizedtradedesk/commit/b47f9ba))
 * docs(tree): fix docs ([659568b](https://github.com/ArcMichael/decentralizedtradedesk/commit/659568b))
 * Delete src/build/contracts/ProductContract.json ([c237810](https://github.com/ArcMichael/decentralizedtradedesk/commit/c237810))
 * Delete src/build/contracts/ProductManagement.json ([e74caf0](https://github.com/ArcMichael/decentralizedtradedesk/commit/e74caf0))
