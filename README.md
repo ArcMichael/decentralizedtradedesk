@@ -14,7 +14,7 @@ pnpm install -g tree-cli
 ```
 2. Output a tree diagram up to 3 levels deep, ignoring node_modules:
 ```shell
-npx tree -l 3 -o output.txt --ignore node_modules/
+npm run tree
     or
 npx tree -l 3 -o output.txt --ignore node_modules/
 ```
