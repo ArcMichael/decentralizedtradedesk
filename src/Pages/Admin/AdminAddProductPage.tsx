@@ -128,6 +128,7 @@ const AdminAddProductPage: React.FC = () => {
         )
         .send({
           from: accounts[0],
+          gas: '1000000',
         });
 
       message.success('Product added successfully');
@@ -149,7 +150,7 @@ const AdminAddProductPage: React.FC = () => {
         ...product,
         createdAt: currentTimestamp,
         hash,
-        digitalSignature: signature,
+        digitalSignature: signature as string,
         price: Number(product.price), // Ensure price is a number
         stock: Number(product.stock), // Ensure stock is a number
       };
@@ -287,12 +288,15 @@ const AdminAddProductPage: React.FC = () => {
             menu={{ items: menuItems, onClick: handleMenuClick }}
             trigger={['click']}
           >
-            <a href='#' onClick={e => e.preventDefault()}>
+            <button
+              onClick={e => e.preventDefault()}
+              style={{ all: 'unset', cursor: 'pointer' }}
+            >
               <Space>
                 {product.copyrightUsageRules}
                 <DownOutlined />
               </Space>
-            </a>
+            </button>
           </Dropdown>
         </Form.Item>
 
