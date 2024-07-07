@@ -1,8 +1,11 @@
+// src/Pages/Admin/AdminProductsPage.tsx
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import WithCustomLayout from '../../Layout/WithCustomLayout';
 import { Typography, Table, Button, Modal, message } from 'antd';
 import { getWeb3, getContract } from '../../web3/web3Config';
+import { defaultImage } from '../../constants'; // Import default image from constants
 
 const { Title } = Typography;
 const { confirm } = Modal;
@@ -20,6 +23,12 @@ interface Product {
   creatorAddress: string;
   timestamp: number;
   transactionHash: string;
+  metadata: string; // Metadata field
+  transactionConditions: {
+    fixedPricePayment: boolean;
+  };
+  currency: string;
+  imageUrl: string; // Add imageUrl field
 }
 
 interface ContractProduct {
@@ -28,10 +37,16 @@ interface ContractProduct {
   description: string;
   price: string;
   stock: string;
-  category: string;
-  tags?: string[]; // Make tags optional
-  creator?: string; // Make creator optional
+  metadata: string;
   createdAt: string;
+  currentOwner: string;
+  details: {
+    fixedPricePayment: boolean;
+    currency: string;
+    hash: string;
+    digitalSignature: string;
+  };
+  creator: string;
 }
 
 const AdminProductsPage: React.FC = () => {
@@ -81,23 +96,31 @@ const AdminProductsPage: React.FC = () => {
       const product: ContractProduct = await contract.methods
         .products(i)
         .call();
+
       if (product && product.creator) {
+        const metadata = JSON.parse(product.metadata);
         products.push({
           id: parseInt(product.id, 10),
           name: product.name,
           description: product.description,
           price: parseFloat(web3.utils.fromWei(product.price, 'ether')),
           stock: parseInt(product.stock, 10),
-          category: product.category,
-          tags: product.tags || [], // Ensure tags is an array
+          category: metadata.category,
+          tags: metadata.tags || [], // Ensure tags is an array
           contractAddress: contract.options.address || '',
           transactionStatus: 'available', // Assuming default status
           creatorAddress: product.creator, // Assuming the contract has creator field
           timestamp: parseInt(product.createdAt, 10),
           transactionHash: '', // Placeholder, should be fetched or managed
+          metadata: product.metadata,
+          transactionConditions: product.details,
+          currency: product.details.currency,
+          imageUrl: metadata.imageUrl || defaultImage, // Use default image if imageUrl is empty
         });
       }
     }
+
+    console.log(products);
 
     // Filter products by current user address
     const userProducts = products.filter(
@@ -136,55 +159,61 @@ const AdminProductsPage: React.FC = () => {
 
   const columns = [
     {
-      title: 'ID',
-      dataIndex: 'id',
-      key: 'id',
-    },
-    {
-      title: 'Name',
+      title: '商品名称',
       dataIndex: 'name',
       key: 'name',
     },
     {
-      title: 'Description',
-      dataIndex: 'description',
-      key: 'description',
+      title: '图片',
+      dataIndex: 'imageUrl',
+      key: 'imageUrl',
+      render: (imageUrl: string) => (
+        <img
+          src={imageUrl}
+          alt='Product'
+          style={{ width: '50px', height: '50px' }}
+          onError={(e: any) => {
+            e.target.src = defaultImage; // Use default image if the original one fails to load
+          }}
+        />
+      ),
     },
     {
-      title: 'Price',
+      title: '价格',
       dataIndex: 'price',
       key: 'price',
+      render: (price: number) => `${price}`,
     },
     {
-      title: 'Stock',
-      dataIndex: 'stock',
-      key: 'stock',
+      title: '货币类型',
+      dataIndex: 'currency',
+      key: 'currency',
     },
     {
-      title: 'Category',
+      title: '类别',
       dataIndex: 'category',
       key: 'category',
     },
     {
-      title: 'Tags',
+      title: '标签',
       dataIndex: 'tags',
       key: 'tags',
       render: (tags: string[]) => tags.join(', '),
     },
     {
-      title: 'Action',
+      title: '操作',
       key: 'action',
       render: (_: any, record: Product) => (
         <div>
           <Button type='link' onClick={() => handleEditProduct(record.id)}>
-            Edit
+            编辑
           </Button>
           <Button
             type='link'
             danger
             onClick={() => handleDeleteProduct(record.id)}
           >
-            Delete
+            删除
           </Button>
         </div>
       ),
@@ -193,13 +222,13 @@ const AdminProductsPage: React.FC = () => {
 
   return (
     <div style={{ padding: '24px' }}>
-      <Title level={2}>My Products</Title>
+      <Title level={2}>我的商品</Title>
       <Button
         type='primary'
         onClick={handleAddProduct}
         style={{ marginBottom: '20px' }}
       >
-        Add New Product
+        添加新商品
       </Button>
       <Table
         dataSource={products}

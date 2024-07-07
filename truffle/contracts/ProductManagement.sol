@@ -9,10 +9,19 @@ contract ProductContract {
     string description;
     uint256 price;
     uint256 stock;
-    string category;
-    string[] tags;
+    string metadata; // Store metadata as a string
     uint256 createdAt;
-    address creator; // Add creator field
+    address creator;
+    address currentOwner; // Store current owner
+    AdditionalDetails details;
+    string authorizationRecord; // Store authorization record
+  }
+
+  struct AdditionalDetails {
+    bool fixedPricePayment; // Fixed price payment condition
+    string currency;
+    string hash;
+    string digitalSignature;
   }
 
   mapping(uint256 => Product) public products;
@@ -25,9 +34,11 @@ contract ProductContract {
     string memory _description,
     uint256 _price,
     uint256 _stock,
-    string memory _category,
-    string[] memory _tags,
-    uint256 _createdAt
+    string memory _metadata,
+    uint256 _createdAt,
+    address _currentOwner,
+    AdditionalDetails memory _details,
+    string memory _authorizationRecord
   ) public {
     productCount++;
     products[productCount] = Product(
@@ -36,10 +47,12 @@ contract ProductContract {
       _description,
       _price,
       _stock,
-      _category,
-      _tags,
+      _metadata,
       _createdAt,
-      msg.sender // Store creator address
+      msg.sender,
+      _currentOwner,
+      _details,
+      _authorizationRecord
     );
     emit ProductAdded(productCount, _name, _createdAt);
   }

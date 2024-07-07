@@ -1,23 +1,48 @@
 // src/Pages/Admin/AdminAddProductPage.tsx
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Typography, Form, Input, Button, message } from 'antd';
+import {
+  Typography,
+  Form,
+  Input,
+  Button,
+  message,
+  Select,
+  Checkbox,
+  Row,
+  Col,
+  Dropdown,
+  Space,
+} from 'antd';
+import { DownOutlined } from '@ant-design/icons';
 import WithCustomLayout from '../../Layout/WithCustomLayout';
 import { getWeb3, getContract } from '../../web3/web3Config';
+import { v4 as uuidv4 } from 'uuid';
+import { useUser } from '../../contexts/UserContext';
+import { ProductData } from '../../interfaces';
+import { menuItems, initialProductState } from '../../constants';
+import { generateHashAndSignature } from '../../utils/web3Utils';
 
 const { Title } = Typography;
+const { Option } = Select;
 
 const AdminAddProductPage: React.FC = () => {
-  const [product, setProduct] = useState({
-    name: '',
-    description: '',
-    price: 0,
-    stock: 0,
-    category: '',
-    tags: [] as string[],
-    createdAt: '', // Add createdAt field
+  const { user } = useUser();
+  const [product, setProduct] = useState<ProductData>({
+    ...initialProductState,
+    productId: uuidv4(),
   });
+
+  useEffect(() => {
+    if (user?.address) {
+      setProduct(prevProduct => ({
+        ...prevProduct,
+        currentOwner: user.address,
+        creator: user.address,
+      }));
+    }
+  }, [user]);
 
   const navigate = useNavigate();
 
@@ -26,18 +51,28 @@ const AdminAddProductPage: React.FC = () => {
     setProduct({ ...product, [name]: value });
   };
 
-  interface ProductData {
-    name: string;
-    description: string;
-    price: number;
-    stock: number;
-    category?: string; // Make category optional
-    tags?: string[]; // Make tags optional
-    createdAt: string;
-  }
+  const handleMetadataChange = (name: string, value: string | string[]) => {
+    setProduct({
+      ...product,
+      metadata: { ...product.metadata, [name]: value },
+    });
+  };
+
+  const handleSelectChange = (value: string) => {
+    setProduct({ ...product, currency: value });
+  };
+
+  const handleCheckboxChange = (checkedValues: any) => {
+    const fixedPricePayment = checkedValues.includes('fixedPricePayment');
+    setProduct({
+      ...product,
+      transactionConditions: {
+        fixedPricePayment,
+      },
+    });
+  };
 
   const saveProduct = async (productData: ProductData) => {
-    // show productData
     message.info(JSON.stringify(productData));
     const web3 = await getWeb3();
     if (!web3) {
@@ -59,40 +94,85 @@ const AdminAddProductPage: React.FC = () => {
       return;
     }
 
+    const additionalDetails = {
+      fixedPricePayment: productData.transactionConditions.fixedPricePayment,
+      currency: productData.currency,
+      hash: productData.hash,
+      digitalSignature: productData.digitalSignature,
+    };
+
     try {
+      console.log('Product data being sent:', productData);
+      console.log('Additional details:', additionalDetails);
+
+      const parsedPrice = web3.utils.toWei(
+        productData.price.toString(),
+        'ether'
+      );
+      const parsedCreatedAt = Date.parse(productData.createdAt);
+      if (isNaN(parsedCreatedAt)) {
+        throw new Error('Invalid createdAt date.');
+      }
+
       await contract.methods
         .addProduct(
           productData.name,
           productData.description,
-          web3.utils.toWei(productData.price.toString(), 'ether'),
+          parsedPrice,
           productData.stock,
-          productData.category || '', // Handle optional category
-          productData.tags || [], // Handle optional tags
-          Date.parse(productData.createdAt) // Ensure correct timestamp format
+          JSON.stringify(productData.metadata), // Convert metadata to string
+          parsedCreatedAt,
+          productData.currentOwner,
+          additionalDetails,
+          productData.authorizationRecord || '' // Pass empty string if null
         )
         .send({
           from: accounts[0],
-          gas: '500000', // Adjusted gas limit
         });
 
       message.success('Product added successfully');
       navigate('/admin/products');
-    } catch (error) {
-      console.error('Error adding product:', error);
+    } catch (error: unknown) {
+      const errMsg = (error as Error).message;
+      console.error('Error adding product:', errMsg);
       message.error('Failed to add product.');
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const currentTimestamp = new Date().toISOString();
-    setProduct({ ...product, createdAt: currentTimestamp });
-    saveProduct({ ...product, createdAt: currentTimestamp });
+    try {
+      const { hash, signature } = await generateHashAndSignature(
+        product.currentOwner
+      );
+      const updatedProduct = {
+        ...product,
+        createdAt: currentTimestamp,
+        hash,
+        digitalSignature: signature,
+        price: Number(product.price), // Ensure price is a number
+        stock: Number(product.stock), // Ensure stock is a number
+      };
+      setProduct(updatedProduct);
+      await saveProduct(updatedProduct);
+    } catch (error: unknown) {
+      const errMsg = (error as Error).message;
+      message.error(errMsg);
+    }
+  };
+
+  const handleMenuClick = ({ key }: { key: string }) => {
+    setProduct({ ...product, copyrightUsageRules: key });
   };
 
   return (
     <div style={{ padding: '24px' }}>
       <Title level={2}>Add Product</Title>
       <Form layout='vertical' onFinish={handleSubmit}>
+        <Title level={3}>基本信息</Title>
+        <Form.Item label='商品ID'>
+          <Input name='productId' value={product.productId} disabled />
+        </Form.Item>
         <Form.Item label='商品名称' required>
           <Input
             name='name'
@@ -107,6 +187,56 @@ const AdminAddProductPage: React.FC = () => {
             onChange={handleInputChange}
           />
         </Form.Item>
+        <Form.Item label='元数据'>
+          <Row gutter={16}>
+            <Col span={8}>
+              <Form.Item label='类别'>
+                <Select
+                  value={product.metadata.category}
+                  onChange={value => handleMetadataChange('category', value)}
+                >
+                  <Option value='游戏皮肤'>游戏皮肤</Option>
+                  <Option value='其他类别'>其他类别</Option>
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item label='标签'>
+                <Input
+                  placeholder='请输入标签, 用逗号隔开'
+                  value={product.metadata.tags.join(',')} // Convert array to comma-separated string
+                  onChange={e =>
+                    handleMetadataChange(
+                      'tags',
+                      e.target.value.split(',').map(tag => tag.trim())
+                    )
+                  }
+                />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item label='图片URL'>
+                <Input
+                  placeholder='请输入图片URL'
+                  value={product.metadata.imageUrl}
+                  onChange={e =>
+                    handleMetadataChange('imageUrl', e.target.value)
+                  }
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+        </Form.Item>
+
+        <Title level={3}>所有权和授权</Title>
+        <Form.Item label='当前所有者' required>
+          <Input name='currentOwner' value={product.currentOwner} disabled />
+        </Form.Item>
+        <Form.Item label='创作者' required>
+          <Input name='creator' value={product.creator} disabled />
+        </Form.Item>
+
+        <Title level={3}>交易信息</Title>
         <Form.Item label='价格' required>
           <Input
             type='number'
@@ -123,22 +253,49 @@ const AdminAddProductPage: React.FC = () => {
             onChange={handleInputChange}
           />
         </Form.Item>
-        <Form.Item label='分类'>
+        <Form.Item label='货币类型'>
+          <Select value={product.currency} onChange={handleSelectChange}>
+            <Option value='ETH'>ETH</Option>
+            <Option value='BTC'>BTC</Option>
+          </Select>
+        </Form.Item>
+
+        <Title level={3}>安全和验证</Title>
+        <Form.Item label='哈希值'>
+          <Input name='hash' value={product.hash} disabled />
+        </Form.Item>
+        <Form.Item label='数字签名'>
           <Input
-            name='category'
-            value={product.category}
-            onChange={handleInputChange}
+            name='digitalSignature'
+            value={product.digitalSignature}
+            disabled
           />
         </Form.Item>
-        <Form.Item label='标签'>
-          <Input
-            name='tags'
-            value={product.tags.join(',')}
-            onChange={e =>
-              setProduct({ ...product, tags: e.target.value.split(',') })
-            }
-          />
+
+        <Title level={3}>智能合约规则</Title>
+        <Form.Item label='交易条件'>
+          <Checkbox.Group onChange={handleCheckboxChange}>
+            <Row>
+              <Col span={24}>
+                <Checkbox value='fixedPricePayment'>固定价格支付</Checkbox>
+              </Col>
+            </Row>
+          </Checkbox.Group>
         </Form.Item>
+        <Form.Item label='版权和使用权规则'>
+          <Dropdown
+            menu={{ items: menuItems, onClick: handleMenuClick }}
+            trigger={['click']}
+          >
+            <a href='#' onClick={e => e.preventDefault()}>
+              <Space>
+                {product.copyrightUsageRules}
+                <DownOutlined />
+              </Space>
+            </a>
+          </Dropdown>
+        </Form.Item>
+
         <Button type='primary' htmlType='submit'>
           上架商品
         </Button>

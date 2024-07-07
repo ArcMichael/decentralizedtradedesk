@@ -1,0 +1,43 @@
+{
+  "origin": {
+    "productId": "1d75618c-e9a8-4fa6-8f28-79bb1ffabbb2",
+    "name": "F5",
+    "description": "F5",
+    "price": 2,
+    "stock": 1,
+    "metadata": {
+      "category": "游戏皮肤",
+      "tags": ["游戏，皮肤"],
+      "imageUrl": ""
+    },
+    "currentOwner": "0xf438b5a7a6EbE96D1fe2dC3C222940C93A20AFdf",
+    "creator": "0xf438b5a7a6EbE96D1fe2dC3C222940C93A20AFdf",
+    "transactionConditions": ["require(msg.value == 0.5 ether);"],
+    "copyrightUsageRules": "本商品仅供个人使用，不得进行商业再销售。",
+    "currency": "ETH",
+    "hash": "0xc30e3dbcaa9051324e9b709946a15f03e9cb3a3cf110fcd635f4409f436d5140",
+    "digitalSignature": "0x3c476b0f4826f8a413724fb915b24c39c0c0e2bd9273092049489504ef926faf20f1885196a28092f0444e87d00ffaf0361a6730ae9554cc2d83dccc4e42df931b",
+    "createdAt": "2024-07-07T13:22:05.372Z",
+    "expiryTimestamp": "0"
+  },
+  "achievement": {
+    "商品ID": "prod-0001-xyz-12345abc",
+    "商品名称": "虚拟游戏皮肤：火焰战士",
+    "描述": "这是游戏《战士世界》中的一个稀有皮肤，提供额外的护甲和特效。",
+    "元数据": {
+      "类别": "游戏皮肤",
+      "标签": ["稀有", "限量版"],
+      "图片": "http://example.com/image.png"
+    },
+    "当前所有者": "0x123456789abcdefg0123456789abcdef01234567",
+    "创作者": "0x123456789abcdefg0123456789abcdef01234567",
+    "授权记录": [],
+    "价格": 0.5,
+    "货币类型": "ETH",
+    "购买时间": null,
+    "哈希值": "abcd1234abcd1234abcd1234abcd1234abcd1234abcd1234abcd1234abcd1234",
+    "数字签名": "3045022100abcdef1234567890abcdef1234567890abcdef1234567890abcdef123456789022034569...",
+    "交易条件": "require(msg.value >= 0.5 ether);",
+    "版权和使用权规则": "本商品仅供个人使用，不得进行商业再销售。"
+  }
+}
