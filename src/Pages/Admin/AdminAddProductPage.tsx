@@ -63,7 +63,13 @@ const AdminAddProductPage: React.FC = () => {
   };
 
   const handleCheckboxChange = (checkedValues: any) => {
-    setProduct({ ...product, transactionConditions: checkedValues });
+    const fixedPricePayment = checkedValues.includes('fixedPricePayment');
+    setProduct({
+      ...product,
+      transactionConditions: {
+        fixedPricePayment,
+      },
+    });
   };
 
   const saveProduct = async (productData: ProductData) => {
@@ -89,11 +95,10 @@ const AdminAddProductPage: React.FC = () => {
     }
 
     const additionalDetails = {
-      transactionConditions: productData.transactionConditions,
+      fixedPricePayment: productData.transactionConditions.fixedPricePayment,
       currency: productData.currency,
       hash: productData.hash,
       digitalSignature: productData.digitalSignature,
-      expiryTimestamp: Number(productData.expiryTimestamp), // Ensure expiryTimestamp is a number
     };
 
     try {
@@ -118,11 +123,11 @@ const AdminAddProductPage: React.FC = () => {
           JSON.stringify(productData.metadata), // Convert metadata to string
           parsedCreatedAt,
           productData.currentOwner,
-          additionalDetails
+          additionalDetails,
+          productData.authorizationRecord || '' // Pass empty string if null
         )
         .send({
           from: accounts[0],
-          // gas: '1000000',
         });
 
       message.success('Product added successfully');
@@ -272,9 +277,7 @@ const AdminAddProductPage: React.FC = () => {
           <Checkbox.Group onChange={handleCheckboxChange}>
             <Row>
               <Col span={24}>
-                <Checkbox value='require(msg.value == 0.5 ether);'>
-                  固定价格支付
-                </Checkbox>
+                <Checkbox value='fixedPricePayment'>固定价格支付</Checkbox>
               </Col>
             </Row>
           </Checkbox.Group>

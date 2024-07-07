@@ -6,6 +6,10 @@ export interface Metadata {
   imageUrl: string;
 }
 
+export interface TransactionConditions {
+  fixedPricePayment: boolean;
+}
+
 export interface ProductData {
   productId: string;
   name: string;
@@ -15,11 +19,11 @@ export interface ProductData {
   metadata: Metadata;
   currentOwner: string;
   creator: string;
-  transactionConditions: string[];
+  transactionConditions: TransactionConditions;
   copyrightUsageRules: string;
   currency: string;
   hash: string;
   digitalSignature: string;
   createdAt: string;
-  expiryTimestamp: string;
+  authorizationRecord: string | null;
 }

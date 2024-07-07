@@ -14,14 +14,14 @@ contract ProductContract {
     address creator;
     address currentOwner; // Store current owner
     AdditionalDetails details;
+    string authorizationRecord; // Store authorization record
   }
 
   struct AdditionalDetails {
-    string[] transactionConditions;
+    bool fixedPricePayment; // Fixed price payment condition
     string currency;
     string hash;
     string digitalSignature;
-    uint256 expiryTimestamp;
   }
 
   mapping(uint256 => Product) public products;
@@ -37,7 +37,8 @@ contract ProductContract {
     string memory _metadata,
     uint256 _createdAt,
     address _currentOwner,
-    AdditionalDetails memory _details
+    AdditionalDetails memory _details,
+    string memory _authorizationRecord
   ) public {
     productCount++;
     products[productCount] = Product(
@@ -50,7 +51,8 @@ contract ProductContract {
       _createdAt,
       msg.sender,
       _currentOwner,
-      _details
+      _details,
+      _authorizationRecord
     );
     emit ProductAdded(productCount, _name, _createdAt);
   }

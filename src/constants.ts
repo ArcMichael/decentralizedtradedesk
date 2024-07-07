@@ -47,11 +47,15 @@ export const initialProductState = {
   },
   currentOwner: '',
   creator: '',
-  transactionConditions: [] as string[],
+  transactionConditions: {
+    fixedPricePayment: false,
+  },
   copyrightUsageRules: '本商品仅供个人使用，不得进行商业再销售。',
   currency: 'ETH',
   hash: '',
   digitalSignature: '',
   createdAt: '',
-  expiryTimestamp: '0', // Ensure it has a default value
+  authorizationRecord: null,
 };
+
+export const defaultImage = '/vite.svg'; // Default image path
