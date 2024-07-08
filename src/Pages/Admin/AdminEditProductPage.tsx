@@ -52,7 +52,7 @@ const AdminEditProductPage: React.FC = () => {
       setProduct(productToEdit);
     } else {
       message.error('Product not found');
-      navigate('/admin/products');
+      // navigate('/admin/products');
     }
   }, [id, navigate]);
 

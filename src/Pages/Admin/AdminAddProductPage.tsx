@@ -114,22 +114,24 @@ const AdminAddProductPage: React.FC = () => {
         throw new Error('Invalid createdAt date.');
       }
 
-      await contract.methods
-        .addProduct(
-          productData.name,
-          productData.description,
-          parsedPrice,
-          productData.stock,
-          JSON.stringify(productData.metadata), // Convert metadata to string
-          parsedCreatedAt,
-          productData.currentOwner,
-          additionalDetails,
-          productData.authorizationRecord || '' // Pass empty string if null
-        )
-        .send({
-          from: accounts[0],
-          gas: '1000000',
-        });
+      const tx = contract.methods.addProduct(
+        productData.name,
+        productData.description,
+        parsedPrice,
+        productData.stock,
+        JSON.stringify(productData.metadata), // Convert metadata to string
+        parsedCreatedAt,
+        productData.currentOwner,
+        additionalDetails,
+        productData.authorizationRecord || '' // Pass empty string if null
+      );
+
+      const gas = await tx.estimateGas({ from: accounts[0] });
+
+      await tx.send({
+        from: accounts[0],
+        gas: gas.toString(),
+      });
 
       message.success('Product added successfully');
       navigate('/admin/products');
