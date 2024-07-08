@@ -1,6 +1,7 @@
 // src/constants.ts
 
 import { MenuProps } from 'antd';
+import { ProductData } from './interfaces';
 
 export const menuItems: MenuProps['items'] = [
   {
@@ -34,7 +35,7 @@ export const menuItems: MenuProps['items'] = [
   },
 ];
 
-export const initialProductState = {
+export const initialProductState: ProductData = {
   productId: '',
   name: '',
   description: '',
@@ -42,7 +43,7 @@ export const initialProductState = {
   stock: 0,
   metadata: {
     category: '',
-    tags: [] as string[], // Initialize as an array of strings
+    tags: [],
     imageUrl: '',
   },
   currentOwner: '',
@@ -58,4 +59,4 @@ export const initialProductState = {
   authorizationRecord: null,
 };
 
-export const defaultImage = '/vite.svg'; // Default image path
+export const defaultImage = '/vite.svg';

@@ -6,48 +6,10 @@ import WithCustomLayout from '../../Layout/WithCustomLayout';
 import { Typography, Table, Button, Modal, message } from 'antd';
 import { getWeb3, getContract } from '../../web3/web3Config';
 import { defaultImage } from '../../constants'; // Import default image from constants
+import { ContractProduct, Metadata, Product } from '../../interfaces';
 
 const { Title } = Typography;
 const { confirm } = Modal;
-
-interface Product {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  stock: number;
-  category: string;
-  tags: string[];
-  contractAddress: string;
-  transactionStatus: 'available' | 'sold' | 'inTransaction';
-  creatorAddress: string;
-  timestamp: number;
-  transactionHash: string;
-  metadata: string; // Metadata field
-  transactionConditions: {
-    fixedPricePayment: boolean;
-  };
-  currency: string;
-  imageUrl: string; // Add imageUrl field
-}
-
-interface ContractProduct {
-  id: string;
-  name: string;
-  description: string;
-  price: string;
-  stock: string;
-  metadata: string;
-  createdAt: string;
-  currentOwner: string;
-  details: {
-    fixedPricePayment: boolean;
-    currency: string;
-    hash: string;
-    digitalSignature: string;
-  };
-  creator: string;
-}
 
 const AdminProductsPage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -98,7 +60,7 @@ const AdminProductsPage: React.FC = () => {
         .call();
 
       if (product && product.creator) {
-        const metadata = JSON.parse(product.metadata);
+        const metadata: Metadata = JSON.parse(product.metadata);
         products.push({
           id: parseInt(product.id, 10),
           name: product.name,
@@ -135,8 +97,8 @@ const AdminProductsPage: React.FC = () => {
     navigate('/admin/products/add');
   };
 
-  const handleEditProduct = (id: number) => {
-    navigate(`/admin/products/edit/${id}`);
+  const handleEditProduct = (contractAddress: string) => {
+    navigate(`/admin/products/edit/${contractAddress}`);
   };
 
   const handleDeleteProduct = (id: number) => {
@@ -205,7 +167,10 @@ const AdminProductsPage: React.FC = () => {
       key: 'action',
       render: (_: any, record: Product) => (
         <div>
-          <Button type='link' onClick={() => handleEditProduct(record.id)}>
+          <Button
+            type='link'
+            onClick={() => handleEditProduct(record.contractAddress)}
+          >
             编辑
           </Button>
           <Button
