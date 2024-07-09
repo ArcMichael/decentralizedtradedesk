@@ -40,7 +40,6 @@ export const initialProductState: ProductData = {
   name: '',
   description: '',
   price: 0,
-  stock: 0,
   metadata: {
     category: '',
     tags: [],

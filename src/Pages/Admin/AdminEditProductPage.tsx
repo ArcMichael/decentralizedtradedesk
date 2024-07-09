@@ -2,58 +2,82 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Typography, Form, Input, Button, message } from 'antd';
+import {
+  Typography,
+  Form,
+  Input,
+  Button,
+  message,
+  Select,
+  Checkbox,
+  Row,
+  Col,
+  Dropdown,
+  Space,
+} from 'antd';
+import { DownOutlined } from '@ant-design/icons';
 import WithCustomLayout from '../../Layout/WithCustomLayout';
+import { getWeb3, getContract } from '../../web3/web3Config';
+import { ProductData } from '../../interfaces';
+import { menuItems } from '../../constants';
+import { generateHashAndSignature } from '../../utils/web3Utils';
 
 const { Title } = Typography;
-
-interface Product {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  stock: number;
-  category: string;
-  tags: string[];
-  contractAddress: string;
-  transactionStatus: 'available' | 'sold' | 'inTransaction';
-  creatorAddress: string;
-  timestamp: number;
-  transactionHash: string;
-}
-
-const initialProducts: Product[] = [
-  {
-    id: '1',
-    name: 'Product 1',
-    description: 'Description of Product 1',
-    price: 100,
-    stock: 10,
-    category: 'Category 1',
-    tags: ['tag1', 'tag2'],
-    contractAddress: '0x123',
-    transactionStatus: 'available',
-    creatorAddress: '0x456',
-    timestamp: Date.now(),
-    transactionHash: '0x789',
-  },
-  // Add more initial products if needed
-];
+const { Option } = Select;
 
 const AdminEditProductPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [product, setProduct] = useState<Product | null>(null);
+  const [product, setProduct] = useState<ProductData | null>(null);
 
   useEffect(() => {
-    // TODO: 从后端获取商品信息
-    const productToEdit = initialProducts.find(p => p.id === id);
-    if (productToEdit) {
-      setProduct(productToEdit);
-    } else {
-      message.error('Product not found');
-      // navigate('/admin/products');
-    }
+    const fetchProduct = async () => {
+      const web3 = await getWeb3();
+      if (!web3) {
+        message.error(
+          'Web3 is not initialized. Make sure MetaMask is installed and logged in.'
+        );
+        return;
+      }
+
+      const contract = await getContract(web3);
+      if (!contract) {
+        message.error('Failed to load contract.');
+        return;
+      }
+
+      try {
+        const productData: any = await contract.methods.products(id).call();
+        if (productData) {
+          const metadata = JSON.parse(productData.metadata);
+          setProduct({
+            productId: productData.id,
+            name: productData.name,
+            description: productData.description,
+            price: parseFloat(web3.utils.fromWei(productData.price, 'ether')),
+            metadata,
+            currentOwner: productData.currentOwner,
+            creator: productData.creator,
+            transactionConditions: productData.details,
+            copyrightUsageRules: productData.details.copyrightUsageRules,
+            currency: productData.details.currency,
+            hash: productData.details.hash,
+            digitalSignature: productData.details.digitalSignature,
+            createdAt: new Date(
+              parseInt(productData.createdAt, 10)
+            ).toISOString(),
+            authorizationRecord: productData.authorizationRecord,
+          });
+        } else {
+          message.error('Product not found');
+          navigate('/admin/products');
+        }
+      } catch (error) {
+        message.error('Failed to fetch product data.');
+      }
+    };
+
+    fetchProduct();
   }, [id, navigate]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,13 +87,110 @@ const AdminEditProductPage: React.FC = () => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleMetadataChange = (name: string, value: string | string[]) => {
     if (product) {
-      // TODO: 将更新后的商品信息发送到后端API
-      // updateProduct(product);
+      setProduct({
+        ...product,
+        metadata: { ...product.metadata, [name]: value },
+      });
+    }
+  };
+
+  const handleSelectChange = (value: string) => {
+    if (product) {
+      setProduct({ ...product, currency: value });
+    }
+  };
+
+  const handleCheckboxChange = (checkedValues: any) => {
+    if (product) {
+      const fixedPricePayment = checkedValues.includes('fixedPricePayment');
+      setProduct({
+        ...product,
+        transactionConditions: {
+          fixedPricePayment,
+        },
+      });
+    }
+  };
+
+  const handleMenuClick = ({ key }: { key: string }) => {
+    if (product) {
+      setProduct({ ...product, copyrightUsageRules: key });
+    }
+  };
+
+  const handleSubmit = async () => {
+    if (!product) return;
+
+    const currentTimestamp = new Date().toISOString();
+    try {
+      const web3 = await getWeb3();
+      if (!web3) {
+        message.error(
+          'Web3 is not initialized. Make sure MetaMask is installed and logged in.'
+        );
+        return;
+      }
+
+      const contract = await getContract(web3);
+      if (!contract) {
+        message.error('Failed to load contract.');
+        return;
+      }
+
+      const accounts = await web3.eth.getAccounts();
+      if (accounts.length === 0) {
+        message.error('No accounts found.');
+        return;
+      }
+
+      const { hash, signature } = await generateHashAndSignature(
+        product.currentOwner
+      );
+
+      const updatedProduct = {
+        ...product,
+        createdAt: currentTimestamp,
+        hash,
+        digitalSignature: signature as string,
+        price: Number(product.price),
+      };
+
+      setProduct(updatedProduct);
+
+      const additionalDetails = {
+        fixedPricePayment:
+          updatedProduct.transactionConditions.fixedPricePayment,
+        currency: updatedProduct.currency,
+        hash: updatedProduct.hash,
+        digitalSignature: updatedProduct.digitalSignature,
+      };
+
+      const tx = contract.methods.updateProduct(
+        updatedProduct.productId,
+        updatedProduct.name,
+        updatedProduct.description,
+        web3.utils.toWei(updatedProduct.price.toString(), 'ether'),
+        JSON.stringify(updatedProduct.metadata),
+        Date.parse(updatedProduct.createdAt),
+        updatedProduct.currentOwner,
+        additionalDetails
+      );
+
+      const gas = await tx.estimateGas({ from: accounts[0] });
+
+      await tx.send({
+        from: accounts[0],
+        gas: gas.toString(),
+      });
 
       message.success('Product updated successfully');
       navigate('/admin/products');
+    } catch (error: unknown) {
+      const errMsg = (error as Error).message;
+      console.error('Error updating product:', errMsg);
+      message.error('Failed to update product.');
     }
   };
 
@@ -78,6 +199,10 @@ const AdminEditProductPage: React.FC = () => {
       <Title level={2}>Edit Product</Title>
       {product && (
         <Form layout='vertical' onFinish={handleSubmit}>
+          <Title level={3}>基本信息</Title>
+          <Form.Item label='商品ID'>
+            <Input name='productId' value={product.productId} disabled />
+          </Form.Item>
           <Form.Item label='商品名称' required>
             <Input
               name='name'
@@ -92,6 +217,68 @@ const AdminEditProductPage: React.FC = () => {
               onChange={handleInputChange}
             />
           </Form.Item>
+          <Form.Item label='元数据'>
+            <Row gutter={16}>
+              <Col span={8}>
+                <Form.Item label='类别'>
+                  <Select
+                    value={product.metadata.category}
+                    onChange={value => handleMetadataChange('category', value)}
+                  >
+                    <Option value='游戏皮肤'>游戏皮肤</Option>
+                    <Option value='其他类别'>其他类别</Option>
+                  </Select>
+                </Form.Item>
+              </Col>
+              <Col span={8}>
+                <Form.Item label='标签'>
+                  <Input
+                    placeholder='请输入标签, 用逗号隔开'
+                    value={product.metadata.tags.join(',')}
+                    onChange={e =>
+                      handleMetadataChange(
+                        'tags',
+                        e.target.value.split(',').map(tag => tag.trim())
+                      )
+                    }
+                  />
+                </Form.Item>
+              </Col>
+              <Col span={8}>
+                <Form.Item label='图片URL'>
+                  <Input
+                    placeholder='请输入图片URL'
+                    value={product.metadata.imageUrl}
+                    onChange={e =>
+                      handleMetadataChange('imageUrl', e.target.value)
+                    }
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
+          </Form.Item>
+
+          <Title level={3}>所有权和授权</Title>
+          <Form.Item label='当前所有者' required>
+            <Input name='currentOwner' value={product.currentOwner} disabled />
+          </Form.Item>
+          <Form.Item label='创作者' required>
+            <Input name='creator' value={product.creator} disabled />
+          </Form.Item>
+
+          <Title level={3}>交易信息</Title>
+
+          <Form.Item label='货币类型'>
+            <Select
+              value={product.currency}
+              onChange={handleSelectChange}
+              disabled
+            >
+              <Option value='ETH'>ETH</Option>
+              <Option value='BTC'>BTC</Option>
+            </Select>
+          </Form.Item>
+
           <Form.Item label='价格' required>
             <Input
               type='number'
@@ -100,30 +287,53 @@ const AdminEditProductPage: React.FC = () => {
               onChange={handleInputChange}
             />
           </Form.Item>
-          <Form.Item label='库存数量' required>
+
+          <Title level={3}>安全和验证</Title>
+          <Form.Item label='哈希值'>
+            <Input name='hash' value={product.hash} disabled />
+          </Form.Item>
+          <Form.Item label='数字签名'>
             <Input
-              type='number'
-              name='stock'
-              value={product.stock}
-              onChange={handleInputChange}
+              name='digitalSignature'
+              value={product.digitalSignature}
+              disabled
             />
           </Form.Item>
-          <Form.Item label='分类' required>
-            <Input
-              name='category'
-              value={product.category}
-              onChange={handleInputChange}
-            />
-          </Form.Item>
-          <Form.Item label='标签' required>
-            <Input
-              name='tags'
-              value={product.tags.join(',')}
-              onChange={e =>
-                setProduct({ ...product, tags: e.target.value.split(',') })
+
+          <Title level={3}>智能合约规则</Title>
+          <Form.Item label='交易条件'>
+            <Checkbox.Group
+              value={
+                product.transactionConditions.fixedPricePayment
+                  ? ['fixedPricePayment']
+                  : []
               }
-            />
+              onChange={handleCheckboxChange}
+            >
+              <Row>
+                <Col span={24}>
+                  <Checkbox value='fixedPricePayment'>固定价格支付</Checkbox>
+                </Col>
+              </Row>
+            </Checkbox.Group>
           </Form.Item>
+          <Form.Item label='版权和使用权规则'>
+            <Dropdown
+              menu={{ items: menuItems, onClick: handleMenuClick }}
+              trigger={['click']}
+            >
+              <button
+                onClick={e => e.preventDefault()}
+                style={{ all: 'unset', cursor: 'pointer' }}
+              >
+                <Space>
+                  {product.copyrightUsageRules}
+                  <DownOutlined />
+                </Space>
+              </button>
+            </Dropdown>
+          </Form.Item>
+
           <Button type='primary' htmlType='submit'>
             更新商品
           </Button>
