@@ -6,7 +6,7 @@
     "price": 2,
     "stock": 1,
     "metadata": {
-      "category": "游戏皮肤",
+      "category": "游戏皮肤 #",
       "tags": ["游戏，皮肤"],
       "imageUrl": ""
     },
@@ -39,5 +39,38 @@
     "数字签名": "3045022100abcdef1234567890abcdef1234567890abcdef1234567890abcdef123456789022034569...",
     "交易条件": "require(msg.value >= 0.5 ether);",
     "版权和使用权规则": "本商品仅供个人使用，不得进行商业再销售。"
+  },
+  "ready": {
+    "productId": "1d75618c-e9a8-4fa6-8f28-79bb1ffabbb2",
+    "copyrightUsageRules": "本商品仅供个人使用，不得进行商业再销售。",
+    "createdAt": "2024-07-07T13:22:05.372Z ",
+    "name": "46a33ae6-b78e-4e",
+    "description": "46a33ae6-b78e-4e",
+    "parsedPrice": "460000000000000000",
+    "stock": 1,
+    "metadata": "{\"category\":\"游戏皮肤\",\"tags\":[],\"imageUrl\":\"\"}",
+    "parsedCreatedAt": 1720449745842,
+    "currentOwner": "0x976cFBDd61D27d1e67271a9cC1dD57F4ED01D122",
+    "additionalDetails": {
+      "fixedPricePayment": false
+    },
+    "currency": "ETH",
+    "hash": "0x4d2fa047a06949165e82c14e43c1ae589f96b369ace1ef81f8d3f633c4e3ffd8",
+    "digitalSignature": "0x9bd4999bbdf1564d9676fbe114f658d4e3dedbe5b02bb5a903ad4f6c36fb38b57a356a63ffc7f83a3d2cce39a6715ee9a3645afddddd57779a5175ef7311ae1f1b"
+  },
+  "now": {
+    "productId": "5062bb45-5659-49c5-ae45-39b317fb5822",
+    "name": "5062bb45",
+    "description": "5062bb45",
+    "price": 0.506245,
+    "stock": 1,
+    "metadata": { "category": "游戏皮肤", "tags": [], "imageUrl": "" },
+    "currentOwner": "0xb38b5fACBb0E7056176f5d59f0862a3f3EF28e95",
+    "creator": "0xb38b5fACBb0E7056176f5d59f0862a3f3EF28e95",
+    "transactionConditions": { "fixedPricePayment": false },
+    "hash": "0x704b08389a14bc70170a2d661eff9b5a2b2210f563404f3f7af771f5cc0d1b32",
+    "digitalSignature": "0xfae2438c77343a27117c83b84d9c4999dc403330e8d34ef08e2a7f762393f710725d2b899e73f203f98b505bcfa500614a69369421751570cb02e3144df0d1771b",
+    "createdAt": "2024-07-09T11:42:47.122Z",
+    "copyrightUsageRules": "本商品仅供个人使用，不得进行商业再销售。"
   }
 }
