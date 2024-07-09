@@ -15,7 +15,6 @@ export interface ProductData {
   name: string;
   description: string;
   price: number;
-  stock: number;
   metadata: Metadata;
   currentOwner: string;
   creator: string;
@@ -33,7 +32,6 @@ export interface Product {
   name: string;
   description: string;
   price: number;
-  stock: number;
   category: string;
   tags: string[];
   contractAddress: string;
@@ -52,7 +50,6 @@ export interface ContractProduct {
   name: string;
   description: string;
   price: string;
-  stock: string;
   metadata: string;
   createdAt: string;
   currentOwner: string;

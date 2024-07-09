@@ -8,13 +8,11 @@ contract ProductContract {
     string name;
     string description;
     uint256 price;
-    uint256 stock;
     string metadata; // Store metadata as a string
     uint256 createdAt;
     address creator;
     address currentOwner; // Store current owner
     AdditionalDetails details;
-    string authorizationRecord; // Store authorization record
   }
 
   struct AdditionalDetails {
@@ -33,12 +31,10 @@ contract ProductContract {
     string memory _name,
     string memory _description,
     uint256 _price,
-    uint256 _stock,
     string memory _metadata,
     uint256 _createdAt,
     address _currentOwner,
-    AdditionalDetails memory _details,
-    string memory _authorizationRecord
+    AdditionalDetails memory _details
   ) public {
     productCount++;
     products[productCount] = Product(
@@ -46,13 +42,11 @@ contract ProductContract {
       _name,
       _description,
       _price,
-      _stock,
       _metadata,
       _createdAt,
       msg.sender,
       _currentOwner,
-      _details,
-      _authorizationRecord
+      _details
     );
     emit ProductAdded(productCount, _name, _createdAt);
   }

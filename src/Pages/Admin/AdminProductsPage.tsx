@@ -66,7 +66,6 @@ const AdminProductsPage: React.FC = () => {
           name: product.name,
           description: product.description,
           price: parseFloat(web3.utils.fromWei(product.price, 'ether')),
-          stock: parseInt(product.stock, 10),
           category: metadata.category,
           tags: metadata.tags || [], // Ensure tags is an array
           contractAddress: contract.options.address || '',
@@ -97,8 +96,8 @@ const AdminProductsPage: React.FC = () => {
     navigate('/admin/products/add');
   };
 
-  const handleEditProduct = (contractAddress: string) => {
-    navigate(`/admin/products/edit/${contractAddress}`);
+  const handleEditProduct = (id: number) => {
+    navigate(`/admin/products/edit/${id}`);
   };
 
   const handleDeleteProduct = (id: number) => {
@@ -167,10 +166,7 @@ const AdminProductsPage: React.FC = () => {
       key: 'action',
       render: (_: any, record: Product) => (
         <div>
-          <Button
-            type='link'
-            onClick={() => handleEditProduct(record.contractAddress)}
-          >
+          <Button type='link' onClick={() => handleEditProduct(record.id)}>
             编辑
           </Button>
           <Button

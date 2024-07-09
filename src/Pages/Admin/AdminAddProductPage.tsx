@@ -118,7 +118,6 @@ const AdminAddProductPage: React.FC = () => {
         productData.name,
         productData.description,
         parsedPrice,
-        productData.stock,
         JSON.stringify(productData.metadata), // Convert metadata to string
         parsedCreatedAt,
         productData.currentOwner,
@@ -154,7 +153,6 @@ const AdminAddProductPage: React.FC = () => {
         hash,
         digitalSignature: signature as string,
         price: Number(product.price), // Ensure price is a number
-        stock: Number(product.stock), // Ensure stock is a number
       };
       setProduct(updatedProduct);
       await saveProduct(updatedProduct);
@@ -240,6 +238,18 @@ const AdminAddProductPage: React.FC = () => {
         </Form.Item>
 
         <Title level={3}>交易信息</Title>
+
+        <Form.Item label='货币类型'>
+          <Select
+            value={product.currency}
+            onChange={handleSelectChange}
+            disabled
+          >
+            <Option value='ETH'>ETH</Option>
+            <Option value='BTC'>BTC</Option>
+          </Select>
+        </Form.Item>
+
         <Form.Item label='价格' required>
           <Input
             type='number'
@@ -247,20 +257,6 @@ const AdminAddProductPage: React.FC = () => {
             value={product.price}
             onChange={handleInputChange}
           />
-        </Form.Item>
-        <Form.Item label='库存数量' required>
-          <Input
-            type='number'
-            name='stock'
-            value={product.stock}
-            onChange={handleInputChange}
-          />
-        </Form.Item>
-        <Form.Item label='货币类型'>
-          <Select value={product.currency} onChange={handleSelectChange}>
-            <Option value='ETH'>ETH</Option>
-            <Option value='BTC'>BTC</Option>
-          </Select>
         </Form.Item>
 
         <Title level={3}>安全和验证</Title>
