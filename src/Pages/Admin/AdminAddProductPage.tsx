@@ -115,6 +115,7 @@ const AdminAddProductPage: React.FC = () => {
       }
 
       const tx = contract.methods.addProduct(
+        productData.productId,
         productData.name,
         productData.description,
         parsedPrice,
@@ -124,6 +125,8 @@ const AdminAddProductPage: React.FC = () => {
         additionalDetails,
         productData.authorizationRecord || '' // Pass empty string if null
       );
+
+      // console.log()
 
       const gas = await tx.estimateGas({ from: accounts[0] });
 

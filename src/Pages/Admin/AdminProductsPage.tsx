@@ -49,52 +49,53 @@ const AdminProductsPage: React.FC = () => {
       10
     );
 
-    console.log('productCount', productCount);
     if (isNaN(productCount)) {
       message.error('Failed to fetch product count.');
       return;
     }
 
     const products: Product[] = [];
-    for (let i = 1; i <= productCount; i++) {
-      const product: ContractProduct = await contract.methods
-        .products(i)
-        .call();
+    const productIds: string[] = await contract.methods.getProductIds().call();
 
-      console.log('ContractProduct', product);
+    for (const productId of productIds) {
+      try {
+        const product: ContractProduct = await contract.methods
+          .products(productId)
+          .call();
 
-      if (product && product.creator) {
-        let metadata: Metadata = { category: '', tags: [], imageUrl: '' };
-        try {
-          metadata = JSON.parse(product.metadata);
-        } catch (error) {
-          console.error(
-            'Failed to parse metadata for product:',
-            product.id,
-            error
-          );
+        if (product && product.creator) {
+          let metadata: Metadata = { category: '', tags: [], imageUrl: '' };
+          try {
+            metadata = JSON.parse(product.metadata);
+          } catch (error) {
+            console.error(
+              'Failed to parse metadata for product:',
+              product.id,
+              error
+            );
+          }
+          products.push({
+            id: product.id,
+            name: product.name,
+            description: product.description,
+            price: parseFloat(web3.utils.fromWei(product.price, 'ether')),
+            category: metadata.category,
+            tags: metadata.tags || [], // Ensure tags is an array
+            contractAddress: contract.options.address || '',
+            transactionStatus: 'available', // Assuming default status
+            creatorAddress: product.creator, // Assuming the contract has creator field
+            timestamp: parseInt(product.createdAt, 10),
+            transactionHash: '', // Placeholder, should be fetched or managed
+            metadata: product.metadata,
+            transactionConditions: product.details,
+            currency: product.details.currency,
+            imageUrl: metadata.imageUrl || defaultImage, // Use default image if imageUrl is empty
+          });
         }
-        products.push({
-          id: parseInt(product.id, 10),
-          name: product.name,
-          description: product.description,
-          price: parseFloat(web3.utils.fromWei(product.price, 'ether')),
-          category: metadata.category,
-          tags: metadata.tags || [], // Ensure tags is an array
-          contractAddress: contract.options.address || '',
-          transactionStatus: 'available', // Assuming default status
-          creatorAddress: product.creator, // Assuming the contract has creator field
-          timestamp: parseInt(product.createdAt, 10),
-          transactionHash: '', // Placeholder, should be fetched or managed
-          metadata: product.metadata,
-          transactionConditions: product.details,
-          currency: product.details.currency,
-          imageUrl: metadata.imageUrl || defaultImage, // Use default image if imageUrl is empty
-        });
+      } catch (error) {
+        console.error(`Failed to fetch product with id ${productId}:`, error);
       }
     }
-
-    console.log('products', products);
 
     // Filter products by current user address
     const userProducts = products.filter(
@@ -109,11 +110,11 @@ const AdminProductsPage: React.FC = () => {
     navigate('/admin/products/add');
   };
 
-  const handleEditProduct = (id: number) => {
+  const handleEditProduct = (id: string) => {
     navigate(`/admin/products/edit/${id}`);
   };
 
-  const handleDeleteProduct = async (id: number) => {
+  const handleDeleteProduct = async (id: string) => {
     confirm({
       title: 'Are you sure you want to delete this product?',
       content: 'This action cannot be undone.',
