@@ -1,8 +1,13 @@
 // src/Pages/BrowsePage.tsx
 
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Card, Input, message, Avatar } from 'antd';
-import { SettingOutlined, EditOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
+import { Row, Col, Card, Input, message, Avatar, Popover, Divider } from 'antd';
+import {
+  InfoCircleOutlined,
+  SettingOutlined,
+  TransactionOutlined,
+} from '@ant-design/icons';
 import WithCustomLayout from '../Layout/WithCustomLayout';
 import { getWeb3, getContract } from '../web3/web3Config';
 import { defaultImage } from '../constants';
@@ -11,9 +16,17 @@ import { Product, Metadata, ContractProduct } from '../interfaces';
 const { Search } = Input;
 const { Meta } = Card;
 
+// Utility function to shorten Ethereum address
+const shortenAddress = (address: string) => {
+  if (!address) return '';
+  return `${address.substring(0, 6)} **** ${address.substring(address.length - 4)}`;
+};
+
 const BrowsePage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const [currentAccount, setCurrentAccount] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const initialize = async () => {
@@ -31,6 +44,7 @@ const BrowsePage: React.FC = () => {
         return;
       }
 
+      setCurrentAccount(accounts[0]);
       await fetchProducts(web3);
     };
 
@@ -85,6 +99,8 @@ const BrowsePage: React.FC = () => {
       }
     }
 
+    console.log(products);
+
     setProducts(products);
     setFilteredProducts(products);
   };
@@ -101,13 +117,15 @@ const BrowsePage: React.FC = () => {
     setFilteredProducts(filtered);
   };
 
-  const handleAttackFirst = (id: string) => {
-    // Implement the attack first functionality here
-    console.log(`Attack First on product ${id}`);
+  const handleInfo = (id: string) => {
+    console.log(`Info product ${id}`);
+  };
+
+  const handleSetting = (id: string) => {
+    navigate(`/admin/products/edit/${id}`);
   };
 
   const handleTrade = (id: string) => {
-    // Implement the trade functionality here
     console.log(`Trade product ${id}`);
   };
 
@@ -126,28 +144,73 @@ const BrowsePage: React.FC = () => {
 
       <Row gutter={[16, 16]}>
         {filteredProducts.map(product => (
-          <Col span={6} key={product.id}>
+          <Col span={8} key={product.id}>
             <Card
               actions={[
-                <SettingOutlined
-                  key='attack'
-                  onClick={() => handleAttackFirst(product.id)}
-                />,
-                <EditOutlined
-                  key='trade'
-                  onClick={() => handleTrade(product.id)}
-                />,
-              ]}
+                <Popover
+                  placement='top'
+                  title='Info'
+                  content='More details about the product'
+                >
+                  <InfoCircleOutlined
+                    key='info'
+                    onClick={() => handleInfo(product.id)}
+                  />
+                </Popover>,
+                currentAccount === product.creatorAddress && (
+                  <Popover
+                    placement='top'
+                    title='Settings'
+                    content='Configure product settings'
+                  >
+                    <SettingOutlined
+                      key='setting'
+                      onClick={() => handleSetting(product.id)}
+                    />
+                  </Popover>
+                ),
+                currentAccount !== product.creatorAddress && (
+                  <Popover
+                    placement='top'
+                    title='Trade'
+                    content='Initiate a trade for this product'
+                  >
+                    <TransactionOutlined
+                      key='trade'
+                      onClick={() => handleTrade(product.id)}
+                    />
+                  </Popover>
+                ),
+              ].filter(Boolean)} // Filter out null values
             >
               <Meta
                 avatar={<Avatar src={product.imageUrl} />}
                 title={product.name}
                 description={
                   <div>
-                    <p>{product.description}</p>
+                    <p
+                      style={{
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                      }}
+                    >
+                      Description: {product.description}
+                    </p>
                     <p>
                       Price: {product.price} {product.currency}
                     </p>
+                    <p>
+                      Owner:{' '}
+                      {currentAccount === product.creatorAddress
+                        ? 'you'
+                        : shortenAddress(product.creatorAddress)}
+                    </p>
+                    <Divider orientation='center' style={{ color: 'gray' }}>
+                      Metadata
+                    </Divider>
+                    <p>Copyright: {product.metadata.copyright}</p>
+                    <p>Category: {product.category}</p>
                     <p>Tags: {product.tags.join(', ')}</p>
                   </div>
                 }
