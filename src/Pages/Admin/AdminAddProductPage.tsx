@@ -122,11 +122,9 @@ const AdminAddProductPage: React.FC = () => {
         JSON.stringify(productData.metadata), // Convert metadata to string
         parsedCreatedAt,
         productData.currentOwner,
-        additionalDetails,
-        productData.authorizationRecord || '' // Pass empty string if null
+        productData.copyrightUsageRules, // Add the copyright usage rules
+        additionalDetails // Pass additional details as an object
       );
-
-      // console.log()
 
       const gas = await tx.estimateGas({ from: accounts[0] });
 

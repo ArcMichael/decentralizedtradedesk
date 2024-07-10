@@ -90,6 +90,7 @@ const AdminProductsPage: React.FC = () => {
             transactionConditions: product.details,
             currency: product.details.currency,
             imageUrl: metadata.imageUrl || defaultImage, // Use default image if imageUrl is empty
+            copyrightUsageRules: product.copyrightUsageRules,
           });
         }
       } catch (error) {

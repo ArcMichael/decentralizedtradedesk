@@ -12,6 +12,7 @@ contract ProductContract {
     uint256 createdAt;
     address creator;
     address currentOwner; // Store current owner
+    string copyrightUsageRules; // New field for copyright usage rules
     AdditionalDetails details;
   }
 
@@ -38,6 +39,7 @@ contract ProductContract {
     string memory _metadata,
     uint256 _createdAt,
     address _currentOwner,
+    string memory _copyrightUsageRules, // New parameter
     AdditionalDetails memory _details
   ) public {
     require(bytes(_id).length > 0, 'Product ID is required');
@@ -50,6 +52,7 @@ contract ProductContract {
       _createdAt,
       msg.sender,
       _currentOwner,
+      _copyrightUsageRules, // New field assignment
       _details
     );
     productIds.push(_id);
@@ -65,6 +68,7 @@ contract ProductContract {
     string memory _metadata,
     uint256 _createdAt,
     address _currentOwner,
+    string memory _copyrightUsageRules, // New parameter
     AdditionalDetails memory _details
   ) public {
     require(bytes(_id).length > 0, 'Product ID is required');
@@ -76,6 +80,7 @@ contract ProductContract {
     product.metadata = _metadata;
     product.createdAt = _createdAt;
     product.currentOwner = _currentOwner;
+    product.copyrightUsageRules = _copyrightUsageRules; // New field assignment
     product.details = _details;
     emit ProductUpdated(_id, _name, block.timestamp);
   }

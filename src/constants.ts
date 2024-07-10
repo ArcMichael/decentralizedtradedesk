@@ -5,10 +5,6 @@ import { ProductData } from './interfaces';
 
 export const menuItems: MenuProps['items'] = [
   {
-    label: '本商品仅供个人使用，不得进行商业再销售。',
-    key: '本商品仅供个人使用，不得进行商业再销售。',
-  },
-  {
     label: '购买后，本商品可用于商业目的，包括广告和市场推广。',
     key: '购买后，本商品可用于商业目的，包括广告和市场推广。',
   },
@@ -33,6 +29,10 @@ export const menuItems: MenuProps['items'] = [
     label: '不得将本商品用于创建物理产品。',
     key: '不得将本商品用于创建物理产品。',
   },
+  {
+    label: '本商品仅供个人使用，不得进行商业再销售。',
+    key: '本商品仅供个人使用，不得进行商业再销售。',
+  },
 ];
 
 export const initialProductState: ProductData = {
@@ -50,7 +50,7 @@ export const initialProductState: ProductData = {
   transactionConditions: {
     fixedPricePayment: false,
   },
-  copyrightUsageRules: '本商品仅供个人使用，不得进行商业再销售。',
+  copyrightUsageRules: '购买后，本商品可用于商业目的，包括广告和市场推广。',
   currency: 'ETH',
   hash: '',
   digitalSignature: '',
