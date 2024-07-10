@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 
 contract ProductContract {
   struct Product {
-    uint256 id;
+    string id;
     string name;
     string description;
     uint256 price;
@@ -22,14 +22,16 @@ contract ProductContract {
     string digitalSignature;
   }
 
-  mapping(uint256 => Product) public products;
+  mapping(string => Product) public products;
+  string[] public productIds;
   uint256 public productCount;
 
-  event ProductAdded(uint256 id, string name, uint256 createdAt);
-  event ProductUpdated(uint256 id, string name, uint256 updatedAt);
-  event ProductDeleted(uint256 id, string name, uint256 deletedAt);
+  event ProductAdded(string id, string name, uint256 createdAt);
+  event ProductUpdated(string id, string name, uint256 updatedAt);
+  event ProductDeleted(string id, string name, uint256 deletedAt);
 
   function addProduct(
+    string memory _id,
     string memory _name,
     string memory _description,
     uint256 _price,
@@ -38,9 +40,9 @@ contract ProductContract {
     address _currentOwner,
     AdditionalDetails memory _details
   ) public {
-    productCount++;
-    products[productCount] = Product(
-      productCount,
+    require(bytes(_id).length > 0, 'Product ID is required');
+    products[_id] = Product(
+      _id,
       _name,
       _description,
       _price,
@@ -50,11 +52,13 @@ contract ProductContract {
       _currentOwner,
       _details
     );
-    emit ProductAdded(productCount, _name, _createdAt);
+    productIds.push(_id);
+    productCount++;
+    emit ProductAdded(_id, _name, _createdAt);
   }
 
   function updateProduct(
-    uint256 _id,
+    string memory _id,
     string memory _name,
     string memory _description,
     uint256 _price,
@@ -63,7 +67,8 @@ contract ProductContract {
     address _currentOwner,
     AdditionalDetails memory _details
   ) public {
-    require(_id > 0 && _id <= productCount, 'Product does not exist');
+    require(bytes(_id).length > 0, 'Product ID is required');
+    require(bytes(products[_id].id).length > 0, 'Product does not exist');
     Product storage product = products[_id];
     product.name = _name;
     product.description = _description;
@@ -75,8 +80,9 @@ contract ProductContract {
     emit ProductUpdated(_id, _name, block.timestamp);
   }
 
-  function deleteProduct(uint256 _id) public {
-    require(_id > 0 && _id <= productCount, 'Product does not exist');
+  function deleteProduct(string memory _id) public {
+    require(bytes(_id).length > 0, 'Product ID is required');
+    require(bytes(products[_id].id).length > 0, 'Product does not exist');
     Product storage product = products[_id];
     require(
       msg.sender == product.creator,
@@ -86,6 +92,17 @@ contract ProductContract {
     string memory productName = product.name;
 
     delete products[_id];
+    for (uint i = 0; i < productIds.length; i++) {
+      if (keccak256(bytes(productIds[i])) == keccak256(bytes(_id))) {
+        productIds[i] = productIds[productIds.length - 1];
+        productIds.pop();
+        break;
+      }
+    }
     emit ProductDeleted(_id, productName, block.timestamp);
+  }
+
+  function getProductIds() public view returns (string[] memory) {
+    return productIds;
   }
 }
