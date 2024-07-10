@@ -48,6 +48,8 @@ const AdminProductsPage: React.FC = () => {
       await contract.methods.productCount().call(),
       10
     );
+
+    console.log('productCount', productCount);
     if (isNaN(productCount)) {
       message.error('Failed to fetch product count.');
       return;
@@ -59,8 +61,19 @@ const AdminProductsPage: React.FC = () => {
         .products(i)
         .call();
 
+      console.log('ContractProduct', product);
+
       if (product && product.creator) {
-        const metadata: Metadata = JSON.parse(product.metadata);
+        let metadata: Metadata = { category: '', tags: [], imageUrl: '' };
+        try {
+          metadata = JSON.parse(product.metadata);
+        } catch (error) {
+          console.error(
+            'Failed to parse metadata for product:',
+            product.id,
+            error
+          );
+        }
         products.push({
           id: parseInt(product.id, 10),
           name: product.name,
@@ -81,7 +94,7 @@ const AdminProductsPage: React.FC = () => {
       }
     }
 
-    console.log(products);
+    console.log('products', products);
 
     // Filter products by current user address
     const userProducts = products.filter(
@@ -100,17 +113,51 @@ const AdminProductsPage: React.FC = () => {
     navigate(`/admin/products/edit/${id}`);
   };
 
-  const handleDeleteProduct = (id: number) => {
+  const handleDeleteProduct = async (id: number) => {
     confirm({
       title: 'Are you sure you want to delete this product?',
       content: 'This action cannot be undone.',
       okText: 'Yes',
       okType: 'danger',
       cancelText: 'No',
-      onOk() {
-        // Perform delete operation
-        setProducts(products.filter(product => product.id !== id));
-        message.success('Product deleted successfully');
+      onOk: async () => {
+        try {
+          const web3 = await getWeb3();
+          if (!web3) {
+            message.error(
+              'Web3 is not initialized. Make sure MetaMask is installed and logged in.'
+            );
+            return;
+          }
+
+          const contract = await getContract(web3);
+          if (!contract) {
+            message.error('Failed to load contract.');
+            return;
+          }
+
+          const accounts = await web3.eth.getAccounts();
+          if (accounts.length === 0) {
+            message.error('No accounts found.');
+            return;
+          }
+
+          const tx = contract.methods.deleteProduct(id);
+
+          const gas = await tx.estimateGas({ from: accounts[0] });
+
+          await tx.send({
+            from: accounts[0],
+            gas: gas.toString(),
+          });
+
+          setProducts(products.filter(product => product.id !== id));
+          message.success('Product deleted successfully');
+        } catch (error: unknown) {
+          const errMsg = (error as Error).message;
+          console.error('Error deleting product:', errMsg);
+          message.error('Failed to delete product.');
+        }
       },
       onCancel() {
         message.info('Delete action cancelled');
