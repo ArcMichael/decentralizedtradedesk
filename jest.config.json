@@ -2,8 +2,15 @@
   "preset": "ts-jest",
   "testEnvironment": "jsdom",
   "transform": {
-    "^.+\\.tsx?$": "ts-jest"
+    "^.+\\.tsx?$": [
+      "ts-jest",
+      {
+        "tsconfig": "tsconfig.json",
+        "useESM": true
+      }
+    ]
   },
+  "transformIgnorePatterns": ["/node_modules/(?!your-esm-package)"],
   "moduleNameMapper": {
     "\\.(gif|ttf|eot|svg|png)$": "<rootDir>/test/__mocks__/fileMock.js",
     "\\.(css|less|sass|scss)$": "identity-obj-proxy"
