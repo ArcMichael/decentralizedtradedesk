@@ -203,12 +203,7 @@ const BrowsePage: React.FC = () => {
                     <p>
                       Price: {product.price} {product.currency}
                     </p>
-                    <p>
-                      Owner:{' '}
-                      {currentAccount === product.creatorAddress
-                        ? 'you'
-                        : shortenAddress(product.creatorAddress)}
-                    </p>
+                    <p>Owner: {shortenAddress(product.creatorAddress)}</p>
                     <Divider orientation='left' style={{ color: 'gray' }}>
                       Metadata
                     </Divider>
