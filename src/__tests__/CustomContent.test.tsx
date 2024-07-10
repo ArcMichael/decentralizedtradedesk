@@ -1,6 +1,7 @@
 // src/__tests__/CustomContent.test.tsx
 
 import { render } from '@testing-library/react';
+import '@testing-library/jest-dom'; // Import this to include the matchers
 import { MemoryRouter } from 'react-router-dom';
 import CustomContent from '../Layout/CustomContent';
 

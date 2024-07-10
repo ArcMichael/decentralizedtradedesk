@@ -1,5 +1,5 @@
 // src/setupTests.ts
-import '@testing-library/jest-dom';
+require('@testing-library/jest-dom');
 
 // Mock for window.matchMedia
 Object.defineProperty(window, 'matchMedia', {

@@ -1,6 +1,7 @@
 // __tests__/CustomSider.test.ts
 
 import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom'; // Import this to include the matchers
 import { MemoryRouter } from 'react-router-dom';
 import CustomSider from '../Layout/CustomSider';
 import { act } from 'react';

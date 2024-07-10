@@ -1,6 +1,7 @@
 // src/__tests__/CustomFooter.test.tsx
 
 import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom'; // Import this to include the matchers
 import CustomFooter from '../Layout/CustomFooter';
 
 describe('CustomFooter', () => {

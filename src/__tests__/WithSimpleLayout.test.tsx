@@ -1,5 +1,6 @@
 // src/__tests__/WithSimpleLayout.test.tsx
 import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom'; // Import this to include the matchers
 import { MemoryRouter } from 'react-router-dom';
 import WithSimpleLayout from '../Layout/WithSimpleLayout';
 import { act } from 'react';
