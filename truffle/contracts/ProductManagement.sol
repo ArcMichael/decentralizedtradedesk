@@ -27,6 +27,7 @@ contract ProductContract {
 
   event ProductAdded(uint256 id, string name, uint256 createdAt);
   event ProductUpdated(uint256 id, string name, uint256 updatedAt);
+  event ProductDeleted(uint256 id, string name, uint256 deletedAt);
 
   function addProduct(
     string memory _name,
@@ -72,5 +73,19 @@ contract ProductContract {
     product.currentOwner = _currentOwner;
     product.details = _details;
     emit ProductUpdated(_id, _name, block.timestamp);
+  }
+
+  function deleteProduct(uint256 _id) public {
+    require(_id > 0 && _id <= productCount, 'Product does not exist');
+    Product storage product = products[_id];
+    require(
+      msg.sender == product.creator,
+      'Only the creator can delete this product'
+    );
+
+    string memory productName = product.name;
+
+    delete products[_id];
+    emit ProductDeleted(_id, productName, block.timestamp);
   }
 }
