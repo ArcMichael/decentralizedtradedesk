@@ -77,6 +77,8 @@ const BrowsePage: React.FC = () => {
           );
         }
 
+        console.log(product);
+
         products.push({
           id: product.id,
           name: product.name,
@@ -93,6 +95,7 @@ const BrowsePage: React.FC = () => {
           transactionConditions: product.details,
           currency: product.details.currency,
           imageUrl: metadata.imageUrl || defaultImage,
+          copyrightUsageRules: product.copyrightUsageRules,
         });
       } catch (error) {
         console.error(`Failed to fetch product with id ${productId}:`, error);
@@ -118,7 +121,7 @@ const BrowsePage: React.FC = () => {
   };
 
   const handleInfo = (id: string) => {
-    console.log(`Info product ${id}`);
+    navigate(`/product/${id}`);
   };
 
   const handleSetting = (id: string) => {
@@ -144,7 +147,7 @@ const BrowsePage: React.FC = () => {
 
       <Row gutter={[16, 16]}>
         {filteredProducts.map(product => (
-          <Col span={8} key={product.id}>
+          <Col span={6} key={product.id}>
             <Card
               actions={[
                 <Popover
@@ -206,12 +209,13 @@ const BrowsePage: React.FC = () => {
                         ? 'you'
                         : shortenAddress(product.creatorAddress)}
                     </p>
-                    <Divider orientation='center' style={{ color: 'gray' }}>
+                    <Divider orientation='left' style={{ color: 'gray' }}>
                       Metadata
                     </Divider>
-                    <p>Copyright: {product.metadata.copyright}</p>
+
                     <p>Category: {product.category}</p>
                     <p>Tags: {product.tags.join(', ')}</p>
+                    <p>{product.copyrightUsageRules}</p>
                   </div>
                 }
               />

@@ -49,6 +49,7 @@ const AdminEditProductPage: React.FC = () => {
       try {
         const productData: any = await contract.methods.products(id).call();
         if (productData) {
+          console.log(productData);
           const metadata = JSON.parse(productData.metadata);
           setProduct({
             productId: productData.id,
@@ -58,8 +59,10 @@ const AdminEditProductPage: React.FC = () => {
             metadata,
             currentOwner: productData.currentOwner,
             creator: productData.creator,
-            transactionConditions: productData.details,
-            copyrightUsageRules: productData.details.copyrightUsageRules,
+            transactionConditions: {
+              fixedPricePayment: productData.details.fixedPricePayment,
+            },
+            copyrightUsageRules: productData.copyrightUsageRules,
             currency: productData.details.currency,
             hash: productData.details.hash,
             digitalSignature: productData.details.digitalSignature,
@@ -175,6 +178,7 @@ const AdminEditProductPage: React.FC = () => {
         JSON.stringify(updatedProduct.metadata),
         Date.parse(updatedProduct.createdAt),
         updatedProduct.currentOwner,
+        updatedProduct.copyrightUsageRules,
         additionalDetails
       );
 

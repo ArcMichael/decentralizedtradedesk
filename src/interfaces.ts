@@ -43,6 +43,7 @@ export interface Product {
   transactionConditions: TransactionConditions;
   currency: string;
   imageUrl: string;
+  copyrightUsageRules: string;
 }
 
 export interface ContractProduct {
@@ -60,4 +61,5 @@ export interface ContractProduct {
     digitalSignature: string;
   };
   creator: string;
+  copyrightUsageRules: string;
 }
