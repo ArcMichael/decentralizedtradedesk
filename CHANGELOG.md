@@ -1,3 +1,25 @@
+## <small>0.0.12 (2024-07-10)</small>
+
+* test(jest): jest ([f55d7b1](https://github.com/ArcMichael/decentralizedtradedesk/commit/f55d7b1))
+* test(jest): jest ([23536f8](https://github.com/ArcMichael/decentralizedtradedesk/commit/23536f8))
+* test(jest): jest ([914e904](https://github.com/ArcMichael/decentralizedtradedesk/commit/914e904))
+* test(jest): jest ([7c2b6be](https://github.com/ArcMichael/decentralizedtradedesk/commit/7c2b6be))
+* feat(browse): ui ([e239b56](https://github.com/ArcMichael/decentralizedtradedesk/commit/e239b56))
+* feat(constants interface page): pref page for constantss and interface and fixed auto calc gas ([f8a648f](https://github.com/ArcMichael/decentralizedtradedesk/commit/f8a648f))
+* feat(jest): jest ([7c987a3](https://github.com/ArcMichael/decentralizedtradedesk/commit/7c987a3))
+* feat(product constants and page): update ([ba30504](https://github.com/ArcMichael/decentralizedtradedesk/commit/ba30504))
+* feat(product list init): initial and get data ([02eee95](https://github.com/ArcMichael/decentralizedtradedesk/commit/02eee95))
+* feat(taurisigninweb3): signinweb3 and bit fix ([d767366](https://github.com/ArcMichael/decentralizedtradedesk/commit/d767366))
+* feat(const, infterface, browsepage, productdetail, admin{edit,add,product}, sol): enhance browsepage ([550086d](https://github.com/ArcMichael/decentralizedtradedesk/commit/550086d))
+* feat(constants, brosepage): reduced copyrightUsageRules that could not be re-traded, and fixed ui ([4b429c3](https://github.com/ArcMichael/decentralizedtradedesk/commit/4b429c3))
+* feat(product, sol): add del ([02f7cc1](https://github.com/ArcMichael/decentralizedtradedesk/commit/02f7cc1))
+* feat(productupdated, editproductpage): add function edit in sol, enhance edit product page ([e634058](https://github.com/ArcMichael/decentralizedtradedesk/commit/e634058))
+* feat(sol, page, interface): change id to uuid, enahcne page, change interface ([f3f3640](https://github.com/ArcMichael/decentralizedtradedesk/commit/f3f3640))
+* docs(new version and update tree): update ([fbe43e2](https://github.com/ArcMichael/decentralizedtradedesk/commit/fbe43e2))
+* docs(product format): indent product format ([66b99ed](https://github.com/ArcMichael/decentralizedtradedesk/commit/66b99ed))
+
+
+
 ## <small>0.0.11 (2024-07-07)</small>
 
 * chore(release): 0.0.11 ([b47f9ba](https://github.com/ArcMichael/decentralizedtradedesk/commit/b47f9ba))
