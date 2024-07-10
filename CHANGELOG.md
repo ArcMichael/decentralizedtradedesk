@@ -1,5 +1,6 @@
 ## <small>0.0.12 (2024-07-10)</small>
 
+* chore(release): 0.0.12 ([43145bb](https://github.com/ArcMichael/decentralizedtradedesk/commit/43145bb))
 * test(jest): jest ([f55d7b1](https://github.com/ArcMichael/decentralizedtradedesk/commit/f55d7b1))
 * test(jest): jest ([23536f8](https://github.com/ArcMichael/decentralizedtradedesk/commit/23536f8))
 * test(jest): jest ([914e904](https://github.com/ArcMichael/decentralizedtradedesk/commit/914e904))
