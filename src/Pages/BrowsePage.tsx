@@ -7,6 +7,7 @@ import {
   InfoCircleOutlined,
   SettingOutlined,
   TransactionOutlined,
+  ShoppingCartOutlined,
 } from '@ant-design/icons';
 import WithCustomLayout from '../Layout/WithCustomLayout';
 import { getWeb3, getContract } from '../web3/web3Config';
@@ -16,7 +17,6 @@ import { Product, Metadata, ContractProduct } from '../interfaces';
 const { Search } = Input;
 const { Meta } = Card;
 
-// Utility function to shorten Ethereum address
 const shortenAddress = (address: string) => {
   if (!address) return '';
   return `${address.substring(0, 6)} **** ${address.substring(address.length - 4)}`;
@@ -25,7 +25,9 @@ const shortenAddress = (address: string) => {
 const BrowsePage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  const [currentAccount, setCurrentAccount] = useState<string | null>(null);
+  const [currentAccount, setCurrentAccount] = useState<string | undefined>(
+    undefined
+  );
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -89,6 +91,7 @@ const BrowsePage: React.FC = () => {
           contractAddress: contract.options.address || '',
           transactionStatus: 'available', // Assuming default status
           creatorAddress: product.creator,
+          currentOwnerAddress: product.currentOwner,
           timestamp: parseInt(product.createdAt, 10),
           transactionHash: '', // Placeholder, should be fetched or managed
           metadata: product.metadata,
@@ -101,8 +104,6 @@ const BrowsePage: React.FC = () => {
         console.error(`Failed to fetch product with id ${productId}:`, error);
       }
     }
-
-    console.log(products);
 
     setProducts(products);
     setFilteredProducts(products);
@@ -132,6 +133,35 @@ const BrowsePage: React.FC = () => {
     console.log(`Trade product ${id}`);
   };
 
+  const handlePurchase = async (product: Product) => {
+    const web3 = await getWeb3();
+    if (!web3) {
+      message.error(
+        'Web3 is not initialized. Make sure MetaMask is installed and logged in.'
+      );
+      return;
+    }
+
+    const contract = await getContract(web3);
+    if (!contract) {
+      message.error('Failed to load contract.');
+      return;
+    }
+
+    try {
+      console.log(currentAccount);
+      await contract.methods.purchaseProduct(product.id).send({
+        from: currentAccount,
+        value: web3.utils.toWei(product.price.toString(), 'ether'),
+      });
+      message.success('Purchase successful!');
+      // Update product status or other related UI updates can be done here
+    } catch (error) {
+      console.error('Purchase failed:', error);
+      message.error('Purchase failed. Please try again.');
+    }
+  };
+
   return (
     <div style={{ padding: '24px' }}>
       <header>
@@ -147,7 +177,7 @@ const BrowsePage: React.FC = () => {
 
       <Row gutter={[16, 16]}>
         {filteredProducts.map(product => (
-          <Col span={6} key={product.id}>
+          <Col span={12} key={product.id}>
             <Card
               actions={[
                 <Popover
@@ -160,7 +190,7 @@ const BrowsePage: React.FC = () => {
                     onClick={() => handleInfo(product.id)}
                   />
                 </Popover>,
-                currentAccount === product.creatorAddress && (
+                currentAccount === product.currentOwnerAddress && (
                   <Popover
                     placement='top'
                     title='Settings'
@@ -172,7 +202,7 @@ const BrowsePage: React.FC = () => {
                     />
                   </Popover>
                 ),
-                currentAccount !== product.creatorAddress && (
+                currentAccount !== product.currentOwnerAddress && (
                   <Popover
                     placement='top'
                     title='Trade'
@@ -181,6 +211,18 @@ const BrowsePage: React.FC = () => {
                     <TransactionOutlined
                       key='trade'
                       onClick={() => handleTrade(product.id)}
+                    />
+                  </Popover>
+                ),
+                currentAccount !== product.currentOwnerAddress && (
+                  <Popover
+                    placement='top'
+                    title='Purchase'
+                    content='Purchase this product'
+                  >
+                    <ShoppingCartOutlined
+                      key='purchase'
+                      onClick={() => handlePurchase(product)}
                     />
                   </Popover>
                 ),
@@ -203,7 +245,10 @@ const BrowsePage: React.FC = () => {
                     <p>
                       Price: {product.price} {product.currency}
                     </p>
-                    <p>Owner: {shortenAddress(product.creatorAddress)}</p>
+                    <p>creator: {shortenAddress(product.creatorAddress)}</p>
+                    <p>
+                      current: {shortenAddress(product.currentOwnerAddress)}
+                    </p>
                     <Divider orientation='left' style={{ color: 'gray' }}>
                       Metadata
                     </Divider>

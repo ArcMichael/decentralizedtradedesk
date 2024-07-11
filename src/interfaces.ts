@@ -44,6 +44,7 @@ export interface Product {
   currency: string;
   imageUrl: string;
   copyrightUsageRules: string;
+  currentOwnerAddress: string;
 }
 
 export interface ContractProduct {
@@ -62,4 +63,5 @@ export interface ContractProduct {
   };
   creator: string;
   copyrightUsageRules: string;
+  currentOwnerAddress: string;
 }
