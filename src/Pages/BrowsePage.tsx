@@ -6,7 +6,6 @@ import { Row, Col, Card, Input, message, Avatar, Popover, Divider } from 'antd';
 import {
   InfoCircleOutlined,
   SettingOutlined,
-  TransactionOutlined,
   ShoppingCartOutlined,
 } from '@ant-design/icons';
 import WithCustomLayout from '../Layout/WithCustomLayout';
@@ -129,10 +128,6 @@ const BrowsePage: React.FC = () => {
     navigate(`/admin/products/edit/${id}`);
   };
 
-  const handleTrade = (id: string) => {
-    console.log(`Trade product ${id}`);
-  };
-
   const handlePurchase = async (product: Product) => {
     const web3 = await getWeb3();
     if (!web3) {
@@ -199,18 +194,6 @@ const BrowsePage: React.FC = () => {
                     <SettingOutlined
                       key='setting'
                       onClick={() => handleSetting(product.id)}
-                    />
-                  </Popover>
-                ),
-                currentAccount !== product.currentOwnerAddress && (
-                  <Popover
-                    placement='top'
-                    title='Trade'
-                    content='Initiate a trade for this product'
-                  >
-                    <TransactionOutlined
-                      key='trade'
-                      onClick={() => handleTrade(product.id)}
                     />
                   </Popover>
                 ),

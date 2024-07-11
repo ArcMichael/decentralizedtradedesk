@@ -35,7 +35,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    const storedAddress = localStorage.getItem('accountAddress');
+    const storedAddress = sessionStorage.getItem('accountAddress');
     if (storedAddress) {
       setUser({ address: storedAddress });
     }
@@ -43,12 +43,12 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
 
   const login = (address: string) => {
     setUser({ address });
-    localStorage.setItem('accountAddress', address);
+    sessionStorage.setItem('accountAddress', address);
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('accountAddress');
+    sessionStorage.removeItem('accountAddress');
   };
 
   return (
