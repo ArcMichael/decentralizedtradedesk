@@ -91,7 +91,10 @@ const AdminProductsPage: React.FC = () => {
             currency: product.details.currency,
             imageUrl: metadata.imageUrl || defaultImage, // Use default image if imageUrl is empty
             copyrightUsageRules: product.copyrightUsageRules,
+            currentOwnerAddress: product.currentOwner,
           });
+
+          console.log('products', products);
         }
       } catch (error) {
         console.error(`Failed to fetch product with id ${productId}:`, error);
@@ -101,7 +104,7 @@ const AdminProductsPage: React.FC = () => {
     // Filter products by current user address
     const userProducts = products.filter(
       product =>
-        product.creatorAddress?.toLowerCase() ===
+        product.currentOwnerAddress?.toLowerCase() ===
         currentUserAddress.toLowerCase()
     );
     setProducts(userProducts);
