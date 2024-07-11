@@ -30,6 +30,7 @@ contract ProductContract {
   event ProductAdded(string id, string name, uint256 createdAt);
   event ProductUpdated(string id, string name, uint256 updatedAt);
   event ProductDeleted(string id, string name, uint256 deletedAt);
+  event ProductPurchased(string id, address buyer, uint256 purchasedAt);
 
   function addProduct(
     string memory _id,
@@ -105,6 +106,20 @@ contract ProductContract {
       }
     }
     emit ProductDeleted(_id, productName, block.timestamp);
+  }
+
+  function purchaseProduct(string memory _id) public payable {
+    require(bytes(_id).length > 0, 'Product ID is required');
+    require(bytes(products[_id].id).length > 0, 'Product does not exist');
+    Product storage product = products[_id];
+    require(msg.value == product.price, 'Incorrect price sent');
+
+    address previousOwner = product.currentOwner;
+    product.currentOwner = msg.sender;
+
+    payable(previousOwner).transfer(msg.value);
+
+    emit ProductPurchased(_id, msg.sender, block.timestamp);
   }
 
   function getProductIds() public view returns (string[] memory) {

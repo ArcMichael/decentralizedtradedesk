@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Badge, Descriptions, message } from 'antd';
+import { Badge, Descriptions, Divider, message } from 'antd';
 import WithCustomerLayout from '../Layout/WithCustomLayout';
 import { getWeb3, getContract } from '../web3/web3Config';
 import { Product, Metadata, ContractProduct } from '../interfaces';
@@ -11,6 +11,7 @@ import { defaultImage } from '../constants';
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
+  // const [_purchaseHistory, setPurchaseHistory] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -44,7 +45,7 @@ const ProductDetailPage: React.FC = () => {
             );
           }
 
-          console.log(productData);
+          console.log('productData', productData);
 
           setProduct({
             id: productData.id,
@@ -63,7 +64,29 @@ const ProductDetailPage: React.FC = () => {
             currency: productData.details.currency,
             imageUrl: metadata.imageUrl || defaultImage,
             copyrightUsageRules: productData.copyrightUsageRules || '',
+            currentOwnerAddress: productData.currentOwnerAddress || '',
           });
+
+          const events: any[] = await contract.getPastEvents('ALLEVENTS', {
+            filter: { id: productData.id },
+            fromBlock: 0,
+            toBlock: 'latest',
+          });
+
+          console.log(events);
+
+          // const history = events.map(event => {
+          //   const eventData = web3.eth.abi.decodeParameters(
+          //     ['string', 'uint256'],
+          //     event.data
+          //   );
+          //   return {
+          //     buyer: eventData[0],
+          //     timestamp: new Date(parseInt(eventData[1]) * 1000).toLocaleString(),
+          //   };
+          // });
+
+          // setPurchaseHistory([]);
         } else {
           message.error('Product not found');
         }
@@ -79,70 +102,112 @@ const ProductDetailPage: React.FC = () => {
     return <div>Loading...</div>;
   }
 
-  const items = [
+  const ProductDetailItems = [
     {
       key: '1',
-      label: 'Name',
-      children: product.name,
+      label: 'ID',
+      children: product.id,
+      span: 1,
     },
     {
       key: '2',
-      label: 'Description',
-      children: product.description,
-      span: 2,
+      label: 'Currency',
+      children: `${product.currency}`,
+      span: 1,
     },
     {
       key: '3',
-      label: 'Category',
-      children: product.category,
+      label: 'Price',
+      children: `${product.price}`,
+      span: 1,
     },
     {
       key: '4',
-      label: 'Tags',
-      children: product.tags.join(', '),
+      label: 'Name',
+      children: product.name,
+      span: 1,
     },
     {
       key: '5',
+      label: 'Description',
+      children: product.description,
+      span: 1,
+    },
+    {
+      key: '6',
       label: 'Image',
       children: (
         <img
           src={product.imageUrl}
           alt={product.name}
-          style={{ width: '80px' }}
+          style={{ width: '60px' }}
         />
       ),
-    },
-    {
-      key: '6',
-      label: 'Price',
-      children: `${product.price} ${product.currency}`,
+      span: 1,
     },
     {
       key: '7',
-      label: 'Status',
-      children: <Badge status='processing' text={product.transactionStatus} />,
-      span: 2,
+      label: 'Category',
+      children: product.category,
+      span: 1,
     },
     {
       key: '8',
+      label: 'Tags',
+      children: product.tags.join(', '),
+      span: 1,
+    },
+    {
+      key: '9',
+      label: 'Status',
+      children: <Badge status='processing' text={product.transactionStatus} />,
+      span: 1,
+    },
+    {
+      key: '10',
       label: 'Creator',
       children: product.creatorAddress,
       span: 3,
     },
     {
-      key: '9',
+      key: '11',
       label: 'Current Owner',
       children: product.creatorAddress,
       span: 3,
     },
     {
-      key: '10',
-      label: 'copyrightUsageRules',
+      key: '12',
+      label: 'Copyright Usage Rules',
       children: product.copyrightUsageRules,
+      span: 3,
     },
   ];
 
-  return <Descriptions title='Product Detail' bordered items={items} />;
+  return (
+    <div>
+      <Descriptions
+        layout='vertical'
+        title='Product Detail'
+        size='small'
+        bordered
+        column={3}
+      >
+        {ProductDetailItems.map(item => (
+          <Descriptions.Item key={item.key} label={item.label} span={item.span}>
+            {item.children}
+          </Descriptions.Item>
+        ))}
+      </Descriptions>
+      <Divider />
+
+      <Descriptions
+        layout='vertical'
+        title='Product Purchase History'
+        size='small'
+        bordered
+      />
+    </div>
+  );
 };
 
 export default WithCustomerLayout(ProductDetailPage);
