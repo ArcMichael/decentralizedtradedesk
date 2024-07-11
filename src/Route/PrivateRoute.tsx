@@ -9,7 +9,7 @@ interface PrivateRouteProps {
 }
 
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ element }) => {
-  const accountAddress = localStorage.getItem('accountAddress');
+  const accountAddress = sessionStorage.getItem('accountAddress');
   const sessionAccountAddress = sessionStorage.getItem('accountAddress');
   const location = useLocation();
 
