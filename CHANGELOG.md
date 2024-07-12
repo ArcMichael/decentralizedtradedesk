@@ -1,3 +1,14 @@
+## <small>0.0.13 (2024-07-12)</small>
+
+* feat(adminproductspage.tsx): fixed product list display in currentowner ([a3db915](https://github.com/ArcMichael/decentralizedtradedesk/commit/a3db915))
+* feat(pdp pdplist utils): enhance product history, fixed intro tips which if can't delete product ([2bf0b95](https://github.com/ArcMichael/decentralizedtradedesk/commit/2bf0b95))
+* fix(privateroute): unified use of sessionStorage to save user lic ([6a7880b](https://github.com/ArcMichael/decentralizedtradedesk/commit/6a7880b))
+* fix(tree and a new achievement): update tree and fixed jest that not working in github ci ([72141b6](https://github.com/ArcMichael/decentralizedtradedesk/commit/72141b6))
+* feat(interface, browsepage, productdetail, sol): imp productpurchase and update ui ([13c6ad8](https://github.com/ArcMichael/decentralizedtradedesk/commit/13c6ad8))
+* feat(privaterouter, browsepage, usercontext): redirect to login page when user change account ([66b518d](https://github.com/ArcMichael/decentralizedtradedesk/commit/66b518d))
+
+
+
 ## <small>0.0.12 (2024-07-10)</small>
 
 * chore(release): 0.0.12 ([43145bb](https://github.com/ArcMichael/decentralizedtradedesk/commit/43145bb))
