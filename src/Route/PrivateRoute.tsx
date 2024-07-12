@@ -53,6 +53,7 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ element }) => {
         );
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessionAccountAddress]);
 
   if (!accountAddress) {

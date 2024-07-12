@@ -12,14 +12,10 @@ import WithCustomLayout from '../Layout/WithCustomLayout';
 import { getWeb3, getContract } from '../web3/web3Config';
 import { defaultImage } from '../constants';
 import { Product, Metadata, ContractProduct } from '../interfaces';
+import { shortenAddress } from '../utils/utils';
 
 const { Search } = Input;
 const { Meta } = Card;
-
-const shortenAddress = (address: string) => {
-  if (!address) return '';
-  return `${address.substring(0, 6)} **** ${address.substring(address.length - 4)}`;
-};
 
 const BrowsePage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -145,10 +141,16 @@ const BrowsePage: React.FC = () => {
 
     try {
       console.log(currentAccount);
-      await contract.methods.purchaseProduct(product.id).send({
-        from: currentAccount,
-        value: web3.utils.toWei(product.price.toString(), 'ether'),
-      });
+      await contract.methods
+        .purchaseProduct(product.id)
+        .send({
+          from: currentAccount,
+          value: web3.utils.toWei(product.price.toString(), 'ether'),
+        })
+        .then(result => {
+          console.log(result);
+          navigate(0);
+        });
       message.success('Purchase successful!');
       // Update product status or other related UI updates can be done here
     } catch (error) {
