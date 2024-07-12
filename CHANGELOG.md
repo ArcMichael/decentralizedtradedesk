@@ -1,5 +1,6 @@
 ## <small>0.0.13 (2024-07-12)</small>
 
+* chore(release): 0.0.13 ([b6cce9a](https://github.com/ArcMichael/decentralizedtradedesk/commit/b6cce9a))
 * feat(adminproductspage.tsx): fixed product list display in currentowner ([a3db915](https://github.com/ArcMichael/decentralizedtradedesk/commit/a3db915))
 * feat(pdp pdplist utils): enhance product history, fixed intro tips which if can't delete product ([2bf0b95](https://github.com/ArcMichael/decentralizedtradedesk/commit/2bf0b95))
 * fix(privateroute): unified use of sessionStorage to save user lic ([6a7880b](https://github.com/ArcMichael/decentralizedtradedesk/commit/6a7880b))
