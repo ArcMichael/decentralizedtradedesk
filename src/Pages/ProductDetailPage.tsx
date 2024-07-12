@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Badge, Descriptions, Divider, message } from 'antd';
+import { Badge, Descriptions, Divider, message, Timeline } from 'antd';
 import WithCustomerLayout from '../Layout/WithCustomLayout';
 import { getWeb3, getContract } from '../web3/web3Config';
 import { Product, Metadata, ContractProduct } from '../interfaces';
@@ -11,7 +11,7 @@ import { defaultImage } from '../constants';
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
-  // const [_purchaseHistory, setPurchaseHistory] = useState<any[]>([]);
+  const [productHistory, setProductHistory] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -73,20 +73,78 @@ const ProductDetailPage: React.FC = () => {
             toBlock: 'latest',
           });
 
-          console.log(events);
+          console.log('events', events);
 
-          // const history = events.map(event => {
-          //   const eventData = web3.eth.abi.decodeParameters(
-          //     ['string', 'uint256'],
-          //     event.data
-          //   );
-          //   return {
-          //     buyer: eventData[0],
-          //     timestamp: new Date(parseInt(eventData[1]) * 1000).toLocaleString(),
-          //   };
-          // });
+          const historyPromises = events.map(async (eventsList, index) => {
+            // console.log('transactionHash', eventsList.transactionHash);
+            // console.log('event', eventsList.event);
 
-          // setPurchaseHistory([]);
+            const receipt = await web3.eth.getTransactionReceipt(
+              eventsList.transactionHash
+            );
+            if (!receipt) {
+              message.error('Transaction receipt not found.');
+              return null;
+            }
+
+            // console.log(eventsList.event, 'receipt', receipt);
+            console.log('receipt', receipt, eventsList.returnValues);
+
+            let color = 'blue';
+            let children = (
+              <>
+                <p>Unknown event</p>
+                <p>Unknown description</p>
+              </>
+            );
+
+            switch (eventsList.event) {
+              case 'ProductAdded':
+                color = 'green';
+                children = (
+                  <>
+                    <p>Created a product </p>
+                    <p>From: {receipt.from}</p>
+                  </>
+                );
+                break;
+              case 'ProductUpdated':
+                color = 'orange';
+                children = (
+                  <>
+                    <p>Updated the product </p>
+                    <p>From: {receipt.from}</p>
+                  </>
+                );
+                break;
+              case 'ProductPurchased':
+                color = 'blue';
+                children = (
+                  <>
+                    <p>Purchased the product </p>
+                    <p>From: {eventsList.returnValues.buyer}</p>
+                  </>
+                );
+                break;
+              default:
+                color = 'gray';
+                children = (
+                  <>
+                    <p>Unknown event</p>
+                    <p>Unknown description</p>
+                  </>
+                );
+            }
+
+            return {
+              color,
+              children,
+            };
+          });
+
+          const history = await Promise.all(historyPromises);
+
+          setProductHistory(history.filter(item => item !== null));
         } else {
           message.error('Product not found');
         }
@@ -200,12 +258,7 @@ const ProductDetailPage: React.FC = () => {
       </Descriptions>
       <Divider />
 
-      <Descriptions
-        layout='vertical'
-        title='Product Purchase History'
-        size='small'
-        bordered
-      />
+      <Timeline items={productHistory} />
     </div>
   );
 };

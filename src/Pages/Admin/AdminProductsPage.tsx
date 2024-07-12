@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import WithCustomLayout from '../../Layout/WithCustomLayout';
-import { Typography, Table, Button, Modal, message } from 'antd';
+import { Typography, Table, Button, Modal, message, Tooltip } from 'antd';
 import { getWeb3, getContract } from '../../web3/web3Config';
 import { defaultImage } from '../../constants'; // Import default image from constants
 import { ContractProduct, Metadata, Product } from '../../interfaces';
@@ -170,6 +170,26 @@ const AdminProductsPage: React.FC = () => {
     });
   };
 
+  const deleteProductButtom = (record: Product) => {
+    const isDisabled = record.creatorAddress !== record.currentOwnerAddress;
+
+    return (
+      <Tooltip
+        placement='left'
+        title={isDisabled ? '不可删除：当前用户不是创建者' : ''}
+      >
+        <Button
+          type='link'
+          danger
+          onClick={() => handleDeleteProduct(record.id)}
+          disabled={isDisabled}
+        >
+          删除
+        </Button>
+      </Tooltip>
+    );
+  };
+
   const columns = [
     {
       title: '商品名称',
@@ -221,13 +241,7 @@ const AdminProductsPage: React.FC = () => {
           <Button type='link' onClick={() => handleEditProduct(record.id)}>
             编辑
           </Button>
-          <Button
-            type='link'
-            danger
-            onClick={() => handleDeleteProduct(record.id)}
-          >
-            删除
-          </Button>
+          {deleteProductButtom(record)}
         </div>
       ),
     },
