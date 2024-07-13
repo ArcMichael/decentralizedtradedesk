@@ -8,7 +8,8 @@
         "tsconfig": "tsconfig.json",
         "useESM": true
       }
-    ]
+    ],
+    "^.+\\.js$": "babel-jest"
   },
   "transformIgnorePatterns": ["/node_modules/(?!your-esm-package)"],
   "moduleNameMapper": {

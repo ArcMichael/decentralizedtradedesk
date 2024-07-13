@@ -1,7 +1,7 @@
 // src/Pages/Admin/AdminProductsPage.tsx
 
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import WithCustomLayout from '../../Layout/WithCustomLayout';
 import { Typography, Table, Button, Modal, message, Tooltip } from 'antd';
 import { getWeb3, getContract } from '../../web3/web3Config';
@@ -195,6 +195,9 @@ const AdminProductsPage: React.FC = () => {
       title: '商品名称',
       dataIndex: 'name',
       key: 'name',
+      render: (name: string, record: Product) => (
+        <Link to={`/product/${record.id}`}>{name}</Link>
+      ),
     },
     {
       title: '图片',
