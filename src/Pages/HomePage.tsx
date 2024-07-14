@@ -18,52 +18,56 @@ const HomePage: React.FC = () => {
     <div style={{ padding: '24px' }}>
       <header>
         <Title>
-          <FormattedMessage id='welcomeTitle' />
+          <FormattedMessage id='homepage.welcomeTitle' />
         </Title>
         <Paragraph>
-          <FormattedMessage id='welcomeParagraph' />
+          <FormattedMessage id='homepage.welcomeParagraph' />
         </Paragraph>
       </header>
 
       <section>
         <Title level={2}>
-          <FormattedMessage id='aboutUsTitle' />
+          <FormattedMessage id='homepage.aboutUsTitle' />
         </Title>
         <Paragraph>
-          <FormattedMessage id='aboutUsParagraph' />
+          <FormattedMessage id='homepage.aboutUsParagraph' />
         </Paragraph>
       </section>
 
       <section>
         <Title level={2}>
-          <FormattedMessage id='featuresTitle' />
+          <FormattedMessage id='homepage.featuresTitle' />
         </Title>
         <Row gutter={[16, 16]}>
           <Col span={12}>
-            <Card title={<FormattedMessage id='marketplaceFeature' />}>
+            <Card title={<FormattedMessage id='homepage.marketplaceFeature' />}>
               <Paragraph>
-                <FormattedMessage id='marketplaceDescription' />
+                <FormattedMessage id='homepage.marketplaceDescription' />
               </Paragraph>
             </Card>
           </Col>
           <Col span={12}>
-            <Card title={<FormattedMessage id='secureTransactionsFeature' />}>
+            <Card
+              title={
+                <FormattedMessage id='homepage.secureTransactionsFeature' />
+              }
+            >
               <Paragraph>
-                <FormattedMessage id='secureTransactionsDescription' />
+                <FormattedMessage id='homepage.secureTransactionsDescription' />
               </Paragraph>
             </Card>
           </Col>
           <Col span={12}>
-            <Card title={<FormattedMessage id='interfaceFeature' />}>
+            <Card title={<FormattedMessage id='homepage.interfaceFeature' />}>
               <Paragraph>
-                <FormattedMessage id='interfaceDescription' />
+                <FormattedMessage id='homepage.interfaceDescription' />
               </Paragraph>
             </Card>
           </Col>
           <Col span={12}>
-            <Card title={<FormattedMessage id='lowFeesFeature' />}>
+            <Card title={<FormattedMessage id='homepage.lowFeesFeature' />}>
               <Paragraph>
-                <FormattedMessage id='lowFeesDescription' />
+                <FormattedMessage id='homepage.lowFeesDescription' />
               </Paragraph>
             </Card>
           </Col>
@@ -72,34 +76,34 @@ const HomePage: React.FC = () => {
 
       <section>
         <Title level={2}>
-          <FormattedMessage id='missionTitle' />
+          <FormattedMessage id='homepage.missionTitle' />
         </Title>
         <Paragraph>
-          <FormattedMessage id='missionParagraph' />
+          <FormattedMessage id='homepage.missionParagraph' />
         </Paragraph>
       </section>
 
       <section>
         <Title level={2}>
-          <FormattedMessage id='howItWorksTitle' />
+          <FormattedMessage id='homepage.howItWorksTitle' />
         </Title>
         <Paragraph>
-          <FormattedMessage id='howItWorksParagraph' />
+          <FormattedMessage id='homepage.howItWorksParagraph' />
         </Paragraph>
       </section>
 
       <section>
         <Title level={2}>
-          <FormattedMessage id='contactUsTitle' />
+          <FormattedMessage id='homepage.contactUsTitle' />
         </Title>
         <Paragraph>
-          <FormattedMessage id='contactUsParagraph' />{' '}
+          <FormattedMessage id='homepage.contactUsParagraph' />{' '}
           <Button
             type='link'
             icon={<GithubOutlined />}
             onClick={handleContactUsClick}
           >
-            <FormattedMessage id='contactUsTitle' />
+            <FormattedMessage id='homepage.contactUsTitle' />
           </Button>
         </Paragraph>
       </section>

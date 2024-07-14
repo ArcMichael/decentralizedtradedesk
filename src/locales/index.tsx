@@ -1,21 +1,27 @@
-import zhCustomContent from './zh/CustomContent.json';
-import enCustomContent from './en/CustomContent.json';
+// src/locales/index.tsx
+
+import zhCustomFooter from './zh/CustomFooter.json';
+import enCustomFooter from './en/CustomFooter.json';
 import zhHomePage from './zh/HomePage.json';
 import enHomePage from './en/HomePage.json';
 import zhLoginpage from './zh/Loginpage.json';
 import enLoginpage from './en/Loginpage.json';
+import zhCustomSider from './zh/CustomSider.json';
+import enCustomSider from './en/CustomSider.json';
 
 // src/locales/index.ts
 export const messages = {
   zh: {
-    ...zhCustomContent,
+    ...zhCustomFooter,
     ...zhHomePage,
     ...zhLoginpage,
+    ...zhCustomSider,
   },
   en: {
-    ...enCustomContent,
+    ...enCustomFooter,
     ...enHomePage,
     ...enLoginpage,
+    ...enCustomSider,
   },
 };
 

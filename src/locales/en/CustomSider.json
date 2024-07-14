@@ -1,0 +1,18 @@
+{
+  "customsider.home": "Home",
+  "customsider.login": "Login",
+  "customsider.admin": "Admin",
+  "customsider.products": "Products",
+  "customsider.addProduct": "Add Product",
+  "customsider.editProduct": "Edit Product",
+  "customsider.users": "Users",
+  "customsider.orders": "Orders",
+  "customsider.statistics": "Statistics",
+  "customsider.dashboard": "Dashboard",
+  "customsider.profile": "Profile",
+  "customsider.settings": "Settings",
+  "customsider.wallet": "Wallet",
+  "customsider.browse": "Browse",
+  "customsider.productDetail": "Product Detail",
+  "customsider.notFound": "Not Found"
+}

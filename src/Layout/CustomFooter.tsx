@@ -12,76 +12,76 @@ const CustomFooter: React.FC = () => {
       <Row gutter={[16, 16]}>
         <Col span={24}>
           <Title level={2}>
-            <FormattedMessage id='siteMapAndFeatures' />
+            <FormattedMessage id='customfooter.siteMapAndFeatures' />
           </Title>
           <Paragraph>
-            <FormattedMessage id='overview' />
+            <FormattedMessage id='customfooter.overview' />
           </Paragraph>
         </Col>
         <Col span={12} md={6}>
           <Title level={4}>
-            <FormattedMessage id='general' />
+            <FormattedMessage id='customfooter.general' />
           </Title>
           <ul>
             <li>
-              <FormattedMessage id='home' />
+              <FormattedMessage id='customfooter.home' />
             </li>
             <li>
-              <FormattedMessage id='login' />
+              <FormattedMessage id='customfooter.login' />
             </li>
           </ul>
         </Col>
         <Col span={12} md={6}>
           <Title level={4}>
-            <FormattedMessage id='adminPanel' />
+            <FormattedMessage id='customfooter.adminPanel' />
           </Title>
           <ul>
             <li>
-              <FormattedMessage id='products' />
+              <FormattedMessage id='customfooter.products' />
             </li>
             <li>
-              <FormattedMessage id='users' />
+              <FormattedMessage id='customfooter.users' />
             </li>
             <li>
-              <FormattedMessage id='orders' />
+              <FormattedMessage id='customfooter.orders' />
             </li>
             <li>
-              <FormattedMessage id='statistics' />
+              <FormattedMessage id='customfooter.statistics' />
             </li>
           </ul>
         </Col>
         <Col span={12} md={6}>
           <Title level={4}>
-            <FormattedMessage id='dashboard' />
+            <FormattedMessage id='customfooter.dashboard' />
           </Title>
           <ul>
             <li>
-              <FormattedMessage id='viewOrders' />
+              <FormattedMessage id='customfooter.viewOrders' />
             </li>
             <li>
-              <FormattedMessage id='profile' />
+              <FormattedMessage id='customfooter.profile' />
             </li>
             <li>
-              <FormattedMessage id='settings' />
+              <FormattedMessage id='customfooter.settings' />
             </li>
             <li>
-              <FormattedMessage id='wallet' />
+              <FormattedMessage id='customfooter.wallet' />
             </li>
           </ul>
         </Col>
         <Col span={12} md={6}>
           <Title level={4}>
-            <FormattedMessage id='explore' />
+            <FormattedMessage id='customfooter.explore' />
           </Title>
           <ul>
             <li>
-              <FormattedMessage id='browse' />
+              <FormattedMessage id='customfooter.browse' />
             </li>
             <li>
-              <FormattedMessage id='productDetail' />
+              <FormattedMessage id='customfooter.productDetail' />
             </li>
             <li>
-              <FormattedMessage id='notFound' />
+              <FormattedMessage id='customfooter.notFound' />
             </li>
           </ul>
         </Col>
