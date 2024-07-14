@@ -1,15 +1,15 @@
 {
-  "loginPageTitle": "Login Page",
-  "connectingToMetaMask": "Connecting to MetaMask...",
-  "goButton": "Go",
-  "togglePrivateKeyLogin": "Toggle Private Key Login",
-  "enterPrivateKey": "Enter your private key",
-  "privateKeyLogin": "Private Key Login via Ganache",
-  "connectMetaMask": "Connect to MetaMask",
-  "installMetaMask": "Install MetaMask",
-  "metaMaskConnected": "MetaMask connected. You are now logged in.",
-  "metaMaskNotConnected": "MetaMask is not connected. Please log in to MetaMask.",
-  "failedToLoadWeb3": "Failed to load web3 or accounts.",
-  "loggedInWithPrivateKey": "Logged in with private key via Ganache. You are now logged in.",
-  "failedToLoginWithPrivateKey": "Failed to login with private key via Ganache."
+  "loginpage.loginPageTitle": "Login Page",
+  "loginpage.connectingToMetaMask": "Connecting to MetaMask...",
+  "loginpage.goButton": "Go",
+  "loginpage.togglePrivateKeyLogin": "Toggle Private Key Login",
+  "loginpage.enterPrivateKey": "Enter your private key",
+  "loginpage.privateKeyLogin": "Private Key Login via Ganache",
+  "loginpage.connectMetaMask": "Connect to MetaMask",
+  "loginpage.installMetaMask": "Install MetaMask",
+  "loginpage.metaMaskConnected": "MetaMask connected. You are now logged in.",
+  "loginpage.metaMaskNotConnected": "MetaMask is not connected. Please log in to MetaMask.",
+  "loginpage.failedToLoadWeb3": "Failed to load web3 or accounts.",
+  "loginpage.loggedInWithPrivateKey": "Logged in with private key via Ganache. You are now logged in.",
+  "loginpage.failedToLoginWithPrivateKey": "Failed to login with private key via Ganache."
 }

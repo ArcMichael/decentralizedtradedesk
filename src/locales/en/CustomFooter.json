@@ -1,0 +1,21 @@
+{
+  "customfooter.siteMapAndFeatures": "Site Map and Features",
+  "customfooter.overview": "Our platform is structured to provide a seamless experience across various functionalities. Here's an overview:",
+  "customfooter.general": "General",
+  "customfooter.home": "Home",
+  "customfooter.login": "Login",
+  "customfooter.adminPanel": "Admin Panel",
+  "customfooter.products": "Products: Add, edit, and manage product listings.",
+  "customfooter.users": "Users: Manage user accounts and their roles.",
+  "customfooter.orders": "Orders: View and process orders.",
+  "customfooter.statistics": "Statistics: Monitor platform performance and metrics.",
+  "customfooter.dashboard": "Dashboard",
+  "customfooter.viewOrders": "Orders: View and manage your orders.",
+  "customfooter.profile": "Profile: Update your personal information.",
+  "customfooter.settings": "Settings: Configure your account settings.",
+  "customfooter.wallet": "Wallet: Manage your funds and transactions.",
+  "customfooter.explore": "Explore",
+  "customfooter.browse": "Browse",
+  "customfooter.productDetail": "Product Detail",
+  "customfooter.notFound": "Not Found"
+}

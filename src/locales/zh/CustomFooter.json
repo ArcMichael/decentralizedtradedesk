@@ -1,0 +1,21 @@
+{
+  "customfooter.siteMapAndFeatures": "站点地图和功能",
+  "customfooter.overview": "我们的平台结构化以提供无缝的各种功能体验。以下是概述：",
+  "customfooter.general": "通用",
+  "customfooter.home": "主页",
+  "customfooter.login": "登录",
+  "customfooter.adminPanel": "管理面板",
+  "customfooter.products": "产品：添加、编辑和管理产品列表。",
+  "customfooter.users": "用户：管理用户账户及其角色。",
+  "customfooter.orders": "订单：查看和处理订单。",
+  "customfooter.statistics": "统计：监控平台性能和指标。",
+  "customfooter.dashboard": "仪表板",
+  "customfooter.viewOrders": "订单：查看和管理您的订单。",
+  "customfooter.profile": "个人资料：更新您的个人信息。",
+  "customfooter.settings": "设置：配置您的账户设置。",
+  "customfooter.wallet": "钱包：管理您的资金和交易。",
+  "customfooter.explore": "探索",
+  "customfooter.browse": "浏览",
+  "customfooter.productDetail": "产品详情",
+  "customfooter.notFound": "未找到"
+}

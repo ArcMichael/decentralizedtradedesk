@@ -26,13 +26,17 @@ const LoginPage: React.FC = () => {
         const accounts = await web3Instance.eth.getAccounts();
         if (accounts.length > 0) {
           login(accounts[0]);
-          message.success(intl.formatMessage({ id: 'metaMaskConnected' }));
+          message.success(
+            intl.formatMessage({ id: 'loginpage.metaMaskConnected' })
+          );
         } else {
-          message.error(intl.formatMessage({ id: 'metaMaskNotConnected' }));
+          message.error(
+            intl.formatMessage({ id: 'loginpage.metaMaskNotConnected' })
+          );
         }
       }
     } catch (error) {
-      message.error(intl.formatMessage({ id: 'failedToLoadWeb3' }));
+      message.error(intl.formatMessage({ id: 'loginpage.failedToLoadWeb3' }));
     } finally {
       setLoading(false);
     }
@@ -46,9 +50,13 @@ const LoginPage: React.FC = () => {
       ); // Ganache default URL
       const account = web3Instance.eth.accounts.privateKeyToAccount(privateKey);
       login(account.address);
-      message.success(intl.formatMessage({ id: 'loggedInWithPrivateKey' }));
+      message.success(
+        intl.formatMessage({ id: 'loginpage.loggedInWithPrivateKey' })
+      );
     } catch (error) {
-      message.error(intl.formatMessage({ id: 'failedToLoginWithPrivateKey' }));
+      message.error(
+        intl.formatMessage({ id: 'loginpage.failedToLoginWithPrivateKey' })
+      );
     } finally {
       setLoading(false);
     }
@@ -57,11 +65,11 @@ const LoginPage: React.FC = () => {
   return (
     <div style={{ maxWidth: '300px', margin: 'auto', padding: '24px' }}>
       <h1>
-        <FormattedMessage id='loginPageTitle' />
+        <FormattedMessage id='loginpage.loginPageTitle' />
       </h1>
       <Spin
         spinning={loading}
-        tip={intl.formatMessage({ id: 'connectingToMetaMask' })}
+        tip={intl.formatMessage({ id: 'loginpage.connectingToMetaMask' })}
       >
         {user ? (
           <Button
@@ -73,7 +81,7 @@ const LoginPage: React.FC = () => {
             block
             onClick={() => navigate('/')}
           >
-            <FormattedMessage id='goButton' />
+            <FormattedMessage id='loginpage.goButton' />
           </Button>
         ) : (
           <>
@@ -82,7 +90,7 @@ const LoginPage: React.FC = () => {
               style={{ margin: '16px 0', display: 'block' }}
               block
             >
-              <FormattedMessage id='togglePrivateKeyLogin' />
+              <FormattedMessage id='loginpage.togglePrivateKeyLogin' />
             </Button>
             {showPrivateKeyLogin && (
               <div
@@ -94,7 +102,9 @@ const LoginPage: React.FC = () => {
                 }}
               >
                 <Input.Password
-                  placeholder={intl.formatMessage({ id: 'enterPrivateKey' })}
+                  placeholder={intl.formatMessage({
+                    id: 'loginpage.enterPrivateKey',
+                  })}
                   value={privateKey}
                   onChange={e => setPrivateKey(e.target.value)}
                   style={{ margin: '16px 0' }}
@@ -104,7 +114,7 @@ const LoginPage: React.FC = () => {
                   block
                   onClick={handlePrivateKeyLogin}
                 >
-                  <FormattedMessage id='privateKeyLogin' />
+                  <FormattedMessage id='loginpage.privateKeyLogin' />
                 </Button>
               </div>
             )}
@@ -117,7 +127,7 @@ const LoginPage: React.FC = () => {
               }}
             >
               <Button style={{ margin: '16px 0' }} block onClick={initMetaMask}>
-                <FormattedMessage id='connectMetaMask' />
+                <FormattedMessage id='loginpage.connectMetaMask' />
               </Button>
               <Button
                 onClick={() =>
@@ -126,7 +136,7 @@ const LoginPage: React.FC = () => {
                 style={{ margin: '16px 0', borderStyle: 'dashed' }}
                 block
               >
-                <FormattedMessage id='installMetaMask' />
+                <FormattedMessage id='loginpage.installMetaMask' />
               </Button>
             </div>
           </>

@@ -1,0 +1,18 @@
+{
+  "customsider.home": "主页",
+  "customsider.login": "登录",
+  "customsider.admin": "管理",
+  "customsider.products": "商品",
+  "customsider.addProduct": "添加商品",
+  "customsider.editProduct": "编辑商品",
+  "customsider.users": "用户",
+  "customsider.orders": "订单",
+  "customsider.statistics": "统计",
+  "customsider.dashboard": "仪表板",
+  "customsider.profile": "个人资料",
+  "customsider.settings": "设置",
+  "customsider.wallet": "钱包",
+  "customsider.browse": "浏览",
+  "customsider.productDetail": "商品详情",
+  "customsider.notFound": "未找到"
+}

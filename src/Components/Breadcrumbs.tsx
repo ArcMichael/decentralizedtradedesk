@@ -3,6 +3,7 @@ import React from 'react';
 import { Breadcrumb } from 'antd';
 import { Link, useLocation } from 'react-router-dom';
 import routes, { RouteConfig } from '../Route/routeConfig';
+import { FormattedMessage, useIntl } from 'react-intl'; // Import useIntl for localization
 
 const findRoute = (
   path: string,
@@ -20,7 +21,8 @@ const findRoute = (
 
 const generateBreadcrumbs = (
   pathSnippets: string[],
-  routeList: RouteConfig[]
+  routeList: RouteConfig[],
+  intl: any
 ): { key: string; title: React.ReactNode }[] => {
   const breadcrumbs: { key: string; title: React.ReactNode }[] = [];
   let currentPath = '';
@@ -30,11 +32,18 @@ const generateBreadcrumbs = (
     const route = findRoute(currentPath, routeList);
     if (route) {
       if (route.children) {
-        breadcrumbs.push({ key: currentPath, title: route.title });
+        breadcrumbs.push({
+          key: currentPath,
+          title: intl.formatMessage({ id: `customsider.${route.title}` }),
+        });
       } else {
         breadcrumbs.push({
           key: currentPath,
-          title: <Link to={currentPath}>{route.title}</Link>,
+          title: (
+            <Link to={currentPath}>
+              {intl.formatMessage({ id: `customsider.${route.title}` })}
+            </Link>
+          ),
         });
       }
     }
@@ -45,14 +54,20 @@ const generateBreadcrumbs = (
 
 const Breadcrumbs: React.FC = () => {
   const location = useLocation();
+  const intl = useIntl();
   const pathSnippets = location.pathname.split('/').filter(i => i);
 
   const breadcrumbItems = [
     {
       key: 'home',
-      title: <Link to='/'>Home</Link>,
+      title: (
+        <Link to='/'>
+          {' '}
+          <FormattedMessage id='customsider.home' />
+        </Link>
+      ),
     },
-    ...generateBreadcrumbs(pathSnippets, routes),
+    ...generateBreadcrumbs(pathSnippets, routes, intl),
   ];
 
   return <Breadcrumb items={breadcrumbItems} />;
