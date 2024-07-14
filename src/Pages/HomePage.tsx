@@ -2,6 +2,7 @@
 import React from 'react';
 import { Row, Col, Card, Button, Typography } from 'antd';
 import { GithubOutlined } from '@ant-design/icons';
+import { FormattedMessage } from 'react-intl';
 import WithCustomLayout from '../Layout/WithCustomLayout';
 import { openExternalLink } from '../utils/utils'; // Import the utility function
 
@@ -16,53 +17,53 @@ const HomePage: React.FC = () => {
   return (
     <div style={{ padding: '24px' }}>
       <header>
-        <Title>Welcome to Our Decentralized Trading Platform</Title>
+        <Title>
+          <FormattedMessage id='welcomeTitle' />
+        </Title>
         <Paragraph>
-          Empowering peer-to-peer transactions with blockchain technology.
+          <FormattedMessage id='welcomeParagraph' />
         </Paragraph>
       </header>
 
       <section>
-        <Title level={2}>About Us</Title>
+        <Title level={2}>
+          <FormattedMessage id='aboutUsTitle' />
+        </Title>
         <Paragraph>
-          Our platform leverages the power of blockchain to create a secure,
-          transparent, and efficient marketplace for trading goods. Whether
-          you're looking to buy or sell, our decentralized approach ensures that
-          your transactions are protected and fair.
+          <FormattedMessage id='aboutUsParagraph' />
         </Paragraph>
       </section>
 
       <section>
-        <Title level={2}>Key Features</Title>
+        <Title level={2}>
+          <FormattedMessage id='featuresTitle' />
+        </Title>
         <Row gutter={[16, 16]}>
           <Col span={12}>
-            <Card title='Decentralized Marketplace'>
+            <Card title={<FormattedMessage id='marketplaceFeature' />}>
               <Paragraph>
-                Trade directly with others without the need for intermediaries.
+                <FormattedMessage id='marketplaceDescription' />
               </Paragraph>
             </Card>
           </Col>
           <Col span={12}>
-            <Card title='Secure Transactions'>
+            <Card title={<FormattedMessage id='secureTransactionsFeature' />}>
               <Paragraph>
-                Smart contracts ensure that funds are released only when all
-                conditions are met.
+                <FormattedMessage id='secureTransactionsDescription' />
               </Paragraph>
             </Card>
           </Col>
           <Col span={12}>
-            <Card title='User-Friendly Interface'>
+            <Card title={<FormattedMessage id='interfaceFeature' />}>
               <Paragraph>
-                Our intuitive design makes it easy for anyone to use, regardless
-                of their technical expertise.
+                <FormattedMessage id='interfaceDescription' />
               </Paragraph>
             </Card>
           </Col>
           <Col span={12}>
-            <Card title='Low Fees'>
+            <Card title={<FormattedMessage id='lowFeesFeature' />}>
               <Paragraph>
-                Avoid high transaction fees typically associated with
-                centralized platforms.
+                <FormattedMessage id='lowFeesDescription' />
               </Paragraph>
             </Card>
           </Col>
@@ -70,39 +71,36 @@ const HomePage: React.FC = () => {
       </section>
 
       <section>
-        <Title level={2}>Our Mission</Title>
+        <Title level={2}>
+          <FormattedMessage id='missionTitle' />
+        </Title>
         <Paragraph>
-          Our mission is to democratize the trading of goods by removing
-          barriers and providing a platform that is accessible, secure, and
-          transparent. We believe in the power of blockchain to create a more
-          equitable marketplace for everyone.
+          <FormattedMessage id='missionParagraph' />
         </Paragraph>
       </section>
 
       <section>
-        <Title level={2}>How It Works</Title>
+        <Title level={2}>
+          <FormattedMessage id='howItWorksTitle' />
+        </Title>
         <Paragraph>
-          Our platform uses smart contracts written in Solidity to automate and
-          enforce transaction terms. By using Ganache for local blockchain
-          development and testing, we ensure that our contracts are secure and
-          reliable before deploying them to the main network. The Tauri
-          framework allows us to package our web-based interface into a
-          lightweight desktop application, providing a seamless user experience.
+          <FormattedMessage id='howItWorksParagraph' />
         </Paragraph>
       </section>
 
       <section>
-        <Title level={2}>Contact Us</Title>
+        <Title level={2}>
+          <FormattedMessage id='contactUsTitle' />
+        </Title>
         <Paragraph>
-          Have questions or need more information?{' '}
+          <FormattedMessage id='contactUsParagraph' />{' '}
           <Button
             type='link'
             icon={<GithubOutlined />}
             onClick={handleContactUsClick}
           >
-            Contact us
-          </Button>{' '}
-          and we'll be happy to assist you!
+            <FormattedMessage id='contactUsTitle' />
+          </Button>
         </Paragraph>
       </section>
     </div>

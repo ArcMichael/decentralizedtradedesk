@@ -1,0 +1,15 @@
+{
+  "loginPageTitle": "登录页面",
+  "connectingToMetaMask": "正在连接到 MetaMask...",
+  "goButton": "前往",
+  "togglePrivateKeyLogin": "切换私钥登录",
+  "enterPrivateKey": "输入你的私钥",
+  "privateKeyLogin": "通过 Ganache 进行私钥登录",
+  "connectMetaMask": "连接到 MetaMask",
+  "installMetaMask": "安装 MetaMask",
+  "metaMaskConnected": "MetaMask 已连接。你现在已登录。",
+  "metaMaskNotConnected": "MetaMask 未连接。请登录 MetaMask。",
+  "failedToLoadWeb3": "加载 web3 或账户失败。",
+  "loggedInWithPrivateKey": "通过 Ganache 私钥登录。你现在已登录。",
+  "failedToLoginWithPrivateKey": "通过 Ganache 私钥登录失败。"
+}

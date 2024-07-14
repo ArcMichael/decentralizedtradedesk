@@ -1,0 +1,21 @@
+{
+  "siteMapAndFeatures": "Site Map and Features",
+  "overview": "Our platform is structured to provide a seamless experience across various functionalities. Here's an overview:",
+  "general": "General",
+  "home": "Home",
+  "login": "Login",
+  "adminPanel": "Admin Panel",
+  "products": "Products: Add, edit, and manage product listings.",
+  "users": "Users: Manage user accounts and their roles.",
+  "orders": "Orders: View and process orders.",
+  "statistics": "Statistics: Monitor platform performance and metrics.",
+  "dashboard": "Dashboard",
+  "viewOrders": "Orders: View and manage your orders.",
+  "profile": "Profile: Update your personal information.",
+  "settings": "Settings: Configure your account settings.",
+  "wallet": "Wallet: Manage your funds and transactions.",
+  "explore": "Explore",
+  "browse": "Browse",
+  "productDetail": "Product Detail",
+  "notFound": "Not Found"
+}

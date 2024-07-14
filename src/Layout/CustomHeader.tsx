@@ -4,6 +4,7 @@ import React from 'react';
 import { Button, Layout } from 'antd';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import UserMenu from '../Components/UserMenu';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const { Header } = Layout;
 
@@ -18,6 +19,12 @@ const CustomHeader: React.FC<CustomHeaderProps> = ({
   toggleCollapse,
   showUserMenu = true,
 }) => {
+  const { locale, setLocale } = useLanguage();
+
+  const toggleLanguage = () => {
+    setLocale(locale === 'en' ? 'zh' : 'en');
+  };
+
   return (
     <Header
       style={{
@@ -25,9 +32,10 @@ const CustomHeader: React.FC<CustomHeaderProps> = ({
         background: '#fff',
         display: 'flex',
         justifyContent: 'space-between',
+        alignItems: 'center',
       }}
     >
-      <div>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
         {toggleCollapse && (
           <Button
             type='text'
@@ -40,6 +48,9 @@ const CustomHeader: React.FC<CustomHeaderProps> = ({
             }}
           />
         )}
+        <Button onClick={toggleLanguage} style={{ marginLeft: '16px' }}>
+          {locale === 'en' ? '切换到中文' : 'Switch to English'}
+        </Button>
       </div>
       {showUserMenu && (
         <div style={{ marginRight: '16px' }}>

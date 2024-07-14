@@ -1,6 +1,7 @@
 // src/Layout/CustomFooter.tsx
 import React from 'react';
 import { Layout, Typography, Row, Col } from 'antd';
+import { FormattedMessage } from 'react-intl';
 
 const { Footer } = Layout;
 const { Title, Paragraph } = Typography;
@@ -10,43 +11,78 @@ const CustomFooter: React.FC = () => {
     <Footer style={{ textAlign: 'left', padding: '24px 50px' }}>
       <Row gutter={[16, 16]}>
         <Col span={24}>
-          <Title level={2}>Site Map and Features</Title>
+          <Title level={2}>
+            <FormattedMessage id='siteMapAndFeatures' />
+          </Title>
           <Paragraph>
-            Our platform is structured to provide a seamless experience across
-            various functionalities. Here's an overview:
+            <FormattedMessage id='overview' />
           </Paragraph>
         </Col>
         <Col span={12} md={6}>
-          <Title level={4}>General</Title>
+          <Title level={4}>
+            <FormattedMessage id='general' />
+          </Title>
           <ul>
-            <li>Home</li>
-            <li>Login</li>
+            <li>
+              <FormattedMessage id='home' />
+            </li>
+            <li>
+              <FormattedMessage id='login' />
+            </li>
           </ul>
         </Col>
         <Col span={12} md={6}>
-          <Title level={4}>Admin Panel</Title>
+          <Title level={4}>
+            <FormattedMessage id='adminPanel' />
+          </Title>
           <ul>
-            <li>Products: Add, edit, and manage product listings.</li>
-            <li>Users: Manage user accounts and their roles.</li>
-            <li>Orders: View and process orders.</li>
-            <li>Statistics: Monitor platform performance and metrics.</li>
+            <li>
+              <FormattedMessage id='products' />
+            </li>
+            <li>
+              <FormattedMessage id='users' />
+            </li>
+            <li>
+              <FormattedMessage id='orders' />
+            </li>
+            <li>
+              <FormattedMessage id='statistics' />
+            </li>
           </ul>
         </Col>
         <Col span={12} md={6}>
-          <Title level={4}>Dashboard</Title>
+          <Title level={4}>
+            <FormattedMessage id='dashboard' />
+          </Title>
           <ul>
-            <li>Orders: View and manage your orders.</li>
-            <li>Profile: Update your personal information.</li>
-            <li>Settings: Configure your account settings.</li>
-            <li>Wallet: Manage your funds and transactions.</li>
+            <li>
+              <FormattedMessage id='viewOrders' />
+            </li>
+            <li>
+              <FormattedMessage id='profile' />
+            </li>
+            <li>
+              <FormattedMessage id='settings' />
+            </li>
+            <li>
+              <FormattedMessage id='wallet' />
+            </li>
           </ul>
         </Col>
         <Col span={12} md={6}>
-          <Title level={4}>Explore</Title>
+          <Title level={4}>
+            <FormattedMessage id='explore' />
+          </Title>
           <ul>
-            <li>Browse</li>
-            <li>Product Detail</li>
-            <li>Not Found</li>
+            <li>
+              <FormattedMessage id='browse' />
+            </li>
+            <li>
+              <FormattedMessage id='productDetail' />
+            </li>
+            <li>
+              <FormattedMessage id='notFound' />
+            </li>
           </ul>
         </Col>
       </Row>
