@@ -7,6 +7,7 @@ import { useUser } from '../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
 import Web3 from 'web3';
 import { openExternalLink } from '../utils/utils'; // Import the utility function
+import { FormattedMessage, useIntl } from 'react-intl';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ const LoginPage: React.FC = () => {
   const [privateKey, setPrivateKey] = useState<string>('');
   const [showPrivateKeyLogin, setShowPrivateKeyLogin] =
     useState<boolean>(false);
+  const intl = useIntl();
 
   const initMetaMask = useCallback(async () => {
     setLoading(true);
@@ -24,19 +26,17 @@ const LoginPage: React.FC = () => {
         const accounts = await web3Instance.eth.getAccounts();
         if (accounts.length > 0) {
           login(accounts[0]);
-          message.success('MetaMask connected. You are now logged in.');
+          message.success(intl.formatMessage({ id: 'metaMaskConnected' }));
         } else {
-          message.error(
-            'MetaMask is not connected. Please log in to MetaMask.'
-          );
+          message.error(intl.formatMessage({ id: 'metaMaskNotConnected' }));
         }
       }
     } catch (error) {
-      message.error('Failed to load web3 or accounts.');
+      message.error(intl.formatMessage({ id: 'failedToLoadWeb3' }));
     } finally {
       setLoading(false);
     }
-  }, [login]);
+  }, [login, intl]);
 
   const handlePrivateKeyLogin = useCallback(async () => {
     setLoading(true);
@@ -46,20 +46,23 @@ const LoginPage: React.FC = () => {
       ); // Ganache default URL
       const account = web3Instance.eth.accounts.privateKeyToAccount(privateKey);
       login(account.address);
-      message.success(
-        'Logged in with private key via Ganache. You are now logged in.'
-      );
+      message.success(intl.formatMessage({ id: 'loggedInWithPrivateKey' }));
     } catch (error) {
-      message.error('Failed to login with private key via Ganache.');
+      message.error(intl.formatMessage({ id: 'failedToLoginWithPrivateKey' }));
     } finally {
       setLoading(false);
     }
-  }, [privateKey, login]);
+  }, [privateKey, login, intl]);
 
   return (
     <div style={{ maxWidth: '300px', margin: 'auto', padding: '24px' }}>
-      <h1>Login Page</h1>
-      <Spin spinning={loading} tip='Connecting to MetaMask...'>
+      <h1>
+        <FormattedMessage id='loginPageTitle' />
+      </h1>
+      <Spin
+        spinning={loading}
+        tip={intl.formatMessage({ id: 'connectingToMetaMask' })}
+      >
         {user ? (
           <Button
             style={{
@@ -70,7 +73,7 @@ const LoginPage: React.FC = () => {
             block
             onClick={() => navigate('/')}
           >
-            Go
+            <FormattedMessage id='goButton' />
           </Button>
         ) : (
           <>
@@ -79,7 +82,7 @@ const LoginPage: React.FC = () => {
               style={{ margin: '16px 0', display: 'block' }}
               block
             >
-              Toggle Private Key Login
+              <FormattedMessage id='togglePrivateKeyLogin' />
             </Button>
             {showPrivateKeyLogin && (
               <div
@@ -91,7 +94,7 @@ const LoginPage: React.FC = () => {
                 }}
               >
                 <Input.Password
-                  placeholder='Enter your private key'
+                  placeholder={intl.formatMessage({ id: 'enterPrivateKey' })}
                   value={privateKey}
                   onChange={e => setPrivateKey(e.target.value)}
                   style={{ margin: '16px 0' }}
@@ -101,7 +104,7 @@ const LoginPage: React.FC = () => {
                   block
                   onClick={handlePrivateKeyLogin}
                 >
-                  Private Key Login via Ganache
+                  <FormattedMessage id='privateKeyLogin' />
                 </Button>
               </div>
             )}
@@ -114,7 +117,7 @@ const LoginPage: React.FC = () => {
               }}
             >
               <Button style={{ margin: '16px 0' }} block onClick={initMetaMask}>
-                Connect to MetaMask
+                <FormattedMessage id='connectMetaMask' />
               </Button>
               <Button
                 onClick={() =>
@@ -123,7 +126,7 @@ const LoginPage: React.FC = () => {
                 style={{ margin: '16px 0', borderStyle: 'dashed' }}
                 block
               >
-                Install MetaMask
+                <FormattedMessage id='installMetaMask' />
               </Button>
             </div>
           </>
