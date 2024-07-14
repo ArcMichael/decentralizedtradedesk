@@ -46,6 +46,7 @@ const CustomHeader: React.FC<CustomHeaderProps> = ({
               width: 64,
               height: 64,
             }}
+            data-testid='collapse-toggle-button'
           />
         )}
         <Button onClick={toggleLanguage} style={{ marginLeft: '16px' }}>

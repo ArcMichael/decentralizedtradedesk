@@ -1,9 +1,10 @@
 // src/__tests__/CustomHeader.test.tsx
 
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import CustomHeader from '../Layout/CustomHeader';
-import { act } from 'react';
-import { MemoryRouter } from 'react-router-dom'; // Import MemoryRouter
+// import { act } from 'react-dom/test-utils';
+import { MemoryRouter } from 'react-router-dom';
+import { LanguageProvider } from '../contexts/LanguageContext';
 
 describe('CustomHeader', () => {
   it('renders and toggles collapse state correctly', async () => {
@@ -11,13 +12,13 @@ describe('CustomHeader', () => {
 
     render(
       <MemoryRouter>
-        {' '}
-        {/* Wrap your component with MemoryRouter */}
-        <CustomHeader collapsed={false} toggleCollapse={toggleCollapse} />
+        <LanguageProvider>
+          <CustomHeader collapsed={false} toggleCollapse={toggleCollapse} />
+        </LanguageProvider>
       </MemoryRouter>
     );
 
-    const button = screen.getByRole('button');
+    const button = screen.getByTestId('collapse-toggle-button');
     await act(async () => {
       fireEvent.click(button);
     });
