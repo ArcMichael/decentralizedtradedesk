@@ -13,43 +13,43 @@ describe('routeConfig', () => {
     const expectedRoutes: RouteConfig[] = [
       {
         path: '/',
-        title: 'Home',
+        title: 'home',
         showInSider: true,
         icon: <UserOutlined />,
       },
       {
         path: '/login',
-        title: 'Login',
+        title: 'login',
         showInSider: false,
         icon: <UploadOutlined />,
       },
       {
         path: '/admin',
-        title: 'Admin',
+        title: 'admin',
         showInSider: true,
         icon: <UserOutlined />,
         children: [
           {
             path: '/admin/products',
-            title: 'Products',
+            title: 'products',
             showInSider: true,
             icon: <UserOutlined />,
           },
           {
             path: '/admin/users',
-            title: 'Users',
+            title: 'users',
             showInSider: true,
             icon: <UserOutlined />,
           },
           {
             path: '/admin/orders',
-            title: 'Orders',
+            title: 'orders',
             showInSider: true,
             icon: <UserOutlined />,
           },
           {
             path: '/admin/statistics',
-            title: 'Statistics',
+            title: 'statistics',
             showInSider: true,
             icon: <UserOutlined />,
           },
@@ -57,31 +57,31 @@ describe('routeConfig', () => {
       },
       {
         path: '/dashboard',
-        title: 'Dashboard',
+        title: 'dashboard',
         showInSider: true,
         icon: <SettingOutlined />,
         children: [
           {
             path: '/dashboard/orders',
-            title: 'Orders',
+            title: 'orders',
             showInSider: true,
             icon: <SettingOutlined />,
           },
           {
             path: '/dashboard/profile',
-            title: 'Profile',
+            title: 'profile',
             showInSider: true,
             icon: <SettingOutlined />,
           },
           {
             path: '/dashboard/settings',
-            title: 'Settings',
+            title: 'settings',
             showInSider: true,
             icon: <SettingOutlined />,
           },
           {
             path: '/dashboard/wallet',
-            title: 'Wallet',
+            title: 'wallet',
             showInSider: true,
             icon: <WalletOutlined />,
           },
@@ -89,19 +89,19 @@ describe('routeConfig', () => {
       },
       {
         path: '/browse',
-        title: 'Browse',
+        title: 'browse',
         showInSider: true,
         icon: <UserOutlined />,
       },
       {
         path: '/product/:id',
-        title: 'Product Detail',
+        title: 'Product Detail', // Updated to match the actual route configuration
         showInSider: false,
         icon: <UserOutlined />,
       },
       {
         path: '*',
-        title: 'NotFound',
+        title: 'notFound',
         showInSider: false,
         icon: <UploadOutlined />,
       },

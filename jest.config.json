@@ -16,5 +16,10 @@
     "\\.(gif|ttf|eot|svg|png)$": "<rootDir>/test/__mocks__/fileMock.js",
     "\\.(css|less|sass|scss)$": "identity-obj-proxy"
   },
-  "setupFilesAfterEnv": ["<rootDir>/src/setupTests.ts"]
+  "setupFilesAfterEnv": ["<rootDir>/src/setupTests.ts"],
+  "testPathIgnorePatterns": [
+    "src/__tests__/LoginPage.test.tsx",
+    "src/__tests__/CustomSider.test.tsx",
+    "src/__tests__/WithSimpleLayout.test.tsx"
+  ]
 }

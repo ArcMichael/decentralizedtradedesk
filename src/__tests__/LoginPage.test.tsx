@@ -1,7 +1,7 @@
 // src/__tests__/LoginPage.test.tsx
 
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import '@testing-library/jest-dom'; // Updated import statement
+import '@testing-library/jest-dom/extend-expect'; // Import this to include the matchers
 import { MemoryRouter } from 'react-router-dom';
 import LoginPage from '../Pages/LoginPage';
 import { UserProvider } from '../contexts/UserContext';
@@ -54,5 +54,24 @@ describe('LoginPage', () => {
         </UserProvider>
       </MemoryRouter>
     );
+
+    const toggleButton = screen.getByText(/toggle private key login/i);
+    fireEvent.click(toggleButton);
+
+    const privateKeyInput = screen.getByPlaceholderText(/enter private key/i);
+    fireEvent.change(privateKeyInput, {
+      target: { value: 'your_private_key' },
+    });
+
+    const loginButton = screen.getByRole('button', {
+      name: /private key login/i,
+    });
+    fireEvent.click(loginButton);
+
+    await waitFor(() => {
+      expect(
+        screen.queryByText(/logged in with private key/i)
+      ).toBeInTheDocument();
+    });
   });
 });

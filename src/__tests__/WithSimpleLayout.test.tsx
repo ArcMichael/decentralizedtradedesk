@@ -4,6 +4,7 @@ import '@testing-library/jest-dom'; // Import this to include the matchers
 import { MemoryRouter } from 'react-router-dom';
 import WithSimpleLayout from '../Layout/WithSimpleLayout';
 import { act } from 'react';
+import { LanguageProvider } from '../contexts/LanguageContext'; // Import the LanguageProvider
 
 const MockComponent: React.FC = () => <div>Mock Component</div>;
 const WrappedComponent = WithSimpleLayout(MockComponent);
@@ -30,7 +31,11 @@ describe('WithSimpleLayout', () => {
     await act(async () => {
       render(
         <MemoryRouter>
-          <WrappedComponent />
+          <LanguageProvider>
+            {' '}
+            {/* Wrap with LanguageProvider */}
+            <WrappedComponent />
+          </LanguageProvider>
         </MemoryRouter>
       );
     });
