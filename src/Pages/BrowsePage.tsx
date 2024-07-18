@@ -180,7 +180,7 @@ const BrowsePage: React.FC = () => {
 
       <Row gutter={[16, 16]}>
         {filteredProducts.map(product => (
-          <Col span={12} key={product.id}>
+          <Col span={6} key={product.id}>
             <Card
               actions={[
                 <Popover
@@ -250,7 +250,10 @@ const BrowsePage: React.FC = () => {
                       <FormattedMessage id='browsePage.currentOwner' />:{' '}
                       {shortenAddress(product.currentOwnerAddress)}
                     </p>
-                    <Divider orientation='left' style={{ color: 'gray' }}>
+                    <Divider
+                      orientation='left'
+                      style={{ color: 'gray', fontSize: '.8rem' }}
+                    >
                       <FormattedMessage id='browsePage.metadata' />
                     </Divider>
 
