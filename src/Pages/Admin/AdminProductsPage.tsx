@@ -5,8 +5,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import WithCustomLayout from '../../Layout/WithCustomLayout';
 import { Typography, Table, Button, Modal, message, Tooltip } from 'antd';
 import { getWeb3, getContract } from '../../web3/web3Config';
-import { defaultImage } from '../../constants'; // Import default image from constants
+import { defaultImage } from '../../constants';
 import { ContractProduct, Metadata, Product } from '../../interfaces';
+import { FormattedMessage } from 'react-intl';
 
 const { Title } = Typography;
 const { confirm } = Modal;
@@ -20,14 +21,14 @@ const AdminProductsPage: React.FC = () => {
       const web3 = await getWeb3();
       if (!web3) {
         message.error(
-          'Web3 is not initialized. Make sure MetaMask is installed and logged in.'
+          <FormattedMessage id='adminProductsPage.web3NotInitialized' />
         );
         return;
       }
 
       const accounts = await web3.eth.getAccounts();
       if (accounts.length === 0) {
-        message.error('No accounts found.');
+        message.error(<FormattedMessage id='adminProductsPage.noAccounts' />);
         return;
       }
 
@@ -40,7 +41,9 @@ const AdminProductsPage: React.FC = () => {
   const fetchProducts = async (currentUserAddress: string, web3: any) => {
     const contract = await getContract(web3);
     if (!contract) {
-      message.error('Failed to load contract.');
+      message.error(
+        <FormattedMessage id='adminProductsPage.failedToLoadContract' />
+      );
       return;
     }
 
@@ -50,7 +53,9 @@ const AdminProductsPage: React.FC = () => {
     );
 
     if (isNaN(productCount)) {
-      message.error('Failed to fetch product count.');
+      message.error(
+        <FormattedMessage id='adminProductsPage.failedToFetchProductCount' />
+      );
       return;
     }
 
@@ -80,16 +85,16 @@ const AdminProductsPage: React.FC = () => {
             description: product.description,
             price: parseFloat(web3.utils.fromWei(product.price, 'ether')),
             category: metadata.category,
-            tags: metadata.tags || [], // Ensure tags is an array
+            tags: metadata.tags || [],
             contractAddress: contract.options.address || '',
-            transactionStatus: 'available', // Assuming default status
-            creatorAddress: product.creator, // Assuming the contract has creator field
+            transactionStatus: 'available',
+            creatorAddress: product.creator,
             timestamp: parseInt(product.createdAt, 10),
-            transactionHash: '', // Placeholder, should be fetched or managed
+            transactionHash: '',
             metadata: product.metadata,
             transactionConditions: product.details,
             currency: product.details.currency,
-            imageUrl: metadata.imageUrl || defaultImage, // Use default image if imageUrl is empty
+            imageUrl: metadata.imageUrl || defaultImage,
             copyrightUsageRules: product.copyrightUsageRules,
             currentOwnerAddress: product.currentOwner,
           });
@@ -101,7 +106,6 @@ const AdminProductsPage: React.FC = () => {
       }
     }
 
-    // Filter products by current user address
     const userProducts = products.filter(
       product =>
         product.currentOwnerAddress?.toLowerCase() ===
@@ -120,30 +124,36 @@ const AdminProductsPage: React.FC = () => {
 
   const handleDeleteProduct = async (id: string) => {
     confirm({
-      title: 'Are you sure you want to delete this product?',
-      content: 'This action cannot be undone.',
-      okText: 'Yes',
+      title: <FormattedMessage id='adminProductsPage.confirmDeleteTitle' />,
+      content: <FormattedMessage id='adminProductsPage.confirmDeleteContent' />,
+      okText: <FormattedMessage id='adminProductsPage.confirmDeleteOkText' />,
       okType: 'danger',
-      cancelText: 'No',
+      cancelText: (
+        <FormattedMessage id='adminProductsPage.confirmDeleteCancelText' />
+      ),
       onOk: async () => {
         try {
           const web3 = await getWeb3();
           if (!web3) {
             message.error(
-              'Web3 is not initialized. Make sure MetaMask is installed and logged in.'
+              <FormattedMessage id='adminProductsPage.web3NotInitialized' />
             );
             return;
           }
 
           const contract = await getContract(web3);
           if (!contract) {
-            message.error('Failed to load contract.');
+            message.error(
+              <FormattedMessage id='adminProductsPage.failedToLoadContract' />
+            );
             return;
           }
 
           const accounts = await web3.eth.getAccounts();
           if (accounts.length === 0) {
-            message.error('No accounts found.');
+            message.error(
+              <FormattedMessage id='adminProductsPage.noAccounts' />
+            );
             return;
           }
 
@@ -157,15 +167,21 @@ const AdminProductsPage: React.FC = () => {
           });
 
           setProducts(products.filter(product => product.id !== id));
-          message.success('Product deleted successfully');
+          message.success(
+            <FormattedMessage id='adminProductsPage.deleteSuccess' />
+          );
         } catch (error: unknown) {
           const errMsg = (error as Error).message;
           console.error('Error deleting product:', errMsg);
-          message.error('Failed to delete product.');
+          message.error(
+            <FormattedMessage id='adminProductsPage.deleteFailed' />
+          );
         }
       },
       onCancel() {
-        message.info('Delete action cancelled');
+        message.info(
+          <FormattedMessage id='adminProductsPage.deleteCancelled' />
+        );
       },
     });
   };
@@ -176,7 +192,13 @@ const AdminProductsPage: React.FC = () => {
     return (
       <Tooltip
         placement='left'
-        title={isDisabled ? '不可删除：当前用户不是创建者' : ''}
+        title={
+          isDisabled ? (
+            <FormattedMessage id='adminProductsPage.deleteTooltip' />
+          ) : (
+            ''
+          )
+        }
       >
         <Button
           type='link'
@@ -184,7 +206,7 @@ const AdminProductsPage: React.FC = () => {
           onClick={() => handleDeleteProduct(record.id)}
           disabled={isDisabled}
         >
-          删除
+          <FormattedMessage id='adminProductsPage.deleteButton' />
         </Button>
       </Tooltip>
     );
@@ -192,7 +214,7 @@ const AdminProductsPage: React.FC = () => {
 
   const columns = [
     {
-      title: '商品名称',
+      title: <FormattedMessage id='adminProductsPage.name' />,
       dataIndex: 'name',
       key: 'name',
       render: (name: string, record: Product) => (
@@ -200,7 +222,7 @@ const AdminProductsPage: React.FC = () => {
       ),
     },
     {
-      title: '图片',
+      title: <FormattedMessage id='adminProductsPage.image' />,
       dataIndex: 'imageUrl',
       key: 'imageUrl',
       render: (imageUrl: string) => (
@@ -209,40 +231,40 @@ const AdminProductsPage: React.FC = () => {
           alt='Product'
           style={{ width: '50px', height: '50px' }}
           onError={(e: any) => {
-            e.target.src = defaultImage; // Use default image if the original one fails to load
+            e.target.src = defaultImage;
           }}
         />
       ),
     },
     {
-      title: '价格',
+      title: <FormattedMessage id='adminProductsPage.price' />,
       dataIndex: 'price',
       key: 'price',
       render: (price: number) => `${price}`,
     },
     {
-      title: '货币类型',
+      title: <FormattedMessage id='adminProductsPage.currency' />,
       dataIndex: 'currency',
       key: 'currency',
     },
     {
-      title: '类别',
+      title: <FormattedMessage id='adminProductsPage.category' />,
       dataIndex: 'category',
       key: 'category',
     },
     {
-      title: '标签',
+      title: <FormattedMessage id='adminProductsPage.tags' />,
       dataIndex: 'tags',
       key: 'tags',
       render: (tags: string[]) => tags.join(', '),
     },
     {
-      title: '操作',
+      title: <FormattedMessage id='adminProductsPage.actions' />,
       key: 'action',
       render: (_: any, record: Product) => (
         <div>
           <Button type='link' onClick={() => handleEditProduct(record.id)}>
-            编辑
+            <FormattedMessage id='adminProductsPage.editButton' />
           </Button>
           {deleteProductButtom(record)}
         </div>
@@ -252,13 +274,15 @@ const AdminProductsPage: React.FC = () => {
 
   return (
     <div style={{ padding: '24px' }}>
-      <Title level={2}>我的商品</Title>
+      <Title level={2}>
+        <FormattedMessage id='adminProductsPage.title' />
+      </Title>
       <Button
         type='primary'
         onClick={handleAddProduct}
         style={{ marginBottom: '20px' }}
       >
-        添加新商品
+        <FormattedMessage id='adminProductsPage.addButton' />
       </Button>
       <Table
         dataSource={products}

@@ -5,6 +5,7 @@ import { Dropdown, Avatar, MenuProps } from 'antd';
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import { useUser } from '../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
 const UserMenu: React.FC = () => {
   const { user, logout } = useUser();
@@ -19,12 +20,12 @@ const UserMenu: React.FC = () => {
   const menuItems: MenuProps['items'] = [
     {
       key: 'profile',
-      label: 'Profile',
+      label: <FormattedMessage id='usermenu.profile' />,
       icon: <UserOutlined />,
     },
     {
       key: 'logout',
-      label: 'Logout',
+      label: <FormattedMessage id='usermenu.logout' />,
       icon: <LogoutOutlined />,
       onClick: handleLogout,
     },

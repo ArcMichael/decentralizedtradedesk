@@ -1,5 +1,6 @@
 // src/contexts/LanguageContext.tsx
-import {
+
+import React, {
   createContext,
   useContext,
   useState,

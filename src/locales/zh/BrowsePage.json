@@ -1,0 +1,23 @@
+{
+  "browsePage.web3NotInitialized": "Web3 未初始化。请确保已安装并登录 MetaMask。",
+  "browsePage.noAccounts": "未找到账户。",
+  "browsePage.failedToLoadContract": "加载合约失败。",
+  "browsePage.purchaseSuccess": "购买成功！",
+  "browsePage.purchaseFailed": "购买失败。请再试一次。",
+  "browsePage.title": "浏览商品",
+  "browsePage.searchPlaceholder": "搜索商品",
+  "browsePage.searchButton": "搜索",
+  "browsePage.info": "信息",
+  "browsePage.infoContent": "更多商品详情",
+  "browsePage.settings": "设置",
+  "browsePage.settingsContent": "配置商品设置",
+  "browsePage.purchase": "购买",
+  "browsePage.purchaseContent": "购买此商品",
+  "browsePage.description": "描述",
+  "browsePage.price": "价格",
+  "browsePage.creator": "创作者",
+  "browsePage.currentOwner": "当前拥有者",
+  "browsePage.metadata": "元数据",
+  "browsePage.category": "类别",
+  "browsePage.tags": "标签"
+}

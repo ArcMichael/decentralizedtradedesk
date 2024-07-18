@@ -7,25 +7,29 @@ import WithCustomerLayout from '../Layout/WithCustomLayout';
 import { getWeb3, getContract } from '../web3/web3Config';
 import { Product, Metadata, ContractProduct } from '../interfaces';
 import { defaultImage } from '../constants';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const [productHistory, setProductHistory] = useState<any[]>([]);
+  const intl = useIntl();
 
   useEffect(() => {
     const fetchProduct = async () => {
       const web3 = await getWeb3();
       if (!web3) {
         message.error(
-          'Web3 is not initialized. Make sure MetaMask is installed and logged in.'
+          intl.formatMessage({ id: 'productDetailPage.web3NotInitialized' })
         );
         return;
       }
 
       const contract = await getContract(web3);
       if (!contract) {
-        message.error('Failed to load contract.');
+        message.error(
+          intl.formatMessage({ id: 'productDetailPage.failedToLoadContract' })
+        );
         return;
       }
 
@@ -64,7 +68,7 @@ const ProductDetailPage: React.FC = () => {
             currency: productData.details.currency,
             imageUrl: metadata.imageUrl || defaultImage,
             copyrightUsageRules: productData.copyrightUsageRules || '',
-            currentOwnerAddress: productData.currentOwnerAddress || '',
+            currentOwnerAddress: productData.currentOwner || '',
           });
 
           const events: any[] = await contract.getPastEvents('ALLEVENTS', {
@@ -76,25 +80,27 @@ const ProductDetailPage: React.FC = () => {
           console.log('events', events);
 
           const historyPromises = events.map(async (eventsList, index) => {
-            // console.log('transactionHash', eventsList.transactionHash);
-            // console.log('event', eventsList.event);
-
             const receipt = await web3.eth.getTransactionReceipt(
               eventsList.transactionHash
             );
             if (!receipt) {
-              message.error('Transaction receipt not found.');
+              message.error(
+                intl.formatMessage({
+                  id: 'productDetailPage.transactionReceiptNotFound',
+                })
+              );
               return null;
             }
-
-            // console.log(eventsList.event, 'receipt', receipt);
-            console.log('receipt', receipt, eventsList.returnValues);
 
             let color = 'blue';
             let children = (
               <>
-                <p>Unknown event</p>
-                <p>Unknown description</p>
+                <p>
+                  <FormattedMessage id='productDetailPage.unknownEvent' />
+                </p>
+                <p>
+                  <FormattedMessage id='productDetailPage.unknownDescription' />
+                </p>
               </>
             );
 
@@ -103,8 +109,13 @@ const ProductDetailPage: React.FC = () => {
                 color = 'green';
                 children = (
                   <>
-                    <p>Created a product </p>
-                    <p>From: {receipt.from}</p>
+                    <p>
+                      <FormattedMessage id='productDetailPage.productAdded' />
+                    </p>
+                    <p>
+                      <FormattedMessage id='productDetailPage.from' />:{' '}
+                      {receipt.from}
+                    </p>
                   </>
                 );
                 break;
@@ -112,8 +123,13 @@ const ProductDetailPage: React.FC = () => {
                 color = 'orange';
                 children = (
                   <>
-                    <p>Updated the product </p>
-                    <p>From: {receipt.from}</p>
+                    <p>
+                      <FormattedMessage id='productDetailPage.productUpdated' />
+                    </p>
+                    <p>
+                      <FormattedMessage id='productDetailPage.from' />:{' '}
+                      {receipt.from}
+                    </p>
                   </>
                 );
                 break;
@@ -121,8 +137,13 @@ const ProductDetailPage: React.FC = () => {
                 color = 'blue';
                 children = (
                   <>
-                    <p>Purchased the product </p>
-                    <p>From: {eventsList.returnValues.buyer}</p>
+                    <p>
+                      <FormattedMessage id='productDetailPage.productPurchased' />
+                    </p>
+                    <p>
+                      <FormattedMessage id='productDetailPage.from' />:{' '}
+                      {eventsList.returnValues.buyer}
+                    </p>
                   </>
                 );
                 break;
@@ -130,8 +151,12 @@ const ProductDetailPage: React.FC = () => {
                 color = 'gray';
                 children = (
                   <>
-                    <p>Unknown event</p>
-                    <p>Unknown description</p>
+                    <p>
+                      <FormattedMessage id='productDetailPage.unknownEvent' />
+                    </p>
+                    <p>
+                      <FormattedMessage id='productDetailPage.unknownDescription' />
+                    </p>
                   </>
                 );
             }
@@ -146,10 +171,16 @@ const ProductDetailPage: React.FC = () => {
 
           setProductHistory(history.filter(item => item !== null));
         } else {
-          message.error('Product not found');
+          message.error(
+            intl.formatMessage({ id: 'productDetailPage.productNotFound' })
+          );
         }
       } catch (error) {
-        message.error('Failed to fetch product data.');
+        message.error(
+          intl.formatMessage({
+            id: 'productDetailPage.failedToFetchProductData',
+          })
+        );
       }
     };
 
@@ -157,43 +188,47 @@ const ProductDetailPage: React.FC = () => {
   }, [id]);
 
   if (!product) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <FormattedMessage id='productDetailPage.loading' />
+      </div>
+    );
   }
 
   const ProductDetailItems = [
     {
       key: '1',
-      label: 'ID',
+      label: intl.formatMessage({ id: 'productDetailPage.id' }),
       children: product.id,
       span: 1,
     },
     {
       key: '2',
-      label: 'Currency',
+      label: intl.formatMessage({ id: 'productDetailPage.currency' }),
       children: `${product.currency}`,
       span: 1,
     },
     {
       key: '3',
-      label: 'Price',
+      label: intl.formatMessage({ id: 'productDetailPage.price' }),
       children: `${product.price}`,
       span: 1,
     },
     {
       key: '4',
-      label: 'Name',
+      label: intl.formatMessage({ id: 'productDetailPage.name' }),
       children: product.name,
       span: 1,
     },
     {
       key: '5',
-      label: 'Description',
+      label: intl.formatMessage({ id: 'productDetailPage.description' }),
       children: product.description,
       span: 1,
     },
     {
       key: '6',
-      label: 'Image',
+      label: intl.formatMessage({ id: 'productDetailPage.image' }),
       children: (
         <img
           src={product.imageUrl}
@@ -205,37 +240,39 @@ const ProductDetailPage: React.FC = () => {
     },
     {
       key: '7',
-      label: 'Category',
+      label: intl.formatMessage({ id: 'productDetailPage.category' }),
       children: product.category,
       span: 1,
     },
     {
       key: '8',
-      label: 'Tags',
+      label: intl.formatMessage({ id: 'productDetailPage.tags' }),
       children: product.tags.join(', '),
       span: 1,
     },
     {
       key: '9',
-      label: 'Status',
+      label: intl.formatMessage({ id: 'productDetailPage.status' }),
       children: <Badge status='processing' text={product.transactionStatus} />,
       span: 1,
     },
     {
       key: '10',
-      label: 'Creator',
+      label: intl.formatMessage({ id: 'productDetailPage.creator' }),
       children: product.creatorAddress,
       span: 3,
     },
     {
       key: '11',
-      label: 'Current Owner',
-      children: product.creatorAddress,
+      label: intl.formatMessage({ id: 'productDetailPage.currentOwner' }),
+      children: product.currentOwnerAddress,
       span: 3,
     },
     {
       key: '12',
-      label: 'Copyright Usage Rules',
+      label: intl.formatMessage({
+        id: 'productDetailPage.copyrightUsageRules',
+      }),
       children: product.copyrightUsageRules,
       span: 3,
     },
@@ -245,7 +282,7 @@ const ProductDetailPage: React.FC = () => {
     <div>
       <Descriptions
         layout='vertical'
-        title='Product Detail'
+        title={intl.formatMessage({ id: 'productDetailPage.title' })}
         size='small'
         bordered
         column={3}
