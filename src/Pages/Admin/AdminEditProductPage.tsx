@@ -21,6 +21,7 @@ import { getWeb3, getContract } from '../../web3/web3Config';
 import { ProductData } from '../../interfaces';
 import { menuItems } from '../../constants';
 import { generateHashAndSignature } from '../../utils/web3Utils';
+import { FormattedMessage } from 'react-intl';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -35,14 +36,16 @@ const AdminEditProductPage: React.FC = () => {
       const web3 = await getWeb3();
       if (!web3) {
         message.error(
-          'Web3 is not initialized. Make sure MetaMask is installed and logged in.'
+          <FormattedMessage id='adminEditProductPage.web3NotInitialized' />
         );
         return;
       }
 
       const contract = await getContract(web3);
       if (!contract) {
-        message.error('Failed to load contract.');
+        message.error(
+          <FormattedMessage id='adminEditProductPage.failedToLoadContract' />
+        );
         return;
       }
 
@@ -72,11 +75,15 @@ const AdminEditProductPage: React.FC = () => {
             authorizationRecord: productData.authorizationRecord,
           });
         } else {
-          message.error('Product not found');
+          message.error(
+            <FormattedMessage id='adminEditProductPage.productNotFound' />
+          );
           navigate('/admin/products');
         }
       } catch (error) {
-        message.error('Failed to fetch product data.');
+        message.error(
+          <FormattedMessage id='adminEditProductPage.fetchFailed' />
+        );
       }
     };
 
@@ -131,20 +138,24 @@ const AdminEditProductPage: React.FC = () => {
       const web3 = await getWeb3();
       if (!web3) {
         message.error(
-          'Web3 is not initialized. Make sure MetaMask is installed and logged in.'
+          <FormattedMessage id='adminEditProductPage.web3NotInitialized' />
         );
         return;
       }
 
       const contract = await getContract(web3);
       if (!contract) {
-        message.error('Failed to load contract.');
+        message.error(
+          <FormattedMessage id='adminEditProductPage.failedToLoadContract' />
+        );
         return;
       }
 
       const accounts = await web3.eth.getAccounts();
       if (accounts.length === 0) {
-        message.error('No accounts found.');
+        message.error(
+          <FormattedMessage id='adminEditProductPage.noAccounts' />
+        );
         return;
       }
 
@@ -189,55 +200,85 @@ const AdminEditProductPage: React.FC = () => {
         gas: gas.toString(),
       });
 
-      message.success('Product updated successfully');
+      message.success(
+        <FormattedMessage id='adminEditProductPage.updateSuccess' />
+      );
       navigate('/admin/products');
     } catch (error: unknown) {
       const errMsg = (error as Error).message;
       console.error('Error updating product:', errMsg);
-      message.error('Failed to update product.');
+      message.error(
+        <FormattedMessage id='adminEditProductPage.updateFailed' />
+      );
     }
   };
 
   return (
     <div style={{ padding: '24px' }}>
-      <Title level={2}>Edit Product</Title>
+      <Title level={2}>
+        <FormattedMessage id='adminEditProductPage.title' />
+      </Title>
       {product && (
         <Form layout='vertical' onFinish={handleSubmit}>
-          <Title level={3}>基本信息</Title>
-          <Form.Item label='商品ID'>
+          <Title level={3}>
+            <FormattedMessage id='adminEditProductPage.basicInfo' />
+          </Title>
+          <Form.Item
+            label={<FormattedMessage id='adminEditProductPage.productId' />}
+          >
             <Input name='productId' value={product.productId} disabled />
           </Form.Item>
-          <Form.Item label='商品名称' required>
+          <Form.Item
+            label={<FormattedMessage id='adminEditProductPage.productName' />}
+            required
+          >
             <Input
               name='name'
               value={product.name}
               onChange={handleInputChange}
             />
           </Form.Item>
-          <Form.Item label='商品描述' required>
+          <Form.Item
+            label={
+              <FormattedMessage id='adminEditProductPage.productDescription' />
+            }
+            required
+          >
             <Input
               name='description'
               value={product.description}
               onChange={handleInputChange}
             />
           </Form.Item>
-          <Form.Item label='元数据'>
+          <Form.Item
+            label={<FormattedMessage id='adminEditProductPage.metadata' />}
+          >
             <Row gutter={16}>
               <Col span={8}>
-                <Form.Item label='类别'>
+                <Form.Item
+                  label={
+                    <FormattedMessage id='adminEditProductPage.category' />
+                  }
+                >
                   <Select
                     value={product.metadata.category}
                     onChange={value => handleMetadataChange('category', value)}
                   >
-                    <Option value='游戏皮肤'>游戏皮肤</Option>
-                    <Option value='其他类别'>其他类别</Option>
+                    <Option value='gameSkin'>
+                      <FormattedMessage id='adminEditProductPage.gameSkin' />
+                    </Option>
+                    <Option value='otherCategory'>
+                      <FormattedMessage id='adminEditProductPage.otherCategory' />
+                    </Option>
                   </Select>
                 </Form.Item>
               </Col>
               <Col span={8}>
-                <Form.Item label='标签'>
+                <Form.Item
+                  label={<FormattedMessage id='adminEditProductPage.tags' />}
+                >
                   <Input
-                    placeholder='请输入标签, 用逗号隔开'
+                    placeholder='Enter tags, separated by commas'
                     value={product.metadata.tags.join(',')}
                     onChange={e =>
                       handleMetadataChange(
@@ -249,9 +290,13 @@ const AdminEditProductPage: React.FC = () => {
                 </Form.Item>
               </Col>
               <Col span={8}>
-                <Form.Item label='图片URL'>
+                <Form.Item
+                  label={
+                    <FormattedMessage id='adminEditProductPage.imageUrl' />
+                  }
+                >
                   <Input
-                    placeholder='请输入图片URL'
+                    placeholder='Enter image URL'
                     value={product.metadata.imageUrl}
                     onChange={e =>
                       handleMetadataChange('imageUrl', e.target.value)
@@ -262,17 +307,29 @@ const AdminEditProductPage: React.FC = () => {
             </Row>
           </Form.Item>
 
-          <Title level={3}>所有权和授权</Title>
-          <Form.Item label='当前所有者' required>
+          <Title level={3}>
+            <FormattedMessage id='adminEditProductPage.ownershipAndAuthorization' />
+          </Title>
+          <Form.Item
+            label={<FormattedMessage id='adminEditProductPage.currentOwner' />}
+            required
+          >
             <Input name='currentOwner' value={product.currentOwner} disabled />
           </Form.Item>
-          <Form.Item label='创作者' required>
+          <Form.Item
+            label={<FormattedMessage id='adminEditProductPage.creator' />}
+            required
+          >
             <Input name='creator' value={product.creator} disabled />
           </Form.Item>
 
-          <Title level={3}>交易信息</Title>
+          <Title level={3}>
+            <FormattedMessage id='adminEditProductPage.transactionInfo' />
+          </Title>
 
-          <Form.Item label='货币类型'>
+          <Form.Item
+            label={<FormattedMessage id='adminEditProductPage.currencyType' />}
+          >
             <Select
               value={product.currency}
               onChange={handleSelectChange}
@@ -283,7 +340,10 @@ const AdminEditProductPage: React.FC = () => {
             </Select>
           </Form.Item>
 
-          <Form.Item label='价格' required>
+          <Form.Item
+            label={<FormattedMessage id='adminEditProductPage.price' />}
+            required
+          >
             <Input
               type='number'
               name='price'
@@ -292,11 +352,19 @@ const AdminEditProductPage: React.FC = () => {
             />
           </Form.Item>
 
-          <Title level={3}>安全和验证</Title>
-          <Form.Item label='哈希值'>
+          <Title level={3}>
+            <FormattedMessage id='adminEditProductPage.securityAndVerification' />
+          </Title>
+          <Form.Item
+            label={<FormattedMessage id='adminEditProductPage.hash' />}
+          >
             <Input name='hash' value={product.hash} disabled />
           </Form.Item>
-          <Form.Item label='数字签名'>
+          <Form.Item
+            label={
+              <FormattedMessage id='adminEditProductPage.digitalSignature' />
+            }
+          >
             <Input
               name='digitalSignature'
               value={product.digitalSignature}
@@ -304,8 +372,14 @@ const AdminEditProductPage: React.FC = () => {
             />
           </Form.Item>
 
-          <Title level={3}>智能合约规则</Title>
-          <Form.Item label='交易条件'>
+          <Title level={3}>
+            <FormattedMessage id='adminEditProductPage.smartContractRules' />
+          </Title>
+          <Form.Item
+            label={
+              <FormattedMessage id='adminEditProductPage.transactionConditions' />
+            }
+          >
             <Checkbox.Group
               value={
                 product.transactionConditions.fixedPricePayment
@@ -316,12 +390,18 @@ const AdminEditProductPage: React.FC = () => {
             >
               <Row>
                 <Col span={24}>
-                  <Checkbox value='fixedPricePayment'>固定价格支付</Checkbox>
+                  <Checkbox value='fixedPricePayment'>
+                    <FormattedMessage id='adminEditProductPage.fixedPricePayment' />
+                  </Checkbox>
                 </Col>
               </Row>
             </Checkbox.Group>
           </Form.Item>
-          <Form.Item label='版权和使用权规则'>
+          <Form.Item
+            label={
+              <FormattedMessage id='adminEditProductPage.copyrightUsageRules' />
+            }
+          >
             <Dropdown
               menu={{ items: menuItems, onClick: handleMenuClick }}
               trigger={['click']}
@@ -339,7 +419,7 @@ const AdminEditProductPage: React.FC = () => {
           </Form.Item>
 
           <Button type='primary' htmlType='submit'>
-            更新商品
+            <FormattedMessage id='adminEditProductPage.updateProductButton' />
           </Button>
         </Form>
       )}

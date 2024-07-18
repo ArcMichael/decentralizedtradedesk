@@ -13,6 +13,7 @@ import { getWeb3, getContract } from '../web3/web3Config';
 import { defaultImage } from '../constants';
 import { Product, Metadata, ContractProduct } from '../interfaces';
 import { shortenAddress } from '../utils/utils';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 const { Search } = Input;
 const { Meta } = Card;
@@ -24,20 +25,21 @@ const BrowsePage: React.FC = () => {
     undefined
   );
   const navigate = useNavigate();
+  const intl = useIntl();
 
   useEffect(() => {
     const initialize = async () => {
       const web3 = await getWeb3();
       if (!web3) {
         message.error(
-          'Web3 is not initialized. Make sure MetaMask is installed and logged in.'
+          intl.formatMessage({ id: 'browsePage.web3NotInitialized' })
         );
         return;
       }
 
       const accounts = await web3.eth.getAccounts();
       if (accounts.length === 0) {
-        message.error('No accounts found.');
+        message.error(intl.formatMessage({ id: 'browsePage.noAccounts' }));
         return;
       }
 
@@ -51,7 +53,9 @@ const BrowsePage: React.FC = () => {
   const fetchProducts = async (web3: any) => {
     const contract = await getContract(web3);
     if (!contract) {
-      message.error('Failed to load contract.');
+      message.error(
+        intl.formatMessage({ id: 'browsePage.failedToLoadContract' })
+      );
       return;
     }
 
@@ -73,8 +77,6 @@ const BrowsePage: React.FC = () => {
             error
           );
         }
-
-        console.log(product);
 
         products.push({
           id: product.id,
@@ -128,19 +130,20 @@ const BrowsePage: React.FC = () => {
     const web3 = await getWeb3();
     if (!web3) {
       message.error(
-        'Web3 is not initialized. Make sure MetaMask is installed and logged in.'
+        intl.formatMessage({ id: 'browsePage.web3NotInitialized' })
       );
       return;
     }
 
     const contract = await getContract(web3);
     if (!contract) {
-      message.error('Failed to load contract.');
+      message.error(
+        intl.formatMessage({ id: 'browsePage.failedToLoadContract' })
+      );
       return;
     }
 
     try {
-      console.log(currentAccount);
       await contract.methods
         .purchaseProduct(product.id)
         .send({
@@ -151,21 +154,24 @@ const BrowsePage: React.FC = () => {
           console.log(result);
           navigate(0);
         });
-      message.success('Purchase successful!');
-      // Update product status or other related UI updates can be done here
+      message.success(intl.formatMessage({ id: 'browsePage.purchaseSuccess' }));
     } catch (error) {
       console.error('Purchase failed:', error);
-      message.error('Purchase failed. Please try again.');
+      message.error(intl.formatMessage({ id: 'browsePage.purchaseFailed' }));
     }
   };
 
   return (
     <div style={{ padding: '24px' }}>
       <header>
-        <h1>Browse Items</h1>
+        <h1>
+          <FormattedMessage id='browsePage.title' />
+        </h1>
         <Search
-          placeholder='Search for items'
-          enterButton='Search'
+          placeholder={intl.formatMessage({
+            id: 'browsePage.searchPlaceholder',
+          })}
+          enterButton={intl.formatMessage({ id: 'browsePage.searchButton' })}
           size='large'
           onSearch={onSearch}
           style={{ marginBottom: '24px' }}
@@ -179,8 +185,8 @@ const BrowsePage: React.FC = () => {
               actions={[
                 <Popover
                   placement='top'
-                  title='Info'
-                  content='More details about the product'
+                  title={<FormattedMessage id='browsePage.info' />}
+                  content={<FormattedMessage id='browsePage.infoContent' />}
                 >
                   <InfoCircleOutlined
                     key='info'
@@ -190,8 +196,10 @@ const BrowsePage: React.FC = () => {
                 currentAccount === product.currentOwnerAddress && (
                   <Popover
                     placement='top'
-                    title='Settings'
-                    content='Configure product settings'
+                    title={<FormattedMessage id='browsePage.settings' />}
+                    content={
+                      <FormattedMessage id='browsePage.settingsContent' />
+                    }
                   >
                     <SettingOutlined
                       key='setting'
@@ -202,8 +210,10 @@ const BrowsePage: React.FC = () => {
                 currentAccount !== product.currentOwnerAddress && (
                   <Popover
                     placement='top'
-                    title='Purchase'
-                    content='Purchase this product'
+                    title={<FormattedMessage id='browsePage.purchase' />}
+                    content={
+                      <FormattedMessage id='browsePage.purchaseContent' />
+                    }
                   >
                     <ShoppingCartOutlined
                       key='purchase'
@@ -225,21 +235,33 @@ const BrowsePage: React.FC = () => {
                         textOverflow: 'ellipsis',
                       }}
                     >
-                      Description: {product.description}
+                      <FormattedMessage id='browsePage.description' />:{' '}
+                      {product.description}
                     </p>
                     <p>
-                      Price: {product.price} {product.currency}
+                      <FormattedMessage id='browsePage.price' />:{' '}
+                      {product.price} {product.currency}
                     </p>
-                    <p>creator: {shortenAddress(product.creatorAddress)}</p>
                     <p>
-                      current: {shortenAddress(product.currentOwnerAddress)}
+                      <FormattedMessage id='browsePage.creator' />:{' '}
+                      {shortenAddress(product.creatorAddress)}
+                    </p>
+                    <p>
+                      <FormattedMessage id='browsePage.currentOwner' />:{' '}
+                      {shortenAddress(product.currentOwnerAddress)}
                     </p>
                     <Divider orientation='left' style={{ color: 'gray' }}>
-                      Metadata
+                      <FormattedMessage id='browsePage.metadata' />
                     </Divider>
 
-                    <p>Category: {product.category}</p>
-                    <p>Tags: {product.tags.join(', ')}</p>
+                    <p>
+                      <FormattedMessage id='browsePage.category' />:{' '}
+                      {product.category}
+                    </p>
+                    <p>
+                      <FormattedMessage id='browsePage.tags' />:{' '}
+                      {product.tags.join(', ')}
+                    </p>
                     <p>{product.copyrightUsageRules}</p>
                   </div>
                 }

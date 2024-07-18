@@ -1,0 +1,23 @@
+{
+  "browsePage.web3NotInitialized": "Web3 is not initialized. Make sure MetaMask is installed and logged in.",
+  "browsePage.noAccounts": "No accounts found.",
+  "browsePage.failedToLoadContract": "Failed to load contract.",
+  "browsePage.purchaseSuccess": "Purchase successful!",
+  "browsePage.purchaseFailed": "Purchase failed. Please try again.",
+  "browsePage.title": "Browse Items",
+  "browsePage.searchPlaceholder": "Search for items",
+  "browsePage.searchButton": "Search",
+  "browsePage.info": "Info",
+  "browsePage.infoContent": "More details about the product",
+  "browsePage.settings": "Settings",
+  "browsePage.settingsContent": "Configure product settings",
+  "browsePage.purchase": "Purchase",
+  "browsePage.purchaseContent": "Purchase this product",
+  "browsePage.description": "Description",
+  "browsePage.price": "Price",
+  "browsePage.creator": "Creator",
+  "browsePage.currentOwner": "Current",
+  "browsePage.metadata": "Metadata",
+  "browsePage.category": "Category",
+  "browsePage.tags": "Tags"
+}

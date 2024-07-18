@@ -4,7 +4,7 @@ import React from 'react';
 import { Layout, Menu, MenuProps } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import routeConfig, { RouteConfig } from '../Route/routeConfig';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 const CustomSider: React.FC<{ collapsed: boolean }> = ({ collapsed }) => {
   const navigate = useNavigate();
@@ -13,7 +13,6 @@ const CustomSider: React.FC<{ collapsed: boolean }> = ({ collapsed }) => {
   const renderMenuItems = (routes: RouteConfig[]): MenuProps['items'] =>
     routes
       .map(route => {
-        console.log(<FormattedMessage id='home' />);
         if (route.children) {
           return {
             key: route.path,
