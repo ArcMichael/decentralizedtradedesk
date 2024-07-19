@@ -42,6 +42,9 @@ const CustomFooter: React.FC = () => {
             <li>
               <FormattedMessage id='customfooter.users' />
             </li>
+            <li>
+              <FormattedMessage id='customfooter.wallet' />
+            </li>
             {/* <li>
               <FormattedMessage id='customfooter.orders' />
             </li>
@@ -64,9 +67,7 @@ const CustomFooter: React.FC = () => {
             <li>
               <FormattedMessage id='customfooter.settings' />
             </li>
-            <li>
-              <FormattedMessage id='customfooter.wallet' />
-            </li>
+
           </ul>
         </Col> */}
         <Col span={24} md={8}>

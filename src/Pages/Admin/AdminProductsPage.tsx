@@ -99,7 +99,7 @@ const AdminProductsPage: React.FC = () => {
             currentOwnerAddress: product.currentOwner,
           });
 
-          console.log('products', products);
+          // console.log('products', products);
         }
       } catch (error) {
         console.error(`Failed to fetch product with id ${productId}:`, error);

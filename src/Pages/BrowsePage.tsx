@@ -180,7 +180,7 @@ const BrowsePage: React.FC = () => {
 
       <Row gutter={[16, 16]}>
         {filteredProducts.map(product => (
-          <Col span={6} key={product.id}>
+          <Col xs={24} sm={24} md={12} lg={8} xl={6} key={product.id}>
             <Card
               actions={[
                 <Popover
