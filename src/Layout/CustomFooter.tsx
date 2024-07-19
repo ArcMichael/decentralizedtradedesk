@@ -18,7 +18,7 @@ const CustomFooter: React.FC = () => {
             <FormattedMessage id='customfooter.overview' />
           </Paragraph>
         </Col>
-        <Col span={12} md={6}>
+        <Col span={24} md={8}>
           <Title level={4}>
             <FormattedMessage id='customfooter.general' />
           </Title>
@@ -31,7 +31,7 @@ const CustomFooter: React.FC = () => {
             </li>
           </ul>
         </Col>
-        <Col span={12} md={6}>
+        <Col span={24} md={8}>
           <Title level={4}>
             <FormattedMessage id='customfooter.adminPanel' />
           </Title>
@@ -42,15 +42,15 @@ const CustomFooter: React.FC = () => {
             <li>
               <FormattedMessage id='customfooter.users' />
             </li>
-            <li>
+            {/* <li>
               <FormattedMessage id='customfooter.orders' />
             </li>
             <li>
               <FormattedMessage id='customfooter.statistics' />
-            </li>
+            </li> */}
           </ul>
         </Col>
-        <Col span={12} md={6}>
+        {/* <Col span={12} md={6}>
           <Title level={4}>
             <FormattedMessage id='customfooter.dashboard' />
           </Title>
@@ -68,8 +68,8 @@ const CustomFooter: React.FC = () => {
               <FormattedMessage id='customfooter.wallet' />
             </li>
           </ul>
-        </Col>
-        <Col span={12} md={6}>
+        </Col> */}
+        <Col span={24} md={8}>
           <Title level={4}>
             <FormattedMessage id='customfooter.explore' />
           </Title>
