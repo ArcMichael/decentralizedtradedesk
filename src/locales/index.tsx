@@ -36,6 +36,9 @@ import enNotFoundPage from './en/NotFoundPage.json';
 import zhAdminUsersPage from './zh/AdminUsersPage.json';
 import enAdminUsersPage from './en/AdminUsersPage.json';
 
+import zhUserWalletPage from './zh/UserWalletPage.json';
+import enUserWalletPage from './en/UserWalletPage.json';
+
 export const messages = {
   zh: {
     ...zhCustomFooter,
@@ -50,6 +53,7 @@ export const messages = {
     ...zhProductDetailPage,
     ...zhNotFoundPage,
     ...zhAdminUsersPage,
+    ...zhUserWalletPage,
   },
   en: {
     ...enCustomFooter,
@@ -64,6 +68,7 @@ export const messages = {
     ...enProductDetailPage,
     ...enNotFoundPage,
     ...enAdminUsersPage,
+    ...enUserWalletPage,
   },
 };
 

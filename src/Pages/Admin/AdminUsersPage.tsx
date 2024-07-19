@@ -1,8 +1,8 @@
-// src/Pages/Admin/AdminUsersPage.tsx
 import React, { useState, useEffect } from 'react';
 import WithCustomLayout from '../../Layout/WithCustomLayout';
 import { Typography, List, message } from 'antd';
 import { getWeb3 } from '../../web3/web3Config';
+import { FormattedMessage } from 'react-intl';
 
 const { Title } = Typography;
 
@@ -44,8 +44,12 @@ const AdminUsersPage: React.FC = () => {
 
   return (
     <div style={{ padding: '24px' }}>
-      <Title level={3}>Web3 Users</Title>
-      <p>Manage all Web3 users and their information.</p>
+      <Title level={3}>
+        <FormattedMessage id='adminUsersPage.title' />
+      </Title>
+      <p>
+        <FormattedMessage id='adminUsersPage.description' />
+      </p>
       {account && (
         <List
           bordered
@@ -57,7 +61,7 @@ const AdminUsersPage: React.FC = () => {
                   selectedAccount === item.address ? '#ffeb3b' : 'transparent',
               }}
             >
-              {item.address} - Balance: {item.balance}
+              {item.address} - <FormattedMessage id='balance' />: {item.balance}
             </List.Item>
           )}
         />

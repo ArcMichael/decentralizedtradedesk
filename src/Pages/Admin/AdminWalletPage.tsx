@@ -1,8 +1,8 @@
-// src/Pages/Dashboard/UserWalletPage.tsx
 import React, { useState, useEffect } from 'react';
 import WithCustomLayout from '../../Layout/WithCustomLayout';
 import { Typography, List, message } from 'antd';
 import { getWeb3 } from '../../web3/web3Config';
+import { FormattedMessage } from 'react-intl';
 
 const { Title } = Typography;
 
@@ -42,16 +42,24 @@ const UserWalletPage: React.FC = () => {
 
   return (
     <div style={{ padding: '24px' }}>
-      <Title level={2}>User Wallet Page</Title>
-      <p>Manage your wallet and transactions from this page.</p>
+      <Title level={2}>
+        <FormattedMessage id='userWalletPage.title' />
+      </Title>
+      <p>
+        <FormattedMessage id='userWalletPage.description' />
+      </p>
       <List
         bordered
         dataSource={accounts}
         renderItem={(item, index) => (
           <List.Item style={index === 0 ? { backgroundColor: '#ffeb3b' } : {}}>
             <div>
-              <div>Address: {item}</div>
-              <div>Balance: {balances[item]} ETH</div>
+              <div>
+                <FormattedMessage id='address' />: {item}
+              </div>
+              <div>
+                <FormattedMessage id='balance' />: {balances[item]} ETH
+              </div>
             </div>
           </List.Item>
         )}
