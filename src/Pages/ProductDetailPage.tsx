@@ -79,7 +79,7 @@ const ProductDetailPage: React.FC = () => {
 
           console.log('events', events);
 
-          const historyPromises = events.map(async (eventsList, index) => {
+          const historyPromises = events.map(async eventsList => {
             const receipt = await web3.eth.getTransactionReceipt(
               eventsList.transactionHash
             );
@@ -142,7 +142,7 @@ const ProductDetailPage: React.FC = () => {
                     </p>
                     <p>
                       <FormattedMessage id='productDetailPage.from' />:{' '}
-                      {eventsList.returnValues.buyer}
+                      {eventsList.returnValues.buyer.toLowerCase()}
                     </p>
                   </>
                 );
@@ -185,7 +185,7 @@ const ProductDetailPage: React.FC = () => {
     };
 
     fetchProduct();
-  }, [id]);
+  }, [id, intl]);
 
   if (!product) {
     return (

@@ -30,6 +30,12 @@ import enBrowsePage from './en/BrowsePage.json';
 import zhProductDetailPage from './zh/ProductDetailPage.json';
 import enProductDetailPage from './en/ProductDetailPage.json';
 
+import zhNotFoundPage from './zh/NotFoundPage.json';
+import enNotFoundPage from './en/NotFoundPage.json';
+
+import zhAdminUsersPage from './zh/AdminUsersPage.json';
+import enAdminUsersPage from './en/AdminUsersPage.json';
+
 export const messages = {
   zh: {
     ...zhCustomFooter,
@@ -42,6 +48,8 @@ export const messages = {
     ...zhAdminProductPage,
     ...zhBrowsePage,
     ...zhProductDetailPage,
+    ...zhNotFoundPage,
+    ...zhAdminUsersPage,
   },
   en: {
     ...enCustomFooter,
@@ -54,6 +62,8 @@ export const messages = {
     ...enAdminProductPage,
     ...enBrowsePage,
     ...enProductDetailPage,
+    ...enNotFoundPage,
+    ...enAdminUsersPage,
   },
 };
 
