@@ -1,3 +1,21 @@
+## <small>0.0.14 (2024-07-19)</small>
+
+* docs(rm img): rm img ([748f293](https://github.com/ArcMichael/decentralizedtradedesk/commit/748f293))
+* docs(tree): new version and update tree ([f4fcb7d](https://github.com/ArcMichael/decentralizedtradedesk/commit/f4fcb7d))
+* feat(intl admin-{user,wallet}): i18n ([944821c](https://github.com/ArcMichael/decentralizedtradedesk/commit/944821c))
+* feat(locales, page, react-intl): create new module to transform english and add new button to change ([8f4f9e6](https://github.com/ArcMichael/decentralizedtradedesk/commit/8f4f9e6))
+* feat(sider{provider,context,custom},layout,footer,browse,pdp): a bit update ([f3a70b7](https://github.com/ArcMichael/decentralizedtradedesk/commit/f3a70b7))
+* test(babelrc, jest.config.json, other): modifying jest about babelrc and jest.config and enhance ui ([c862a9d](https://github.com/ArcMichael/decentralizedtradedesk/commit/c862a9d))
+* feat(footer sider home login nreadcrumbs): more page translations setting ([737f803](https://github.com/ArcMichael/decentralizedtradedesk/commit/737f803))
+* feat(intl): update ([a7e66b0](https://github.com/ArcMichael/decentralizedtradedesk/commit/a7e66b0))
+* feat(jest.config comp.test.tsx customheader.tsx): jest fix some of them, ignore the rest for now ([579972b](https://github.com/ArcMichael/decentralizedtradedesk/commit/579972b))
+* feat(page router): all of page, fix route ([8e696f2](https://github.com/ArcMichael/decentralizedtradedesk/commit/8e696f2))
+* feat(react-intl): more page ([e5598fd](https://github.com/ArcMichael/decentralizedtradedesk/commit/e5598fd))
+* perf(pref): pref ([95ad730](https://github.com/ArcMichael/decentralizedtradedesk/commit/95ad730))
+* test(jest ignore): jest ([4be5d14](https://github.com/ArcMichael/decentralizedtradedesk/commit/4be5d14))
+
+
+
 ## <small>0.0.13 (2024-07-12)</small>
 
 * chore(release): 0.0.13 ([b6cce9a](https://github.com/ArcMichael/decentralizedtradedesk/commit/b6cce9a))
