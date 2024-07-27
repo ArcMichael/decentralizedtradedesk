@@ -1,5 +1,11 @@
+## <small>0.1.1 (2024-07-27)</small>
+
+
+
+
 ## 0.1.0 (2024-07-27)
 
+* chore(release): 0.1.0 ([1f2bf47](https://github.com/ArcMichael/decentralizedtradedesk/commit/1f2bf47))
 * feat(new version come): new version ([d310ba8](https://github.com/ArcMichael/decentralizedtradedesk/commit/d310ba8))
 
 
