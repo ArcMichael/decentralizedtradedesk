@@ -1,5 +1,6 @@
 ## <small>0.1.1 (2024-07-27)</small>
 
+* chore(release): 0.1.1 ([6532da3](https://github.com/ArcMichael/decentralizedtradedesk/commit/6532da3))
 
 
 
