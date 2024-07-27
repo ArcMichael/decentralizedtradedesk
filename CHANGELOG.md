@@ -1,3 +1,9 @@
+## 0.1.0 (2024-07-27)
+
+* feat(new version come): new version ([d310ba8](https://github.com/ArcMichael/decentralizedtradedesk/commit/d310ba8))
+
+
+
 ## <small>0.0.14 (2024-07-19)</small>
 
 * chore(release): 0.0.14 ([4df981d](https://github.com/ArcMichael/decentralizedtradedesk/commit/4df981d))

@@ -1,6 +1,6 @@
 {
   "name": "decentralizedtradedesk",
-  "version": "0.0.14",
+  "version": "0.1.0",
   "private": true,
   "description": "A decentralized trade desk application",
   "homepage": "https://github.com/ArcMichael/decentralizedtradedesk#readme",
@@ -25,6 +25,7 @@
     "preview": "vite preview",
     "push": "git push",
     "release": "standard-version && git push origin main && git push origin main --tags",
+    "release-minor": "standard-version --release-as minor && git push origin main && git push origin main --tags",
     "release-rust": "node auto-increment-rust-version.cjs",
     "tauri": "tauri",
     "tauri-build": "tauri build",
