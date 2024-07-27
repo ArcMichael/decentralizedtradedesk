@@ -1,5 +1,6 @@
 ## <small>0.0.14 (2024-07-19)</small>
 
+* chore(release): 0.0.14 ([4df981d](https://github.com/ArcMichael/decentralizedtradedesk/commit/4df981d))
 * docs(rm img): rm img ([748f293](https://github.com/ArcMichael/decentralizedtradedesk/commit/748f293))
 * docs(tree): new version and update tree ([f4fcb7d](https://github.com/ArcMichael/decentralizedtradedesk/commit/f4fcb7d))
 * feat(intl admin-{user,wallet}): i18n ([944821c](https://github.com/ArcMichael/decentralizedtradedesk/commit/944821c))

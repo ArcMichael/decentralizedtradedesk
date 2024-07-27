@@ -17,11 +17,5 @@
     "\\.(css|less|sass|scss)$": "identity-obj-proxy"
   },
   "setupFilesAfterEnv": ["<rootDir>/src/setupTests.ts"],
-  "testPathIgnorePatterns": [
-    "src/__tests__/LoginPage.test.tsx",
-    "src/__tests__/CustomSider.test.tsx",
-    "src/__tests__/WithSimpleLayout.test.tsx",
-    "src/__tests__/CustomFooter.test.tsx",
-    "src/__tests__/CustomContent.test.tsx"
-  ]
+  "testPathIgnorePatterns": []
 }
