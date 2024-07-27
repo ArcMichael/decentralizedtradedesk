@@ -1,5 +1,6 @@
 ## <small>0.1.1 (2024-07-27)</small>
 
+* feat(jest): jest ([26c4e85](https://github.com/ArcMichael/decentralizedtradedesk/commit/26c4e85))
 * test(test): test ([88523d2](https://github.com/ArcMichael/decentralizedtradedesk/commit/88523d2))
 * chore(release): 0.1.1 ([6532da3](https://github.com/ArcMichael/decentralizedtradedesk/commit/6532da3))
 
