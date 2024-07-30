@@ -7,31 +7,43 @@
 ├── commitlint.config.mjs
 ├── dist
 |  ├── assets
-|  |  ├── AdminOrdersPage-Bxu_JF3S.js
-|  |  ├── AdminProductsPage-D_sNZHqV.js
-|  |  ├── AdminStatisticsPage-B9aNkaup.js
-|  |  ├── AdminUsersPage-D-ky8-_5.js
-|  |  ├── BrowsePage-BX4f9YMb.js
-|  |  ├── CloseOutlined-qxa7prRb.js
-|  |  ├── CustomFooter-DcOObeIR.js
-|  |  ├── ExclamationCircleFilled-BgHTL8Hl.js
-|  |  ├── HomePage-CIxpoeXz.js
-|  |  ├── LoginPage-C20nC3Mr.js
-|  |  ├── NotFoundPage-JJhPFnZk.js
-|  |  ├── ProductDetailPage-BNPTRg4L.js
-|  |  ├── RegisterPage-DEV9DTYN.js
-|  |  ├── UserOrdersPage-BgeqGKlv.js
-|  |  ├── UserProfilePage-COntG8l9.js
-|  |  ├── UserSettingsPage-DaEMKQZJ.js
-|  |  ├── UserWalletPage-DILB-VhB.js
-|  |  ├── WithCustomLayout-DZHA8NbD.js
-|  |  ├── WithSimpleLayout-CgTw7QUF.js
-|  |  ├── index-BNT3MDnT.js
+|  |  ├── AdminAddProductPage-Diimpl8_.js
+|  |  ├── AdminEditProductPage-D3Nm3-JA.js
+|  |  ├── AdminProductsPage-Bu95XH6a.js
+|  |  ├── AdminUsersPage-CWymC1JY.js
+|  |  ├── AdminWalletPage-CUxWnhbw.js
+|  |  ├── BrowsePage-DpeMIdu1.js
+|  |  ├── CloseOutlined-IKRnwPHU.js
+|  |  ├── CustomFooter-Bt_pEKAu.js
+|  |  ├── ExclamationCircleFilled-DijTM4Ar.js
+|  |  ├── HomePage-Bf4yHFiL.js
+|  |  ├── LoginPage-bNVhCUeQ.js
+|  |  ├── NotFoundPage-Cm44qMDw.js
+|  |  ├── Pagination-BON-GRl7.js
+|  |  ├── ProductDetailPage-DV8F92bi.js
+|  |  ├── SearchOutlined-RHE3bSuP.js
+|  |  ├── Skeleton-CyHRPshP.js
+|  |  ├── WithCustomLayout-8Va8Q-SE.js
+|  |  ├── constants-B5jTh0ZK.js
+|  |  ├── index-B97hcpBF.js
+|  |  ├── index-BBxlSBmE.js
+|  |  ├── index-BWJ0cZ4L.js
 |  |  ├── index-BbvpVyZv.css
-|  |  ├── index-DDLG82sH.js
-|  |  └── index-jwxbLKGo.js
+|  |  ├── index-Ch0KeB2R.js
+|  |  ├── index-DM58D2mu.js
+|  |  ├── index-FdyF45IQ.js
+|  |  ├── index-MYmsLAXt.js
+|  |  ├── index-s91gb0PC.js
+|  |  ├── utils-545eZH0U.js
+|  |  ├── web3Config-Boz3l3I8.js
+|  |  └── web3Utils-PI_m6GPr.js
 |  ├── index.html
 |  ├── tauri.svg
+|  ├── thumb
+|  |  ├── resized_image1_240x240.webp
+|  |  ├── resized_image2_240x240.webp
+|  |  ├── resized_image3_240x240.webp
+|  |  └── tauri.svg
 |  └── vite.svg
 ├── index.html
 ├── jest.config.json
@@ -39,9 +51,6 @@
 ├── package.json
 ├── pnpm-lock.yaml
 ├── public
-|  ├── DALL·E 2024-07-06 22.10.11 - Create an image depicting the historical Eastern Roman (Byzantine) Empire with a focus on its influence in Turkey. The scene includes iconic Byzantine.webp
-|  ├── DALL·E 2024-07-06 22.16.30 - Create a historical painting depicting the aftermath of the Treaty of Paris, focusing on the major colonial shifts and emerging conflicts. The scene f.webp
-|  ├── DALL·E 2024-07-06 22.53.37 - Modify the layered historical image to emphasize the modern Middle Eastern warfare layer. Expand this bottom layer to make it more prominent, featurin.webp
 |  ├── tauri.svg
 |  ├── thumb
 |  |  ├── resized_image1_240x240.webp
@@ -69,13 +78,13 @@
 |  |  |  ├── AdminOrdersPage.tsx
 |  |  |  ├── AdminProductsPage.tsx
 |  |  |  ├── AdminStatisticsPage.tsx
-|  |  |  └── AdminUsersPage.tsx
+|  |  |  ├── AdminUsersPage.tsx
+|  |  |  └── AdminWalletPage.tsx
 |  |  ├── BrowsePage.tsx
 |  |  ├── Dashboard
 |  |  |  ├── UserOrdersPage.tsx
 |  |  |  ├── UserProfilePage.tsx
-|  |  |  ├── UserSettingsPage.tsx
-|  |  |  └── UserWalletPage.tsx
+|  |  |  └── UserSettingsPage.tsx
 |  |  ├── HomePage.tsx
 |  |  ├── LoginPage.tsx
 |  |  ├── NotFoundPage.tsx
@@ -86,13 +95,10 @@
 |  |  ├── Routes.tsx
 |  |  └── routeConfig.tsx
 |  ├── __tests__
-|  |  ├── CustomContent.test.tsx
-|  |  ├── CustomFooter.test.tsx
-|  |  ├── CustomHeader.test.tsx
-|  |  ├── CustomSider.test.tsx
-|  |  ├── LoginPage.test.tsx
-|  |  ├── WithSimpleLayout.test.tsx
-|  |  └── routeConfig.test.tsx
+|  |  ├── LanguageContext.test.tsx
+|  |  ├── PrivateRoute.test.tsx
+|  |  ├── Routes.test.tsx
+|  |  └── UserContext.test.tsx
 |  ├── assets
 |  |  └── react.svg
 |  ├── build
@@ -100,8 +106,40 @@
 |  |     └── ProductContract.json
 |  ├── constants.ts
 |  ├── contexts
+|  |  ├── LanguageContext.tsx
+|  |  ├── SiderContext.tsx
 |  |  └── UserContext.tsx
 |  ├── interfaces.ts
+|  ├── locales
+|  |  ├── en
+|  |  |  ├── AdminAddProductPage.json
+|  |  |  ├── AdminEditProductPage.json
+|  |  |  ├── AdminProductPage.json
+|  |  |  ├── AdminUsersPage.json
+|  |  |  ├── BrowsePage.json
+|  |  |  ├── CustomFooter.json
+|  |  |  ├── CustomSider.json
+|  |  |  ├── HomePage.json
+|  |  |  ├── LoginPage.json
+|  |  |  ├── NotFoundPage.json
+|  |  |  ├── ProductDetailPage.json
+|  |  |  ├── UserMenu.json
+|  |  |  └── UserWalletPage.json
+|  |  ├── index.tsx
+|  |  └── zh
+|  |     ├── AdminAddProductPage.json
+|  |     ├── AdminEditProductPage.json
+|  |     ├── AdminProductPage.json
+|  |     ├── AdminUsersPage.json
+|  |     ├── BrowsePage.json
+|  |     ├── CustomFooter.json
+|  |     ├── CustomSider.json
+|  |     ├── HomePage.json
+|  |     ├── LoginPage.json
+|  |     ├── NotFoundPage.json
+|  |     ├── ProductDetailPage.json
+|  |     ├── UserMenu.json
+|  |     └── UserWalletPage.json
 |  ├── main.tsx
 |  ├── services
 |  ├── setupTests.ts
@@ -186,6 +224,6 @@
 ├── tsconfig.node.json
 └── vite.config.ts
 
-directory: 57 file: 141 symboliclink: 74
+directory: 61 file: 175 symboliclink: 75
 
 ignored: directory (1)
