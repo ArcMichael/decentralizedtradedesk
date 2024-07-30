@@ -1,8 +1,11 @@
+// src/Pages/AdminUsersPage.tsx
+
 import React, { useState, useEffect } from 'react';
 import WithCustomLayout from '../../Layout/WithCustomLayout';
 import { Typography, List, message } from 'antd';
 import { getWeb3 } from '../../web3/web3Config';
 import { FormattedMessage } from 'react-intl';
+import { useUser } from '../../contexts/UserContext';
 
 const { Title } = Typography;
 
@@ -13,10 +16,15 @@ interface AccountInfo {
 
 const AdminUsersPage: React.FC = () => {
   const [account, setAccount] = useState<AccountInfo | null>(null);
-  const [selectedAccount, setSelectedAccount] = useState<string | null>(null);
+  const { user } = useUser(); // Use user from context
 
   useEffect(() => {
-    const fetchAccounts = async () => {
+    const fetchUserAccount = async () => {
+      if (!user || !user.address) {
+        message.error('User is not authenticated.');
+        return;
+      }
+
       const web3 = await getWeb3();
       if (!web3) {
         message.error('Web3 is not initialized.');
@@ -24,23 +32,19 @@ const AdminUsersPage: React.FC = () => {
       }
 
       try {
-        const accountsList = await web3.eth.getAccounts();
-        if (accountsList.length > 0) {
-          setSelectedAccount(accountsList[0]); // Set the first account as the current user
-          const balance = await web3.eth.getBalance(accountsList[0]);
-          setAccount({
-            address: accountsList[0],
-            balance: web3.utils.fromWei(balance, 'ether') + ' ETH',
-          });
-        }
+        const balance = await web3.eth.getBalance(user.address);
+        setAccount({
+          address: user.address,
+          balance: web3.utils.fromWei(balance, 'ether') + ' ETH',
+        });
       } catch (error) {
-        message.error('Failed to fetch accounts.');
-        console.error('Error fetching accounts:', error);
+        message.error('Failed to fetch account balance.');
+        console.error('Error fetching account balance:', error);
       }
     };
 
-    fetchAccounts();
-  }, []);
+    fetchUserAccount();
+  }, [user]);
 
   return (
     <div style={{ padding: '24px' }}>
@@ -55,12 +59,7 @@ const AdminUsersPage: React.FC = () => {
           bordered
           dataSource={[account]}
           renderItem={item => (
-            <List.Item
-              style={{
-                backgroundColor:
-                  selectedAccount === item.address ? '#ffeb3b' : 'transparent',
-              }}
-            >
+            <List.Item style={{ backgroundColor: '#ffeb3b' }}>
               {item.address} - <FormattedMessage id='balance' />: {item.balance}
             </List.Item>
           )}

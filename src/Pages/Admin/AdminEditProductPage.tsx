@@ -22,6 +22,7 @@ import { ProductData } from '../../interfaces';
 import { menuItems } from '../../constants';
 import { generateHashAndSignature } from '../../utils/web3Utils';
 import { FormattedMessage } from 'react-intl';
+import { useUser } from '../../contexts/UserContext';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -30,6 +31,7 @@ const AdminEditProductPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [product, setProduct] = useState<ProductData | null>(null);
+  const { user } = useUser(); // Use user from context
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -88,7 +90,7 @@ const AdminEditProductPage: React.FC = () => {
     };
 
     fetchProduct();
-  }, [id, navigate]);
+  }, [id, navigate, user]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (product) {
@@ -193,10 +195,10 @@ const AdminEditProductPage: React.FC = () => {
         additionalDetails
       );
 
-      const gas = await tx.estimateGas({ from: accounts[0] });
+      const gas = await tx.estimateGas({ from: user?.address });
 
       await tx.send({
-        from: accounts[0],
+        from: user?.address,
         gas: gas.toString(),
       });
 
