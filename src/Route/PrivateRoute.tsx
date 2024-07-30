@@ -25,14 +25,10 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ element }) => {
   useEffect(() => {
     const handleAccountsChanged = (accounts: string[]) => {
       if (accounts.length === 0) {
-        console.log(
-          'MetaMask is locked or the user has not connected any accounts'
-        );
         handleLogout();
         // window.location.href = '/login';
       } else {
         const currentAccount = accounts[0];
-        console.log('Current account:', currentAccount);
 
         if (sessionAccountAddress && currentAccount !== sessionAccountAddress) {
           alert('Account has changed. You will be redirected to login page ');
