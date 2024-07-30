@@ -14,6 +14,7 @@ import { defaultImage } from '../constants';
 import { Product, Metadata, ContractProduct } from '../interfaces';
 import { shortenAddress } from '../utils/utils';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { useUser } from '../contexts/UserContext';
 
 const { Search } = Input;
 const { Meta } = Card;
@@ -21,9 +22,7 @@ const { Meta } = Card;
 const BrowsePage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  const [currentAccount, setCurrentAccount] = useState<string | undefined>(
-    undefined
-  );
+  const { user } = useUser(); // Use user from context
   const navigate = useNavigate();
   const intl = useIntl();
 
@@ -43,12 +42,11 @@ const BrowsePage: React.FC = () => {
         return;
       }
 
-      setCurrentAccount(accounts[0]);
       await fetchProducts(web3);
     };
 
     initialize();
-  }, []);
+  }, [user]); // Re-run initialization when user changes
 
   const fetchProducts = async (web3: any) => {
     const contract = await getContract(web3);
@@ -60,7 +58,6 @@ const BrowsePage: React.FC = () => {
     }
 
     const productIds: string[] = await contract.methods.getProductIds().call();
-
     const products: Product[] = [];
     for (const productId of productIds) {
       try {
@@ -147,7 +144,7 @@ const BrowsePage: React.FC = () => {
       await contract.methods
         .purchaseProduct(product.id)
         .send({
-          from: currentAccount,
+          from: user?.address,
           value: web3.utils.toWei(product.price.toString(), 'ether'),
         })
         .then(result => {
@@ -193,7 +190,7 @@ const BrowsePage: React.FC = () => {
                     onClick={() => handleInfo(product.id)}
                   />
                 </Popover>,
-                currentAccount === product.currentOwnerAddress && (
+                user && user.address === product.currentOwnerAddress && (
                   <Popover
                     placement='top'
                     title={<FormattedMessage id='browsePage.settings' />}
@@ -207,7 +204,7 @@ const BrowsePage: React.FC = () => {
                     />
                   </Popover>
                 ),
-                currentAccount !== product.currentOwnerAddress && (
+                user && user.address !== product.currentOwnerAddress && (
                   <Popover
                     placement='top'
                     title={<FormattedMessage id='browsePage.purchase' />}
