@@ -24,7 +24,7 @@
     "esModuleInterop": true, // 添加此行
     "allowSyntheticDefaultImports": true, // 添加此行,
 
-    "types": ["jest"],
+    "types": ["jest", "@testing-library/jest-dom"],
     "typeRoots": ["./node_modules/@types", "./src/types"]
   },
   "include": ["src"],

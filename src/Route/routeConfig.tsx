@@ -4,7 +4,6 @@ import React, { lazy } from 'react';
 import {
   UserOutlined,
   UploadOutlined,
-  // SettingOutlined,
   WalletOutlined,
 } from '@ant-design/icons';
 import PrivateRoute from './PrivateRoute'; // Import PrivateRoute component
@@ -22,8 +21,6 @@ const AdminEditProductPage = lazy(
   () => import('../Pages/Admin/AdminEditProductPage')
 ); // 管理后台-编辑商品
 const AdminUsersPage = lazy(() => import('../Pages/Admin/AdminUsersPage')); // 管理后台-用户管理
-// const AdminOrdersPage = lazy(() => import('../Pages/Admin/AdminOrdersPage')); // 管理后台-订单管理
-// const AdminStatisticsPage = lazy(() => import('../Pages/Admin/AdminStatisticsPage')); // 管理后台-数据统计
 const UserWalletPage = lazy(() => import('../Pages/Admin/AdminWalletPage')); // 管理后台-钱包管理
 
 /**
@@ -115,51 +112,8 @@ const routes: RouteConfig[] = [
         icon: <WalletOutlined />,
         showInSider: true,
       },
-      // {
-      //   path: '/admin/orders',
-      //   element: <PrivateRoute element={<AdminOrdersPage />} />,
-      //   title: 'orders',
-      //   icon: <UserOutlined />,
-      //   showInSider: true,
-      // },
-      // {
-      //   path: '/admin/statistics',
-      //   element: <PrivateRoute element={<AdminStatisticsPage />} />,
-      //   title: 'statistics',
-      //   icon: <UserOutlined />,
-      //   showInSider: true,
-      // },
     ],
   },
-  // {
-  //   path: '/dashboard',
-  //   title: 'dashboard',
-  //   icon: <SettingOutlined />,
-  //   showInSider: true,
-  //   children: [
-  //     {
-  //       path: '/dashboard/orders',
-  //       element: <PrivateRoute element={<UserOrdersPage />} />,
-  //       title: 'orders',
-  //       icon: <SettingOutlined />,
-  //       showInSider: true,
-  //     },
-  //     {
-  //       path: '/dashboard/profile',
-  //       element: <PrivateRoute element={<UserProfilePage />} />,
-  //       title: 'profile',
-  //       icon: <SettingOutlined />,
-  //       showInSider: true,
-  //     },
-  //     {
-  //       path: '/dashboard/settings',
-  //       element: <PrivateRoute element={<UserSettingsPage />} />,
-  //       title: 'settings',
-  //       icon: <SettingOutlined />,
-  //       showInSider: true,
-  //     },
-  //   ],
-  // },
   {
     path: '/browse',
     element: <PrivateRoute element={<BrowsePage />} />,
