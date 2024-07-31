@@ -7,7 +7,10 @@ import routeConfig, { RouteConfig } from './routeConfig';
 const renderRoutes = (routes: RouteConfig[]) =>
   routes.map(route => (
     <Route key={route.path} path={route.path} element={route.element}>
-      {route.children && renderRoutes(route.children)}
+      {route.children &&
+        route.children.map(child => (
+          <Route key={child.path} path={child.path} element={child.element} />
+        ))}
     </Route>
   ));
 
