@@ -1,5 +1,6 @@
-## <small>0.1.1 (2024-10-24)</small>
+## <small>0.1.2 (2024-10-24)</small>
 
+* fix(got owner product in app): fix how to got the user id ([b08480e](https://github.com/ArcMichael/decentralizedtradedesk/commit/b08480e))
 * feat(pkg, tree, test, admineditproduct, admin{users,wallet}): update pkg, fixed user to control ([ea8be6a](https://github.com/ArcMichael/decentralizedtradedesk/commit/ea8be6a))
 * feat(test, browsepage, privateroute): fixed account and test ([3d7b491](https://github.com/ArcMichael/decentralizedtradedesk/commit/3d7b491))
 * test(jest.{config.json,setup.js}, tsconfig.json, routes.test.tsx, routeconfig.tsx, routes.tsx): big ([2633df5](https://github.com/ArcMichael/decentralizedtradedesk/commit/2633df5))
