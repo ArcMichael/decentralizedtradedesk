@@ -27,6 +27,8 @@ const defaultContext: UserContextType = {
 
 const UserContext = createContext<UserContextType>(defaultContext);
 
+export type { User };
+
 export const useUser = () => useContext(UserContext);
 
 export const UserProvider: React.FC<{ children: ReactNode }> = ({

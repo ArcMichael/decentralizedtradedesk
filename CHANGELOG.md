@@ -1,7 +1,8 @@
-## <small>0.1.1 (2024-07-31)</small>
+## <small>0.1.1 (2024-10-24)</small>
 
 * feat(pkg, tree, test, admineditproduct, admin{users,wallet}): update pkg, fixed user to control ([ea8be6a](https://github.com/ArcMichael/decentralizedtradedesk/commit/ea8be6a))
 * feat(test, browsepage, privateroute): fixed account and test ([3d7b491](https://github.com/ArcMichael/decentralizedtradedesk/commit/3d7b491))
+* test(jest.{config.json,setup.js}, tsconfig.json, routes.test.tsx, routeconfig.tsx, routes.tsx): big ([2633df5](https://github.com/ArcMichael/decentralizedtradedesk/commit/2633df5))
 * ci(node version): v ([7c45a8d](https://github.com/ArcMichael/decentralizedtradedesk/commit/7c45a8d))
 * ci(pnpm): lock ([f10ee9d](https://github.com/ArcMichael/decentralizedtradedesk/commit/f10ee9d))
 * feat(jest): jest ([26c4e85](https://github.com/ArcMichael/decentralizedtradedesk/commit/26c4e85))

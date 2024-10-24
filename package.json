@@ -28,6 +28,7 @@
     "release-minor": "standard-version --release-as minor && git push origin main && git push origin main --tags",
     "release-rust": "node auto-increment-rust-version.cjs",
     "tauri": "tauri",
+    "tauri-dev": "tauri dev",
     "tauri-build": "tauri build",
     "test": "jest",
     "tree": "tree -l 4 -o tree.txt --ignore node_modules/",

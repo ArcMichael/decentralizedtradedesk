@@ -8,6 +8,7 @@ import { getWeb3, getContract } from '../../web3/web3Config';
 import { defaultImage } from '../../constants';
 import { ContractProduct, Metadata, Product } from '../../interfaces';
 import { FormattedMessage } from 'react-intl';
+import { useUser } from '../../contexts/UserContext';
 
 const { Title } = Typography;
 const { confirm } = Modal;
@@ -15,6 +16,7 @@ const { confirm } = Modal;
 const AdminProductsPage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const navigate = useNavigate();
+  const { user } = useUser();
 
   useEffect(() => {
     const initialize = async () => {
@@ -40,6 +42,7 @@ const AdminProductsPage: React.FC = () => {
 
   const fetchProducts = async (currentUserAddress: string, web3: any) => {
     const contract = await getContract(web3);
+    console.log('contract', '1. ', contract);
     if (!contract) {
       message.error(
         <FormattedMessage id='adminProductsPage.failedToLoadContract' />
@@ -52,6 +55,8 @@ const AdminProductsPage: React.FC = () => {
       10
     );
 
+    console.log('productCount', '2. ', productCount);
+
     if (isNaN(productCount)) {
       message.error(
         <FormattedMessage id='adminProductsPage.failedToFetchProductCount' />
@@ -61,6 +66,8 @@ const AdminProductsPage: React.FC = () => {
 
     const products: Product[] = [];
     const productIds: string[] = await contract.methods.getProductIds().call();
+
+    console.log('productIds', '3. ', productIds);
 
     for (const productId of productIds) {
       try {
@@ -106,11 +113,24 @@ const AdminProductsPage: React.FC = () => {
       }
     }
 
+    console.log('products', '4. ', products);
+
     const userProducts = products.filter(
       product =>
+        user?.address &&
         product.currentOwnerAddress?.toLowerCase() ===
-        currentUserAddress.toLowerCase()
+          user.address.toLowerCase()
     );
+
+    console.log('userProducts', '5. ', userProducts);
+
+    console.info('userinformation debug', '5.1', {
+      products,
+      currentUserAddress,
+    });
+
+    console.log('user', 5.2, user);
+
     setProducts(userProducts);
   };
 
