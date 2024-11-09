@@ -13,7 +13,7 @@
   "homepage.lowFeesFeature": "低费用",
   "homepage.lowFeesDescription": "避免集中平台通常伴随的高额交易费用。",
   "homepage.missionTitle": "我们的使命",
-  "homepage.missionParagraph": "我们的使命是通过消除障碍，提供一个可访问、安全和透明的平台，民主化商品交易。我们相信区块链的力量能够为每个人创造一个更公平的市场。",
+  "homepage.missionParagraph": "我们的使命是通过消除障碍，提供一个可访问、安全且透明的平台，以实现商品交易的公平化。我们相信区块链的力量能够为每个人创造一个更加公平的市场环境。",
   "homepage.howItWorksTitle": "工作原理",
   "homepage.howItWorksParagraph": "我们的平台使用用 Solidity 编写的智能合约来自动化和执行交易条款。通过使用 Ganache 进行本地区块链开发和测试，我们确保在将合约部署到主网络之前它们是安全和可靠的。 Tauri 框架允许我们将基于 web 的界面打包成轻量级的桌面应用程序，提供无缝的用户体验。",
   "homepage.contactUsTitle": "联系我们",

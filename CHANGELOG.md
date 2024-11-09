@@ -1,5 +1,7 @@
 ## <small>0.1.2 (2024-10-24)</small>
 
+* chore(release): 0.1.1 ([6532da3](https://github.com/ArcMichael/decentralizedtradedesk/commit/6532da3))
+* chore(release): 0.1.2 ([611f0ef](https://github.com/ArcMichael/decentralizedtradedesk/commit/611f0ef))
 * fix(got owner product in app): fix how to got the user id ([b08480e](https://github.com/ArcMichael/decentralizedtradedesk/commit/b08480e))
 * feat(pkg, tree, test, admineditproduct, admin{users,wallet}): update pkg, fixed user to control ([ea8be6a](https://github.com/ArcMichael/decentralizedtradedesk/commit/ea8be6a))
 * feat(test, browsepage, privateroute): fixed account and test ([3d7b491](https://github.com/ArcMichael/decentralizedtradedesk/commit/3d7b491))
@@ -8,7 +10,6 @@
 * ci(pnpm): lock ([f10ee9d](https://github.com/ArcMichael/decentralizedtradedesk/commit/f10ee9d))
 * feat(jest): jest ([26c4e85](https://github.com/ArcMichael/decentralizedtradedesk/commit/26c4e85))
 * test(test): test ([88523d2](https://github.com/ArcMichael/decentralizedtradedesk/commit/88523d2))
-* chore(release): 0.1.1 ([6532da3](https://github.com/ArcMichael/decentralizedtradedesk/commit/6532da3))
 
 
 

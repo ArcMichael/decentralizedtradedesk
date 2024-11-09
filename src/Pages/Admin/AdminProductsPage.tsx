@@ -42,7 +42,7 @@ const AdminProductsPage: React.FC = () => {
 
   const fetchProducts = async (currentUserAddress: string, web3: any) => {
     const contract = await getContract(web3);
-    console.log('contract', '1. ', contract);
+
     if (!contract) {
       message.error(
         <FormattedMessage id='adminProductsPage.failedToLoadContract' />
@@ -55,8 +55,6 @@ const AdminProductsPage: React.FC = () => {
       10
     );
 
-    console.log('productCount', '2. ', productCount);
-
     if (isNaN(productCount)) {
       message.error(
         <FormattedMessage id='adminProductsPage.failedToFetchProductCount' />
@@ -66,8 +64,6 @@ const AdminProductsPage: React.FC = () => {
 
     const products: Product[] = [];
     const productIds: string[] = await contract.methods.getProductIds().call();
-
-    console.log('productIds', '3. ', productIds);
 
     for (const productId of productIds) {
       try {
@@ -105,15 +101,11 @@ const AdminProductsPage: React.FC = () => {
             copyrightUsageRules: product.copyrightUsageRules,
             currentOwnerAddress: product.currentOwner,
           });
-
-          // console.log('products', products);
         }
       } catch (error) {
         console.error(`Failed to fetch product with id ${productId}:`, error);
       }
     }
-
-    console.log('products', '4. ', products);
 
     const userProducts = products.filter(
       product =>
@@ -122,14 +114,10 @@ const AdminProductsPage: React.FC = () => {
           user.address.toLowerCase()
     );
 
-    console.log('userProducts', '5. ', userProducts);
-
     console.info('userinformation debug', '5.1', {
       products,
       currentUserAddress,
     });
-
-    console.log('user', 5.2, user);
 
     setProducts(userProducts);
   };

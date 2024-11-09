@@ -13,7 +13,7 @@
   "homepage.lowFeesFeature": "Low Fees",
   "homepage.lowFeesDescription": "Avoid high transaction fees typically associated with centralized platforms.",
   "homepage.missionTitle": "Our Mission",
-  "homepage.missionParagraph": "Our mission is to democratize the trading of goods by removing barriers and providing a platform that is accessible, secure, and transparent. We believe in the power of blockchain to create a more equitable marketplace for everyone.",
+  "homepage.missionParagraph": "Our mission is to promote fairness in the trading of goods by removing barriers and providing a platform that is accessible, secure, and transparent. We believe in the power of blockchain to create a more equitable marketplace for everyone.",
   "homepage.howItWorksTitle": "How It Works",
   "homepage.howItWorksParagraph": "Our platform uses smart contracts written in Solidity to automate and enforce transaction terms. By using Ganache for local blockchain development and testing, we ensure that our contracts are secure and reliable before deploying them to the main network. The Tauri framework allows us to package our web-based interface into a lightweight desktop application, providing a seamless user experience.",
   "homepage.contactUsTitle": "Contact Us",
